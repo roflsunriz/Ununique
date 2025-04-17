@@ -321,10 +321,10 @@ function injectScriptToMainWorld(settings) {
                 return "Mozilla";
               } else if (parameter === 0x1F00) { // RENDERER
                 return "Mozilla";
-              } else if (parameter === 0x9246) { // UNMASKED_VENDOR_WEBGL
-                return "Nvidia Inc.";
-              } else if (parameter === 0x9245) { // UNMASKED_RENDERER_WEBGL
+              } else if (parameter === 0x9246) { // UNMASKED_RENDERER_WEBGL
                 return "Nvidia(R) GeForce GTX 1060";
+              } else if (parameter === 0x9245) { // UNMASKED_VENDOR_WEBGL
+                return "Nvidia Inc.";
               }
               
               // その他のパラメーターは通常通り
