@@ -281,12 +281,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('spoofedWebGLRenderer').textContent = errorMsg;
     
     // フォントリスト
-    document.getElementById('originalFonts').innerHTML = errorMsg;
-    document.getElementById('spoofedFonts').innerHTML = errorMsg;
+    document.getElementById('originalFonts').textContent = errorMsg;
+    document.getElementById('spoofedFonts').textContent = errorMsg;
     
     // メディアデバイス
-    document.getElementById('originalDevices').innerHTML = errorMsg;
-    document.getElementById('spoofedDevices').innerHTML = errorMsg;
+    document.getElementById('originalDevices').textContent = errorMsg;
+    document.getElementById('spoofedDevices').textContent = errorMsg;
     
     // バッテリー情報
     document.getElementById('originalBatteryCharging').textContent = errorMsg;
