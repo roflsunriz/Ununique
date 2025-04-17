@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ununique</title>
+  <style>
+    body {
+      width: 300px;
+      font-family: sans-serif;
+      padding: 10px;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .toggle-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 4px;
+      background-color: #f5f5f5;
+    }
+    .toggle-label {
+      font-size: 14px;
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 20px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #4CAF50;
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+    .footer {
+      margin-top: 15px;
+      font-size: 12px;
+      text-align: center;
+      color: #666;
+    }
+    .options-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      color: #0060df;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .options-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1><img src="../icons/icon-48.png" alt="Ununique" style="width: 24px; height: 24px; vertical-align: middle;">Ununique</h1>
+  
+  <div class="toggle-container">
+    <span class="toggle-label">HTTPヘッダーの偽装</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="headerSpoofing" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+  
+  <div class="toggle-container">
+    <span class="toggle-label">JavaScriptプロパティの偽装</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="jsSpoofing" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+  
+  <a href="#" id="openOptions" class="options-link">詳細設定</a>
+  
+  <div class="footer">
+    フィンガープリントを一般的な値に偽装して、追跡から保護します。
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html> 
