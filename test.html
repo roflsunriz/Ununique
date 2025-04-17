@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ununique 拡張機能テスト</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.5;
+    }
+    h1 {
+      color: #333;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+    .test-section {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+    }
+    .result {
+      font-family: monospace;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 3px;
+      margin-top: 5px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    button {
+      background-color: #0060df;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      margin-top: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0050bd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ununique 拡張機能テスト</h1>
+  
+  <div class="test-section">
+    <h2>基本情報</h2>
+    <p>User-Agent: <span id="userAgent" class="result">-</span></p>
+    <p>プラットフォーム: <span id="platform" class="result">-</span></p>
+    <p>言語: <span id="language" class="result">-</span></p>
+    <p>画面サイズ: <span id="screenSize" class="result">-</span></p>
+    <p>ハードウェアコンカレンシー: <span id="hardwareConcurrency" class="result">-</span></p>
+    <button id="checkBasic">情報を更新</button>
+  </div>
+  
+  <div class="test-section">
+    <h2>キャンバスフィンガープリント</h2>
+    <p>キャンバスの出力結果が毎回変わるか確認します</p>
+    <canvas id="testCanvas" width="300" height="50"></canvas>
+    <p>データURL (先頭100文字): <span id="canvasDataUrl" class="result">-</span></p>
+    <button id="checkCanvas">キャンバスを再描画</button>
+  </div>
+  
+  <div class="test-section">
+    <h2>WebGL情報</h2>
+    <p>WebGLベンダー: <span id="webglVendor" class="result">-</span></p>
+    <p>WebGLレンダラー: <span id="webglRenderer" class="result">-</span></p>
+    <button id="checkWebGL">情報を更新</button>
+  </div>
+  
+  <script>
+    // 基本情報をチェックする関数
+    function checkBasicInfo() {
+      document.getElementById('userAgent').textContent = navigator.userAgent;
+      document.getElementById('platform').textContent = navigator.platform;
+      document.getElementById('language').textContent = navigator.language;
+      document.getElementById('screenSize').textContent = `${screen.width}x${screen.height}`;
+      document.getElementById('hardwareConcurrency').textContent = navigator.hardwareConcurrency;
+    }
+    
+    // キャンバスフィンガープリントをチェックする関数
+    function checkCanvasFingerprint() {
+      const canvas = document.getElementById('testCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // キャンバスをクリア
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // 背景を設定
+      ctx.fillStyle = '#f0f0f0';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // テキストを描画
+      ctx.font = '16px Arial';
+      ctx.fillStyle = '#000000';
+      ctx.fillText('Ununique Test ' + new Date().toISOString(), 10, 30);
+      
+      // 図形を描画
+      ctx.beginPath();
+      ctx.arc(250, 25, 15, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+      ctx.fill();
+      
+      // データURLを取得して表示
+      const dataUrl = canvas.toDataURL();
+      document.getElementById('canvasDataUrl').textContent = dataUrl.substring(0, 100) + '...';
+    }
+    
+    // WebGL情報をチェックする関数
+    function checkWebGLInfo() {
+      const canvas = document.createElement('canvas');
+      let gl;
+      try {
+        gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      } catch (e) {
+        document.getElementById('webglVendor').textContent = 'エラー: ' + e.message;
+        document.getElementById('webglRenderer').textContent = 'エラー: ' + e.message;
+        return;
+      }
+      
+      if (!gl) {
+        document.getElementById('webglVendor').textContent = 'WebGL未サポート';
+        document.getElementById('webglRenderer').textContent = 'WebGL未サポート';
+        return;
+      }
+      
+      const vendor = gl.getParameter(gl.VENDOR);
+      const renderer = gl.getParameter(gl.RENDERER);
+      
+      document.getElementById('webglVendor').textContent = vendor;
+      document.getElementById('webglRenderer').textContent = renderer;
+    }
+    
+    // ページロード時に初期チェック
+    window.addEventListener('load', () => {
+      checkBasicInfo();
+      checkCanvasFingerprint();
+      checkWebGLInfo();
+    });
+    
+    // ボタンイベントを追加
+    document.getElementById('checkBasic').addEventListener('click', checkBasicInfo);
+    document.getElementById('checkCanvas').addEventListener('click', checkCanvasFingerprint);
+    document.getElementById('checkWebGL').addEventListener('click', checkWebGLInfo);
+  </script>
+</body>
+</html> 

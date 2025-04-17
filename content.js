@@ -124,10 +124,22 @@ function logDebug(message) {
   console.log(`[Ununique Debug] ${message}`);
 }
 
+// 現在の設定を保持する変数
+let currentSettings = {
+  enableHeaderSpoofing: true,
+  enableJsSpoofing: true
+};
+
 // 重要: コンテンツスクリプトはisolated worldで実行されるため
 // メインワールドにコードを注入して、ブラウザのプロパティを直接上書きする
-function injectScriptToMainWorld() {
+function injectScriptToMainWorld(settings) {
   logDebug("メインワールドへのスクリプト注入を開始します");
+  
+  // 設定に基づいてJavaScriptスプーフィングをスキップする
+  if (!settings.enableJsSpoofing) {
+    logDebug("JavaScriptスプーフィングが無効なため、スクリプト注入をスキップします");
+    return;
+  }
   
   // メインワールドに注入するコードを文字列として作成
   const scriptContent = `
@@ -464,8 +476,17 @@ function injectScriptToMainWorld() {
   logDebug("メインワールドへのスクリプト注入が完了しました");
 }
 
-// メインワールドへのスクリプト注入を実行
-injectScriptToMainWorld();
+// 設定に基づいてスクリプト注入を実行する関数
+function applySettings(settings) {
+  currentSettings = settings;
+  
+  if (settings.enableJsSpoofing) {
+    injectScriptToMainWorld(settings);
+    logDebug("JavaScriptスプーフィングが有効です。メインワールドでの偽装を実行しました。");
+  } else {
+    logDebug("JavaScriptスプーフィングが無効です。");
+  }
+}
 
 // バックグラウンドスクリプトと通信するためのコードは残しておく
 // 設定を取得する
@@ -499,13 +520,38 @@ async function getSettings() {
   });
 }
 
-// 以下の関数は、コンテンツスクリプト側では不要になるが、
-// メンテナンス性のために残しておく
-// DOMContentLoadedイベントを待たず、即時実行
-getSettings().then((settings) => {
-  if (settings.enableJsSpoofing) {
-    logDebug("JavaScriptスプーフィングが有効です。メインワールドでの偽装を実行しました。");
-  } else {
-    logDebug("JavaScriptスプーフィングが無効です。");
+// 設定変更を監視するリスナーを設定
+function setupSettingsListener() {
+  try {
+    // ブラウザAPIへの対応（Firefox または Chrome）
+    const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
+    
+    browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      if (message.type === "settingsChanged" && message.settings) {
+        logDebug("設定変更通知を受信しました: " + JSON.stringify(message.settings));
+        applySettings(message.settings);
+        if (sendResponse) {
+          sendResponse({ success: true });
+        }
+      }
+      return true;
+    });
+    
+    logDebug("設定変更リスナーを設定しました");
+  } catch (e) {
+    logDebug("設定変更リスナーの設定中にエラーが発生しました: " + e.message);
   }
-}); 
+}
+
+// 初期化処理
+async function initialize() {
+  // 設定を取得して適用
+  const settings = await getSettings();
+  applySettings(settings);
+  
+  // 設定変更リスナーを設定
+  setupSettingsListener();
+}
+
+// DOMContentLoadedイベントを待たず、即時実行
+initialize(); 

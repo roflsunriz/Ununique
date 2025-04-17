@@ -215,8 +215,38 @@ browserAPI.webRequest.onBeforeSendHeaders.addListener(
 browserAPI.storage.onChanged.addListener((changes, areaName) => {
   if (areaName === "local" && changes.settings) {
     console.log("[Ununique Debug] 設定が変更されました。");
+    
+    // 新しい設定を取得
+    const newSettings = changes.settings.newValue;
+    
+    // アクティブなタブにメッセージを送信
+    notifyAllTabs(newSettings);
   }
 });
+
+// すべてのタブに設定変更を通知する関数
+function notifyAllTabs(settings) {
+  // 現在開いているすべてのタブを取得
+  browserAPI.tabs.query({}, (tabs) => {
+    for (const tab of tabs) {
+      try {
+        // 各タブに設定変更メッセージを送信
+        browserAPI.tabs.sendMessage(tab.id, {
+          type: "settingsChanged",
+          settings: settings
+        }, (response) => {
+          // レスポンスを処理（エラーは無視）
+          const lastError = browserAPI.runtime.lastError;
+          if (!lastError) {
+            console.log(`[Ununique Debug] タブID: ${tab.id} への設定変更通知が成功しました。`);
+          }
+        });
+      } catch (e) {
+        console.error(`[Ununique Debug] タブID: ${tab.id} への設定変更通知中にエラーが発生しました: ${e.message}`);
+      }
+    }
+  });
+}
 
 // コンテンツスクリプトからのメッセージを受け取る
 browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -227,6 +257,10 @@ browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true; // 非同期レスポンスを示す
   } else if (message.type === "saveSettings") {
     browserAPI.storage.local.set({ settings: message.settings });
+    
+    // 設定の保存と同時に、他のタブにも通知する
+    notifyAllTabs(message.settings);
+    
     sendResponse({ success: true });
   } else if (message.type === "getOriginalValues") {
     // オリジナルのブラウザ値を返す

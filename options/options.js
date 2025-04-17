@@ -261,7 +261,56 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('originalUserAgent').textContent = errorMsg;
     document.getElementById('spoofedUserAgent').textContent = errorMsg;
     // 他の要素も同様に
-    // ...
+    document.getElementById('originalPlatform').textContent = errorMsg;
+    document.getElementById('spoofedPlatform').textContent = errorMsg;
+    document.getElementById('originalLanguage').textContent = errorMsg;
+    document.getElementById('spoofedLanguage').textContent = errorMsg;
+    document.getElementById('originalScreenWidth').textContent = errorMsg;
+    document.getElementById('spoofedScreenWidth').textContent = errorMsg;
+    document.getElementById('originalScreenHeight').textContent = errorMsg;
+    document.getElementById('spoofedScreenHeight').textContent = errorMsg;
+    document.getElementById('originalHardwareConcurrency').textContent = errorMsg;
+    document.getElementById('spoofedHardwareConcurrency').textContent = errorMsg;
+    document.getElementById('originalDoNotTrack').textContent = errorMsg;
+    document.getElementById('spoofedDoNotTrack').textContent = errorMsg;
+    
+    // WebGL情報
+    document.getElementById('originalWebGLVendor').textContent = errorMsg;
+    document.getElementById('spoofedWebGLVendor').textContent = errorMsg;
+    document.getElementById('originalWebGLRenderer').textContent = errorMsg;
+    document.getElementById('spoofedWebGLRenderer').textContent = errorMsg;
+    
+    // フォントリスト
+    document.getElementById('originalFonts').innerHTML = errorMsg;
+    document.getElementById('spoofedFonts').innerHTML = errorMsg;
+    
+    // メディアデバイス
+    document.getElementById('originalDevices').innerHTML = errorMsg;
+    document.getElementById('spoofedDevices').innerHTML = errorMsg;
+    
+    // バッテリー情報
+    document.getElementById('originalBatteryCharging').textContent = errorMsg;
+    document.getElementById('spoofedBatteryCharging').textContent = errorMsg;
+    document.getElementById('originalBatteryLevel').textContent = errorMsg;
+    document.getElementById('spoofedBatteryLevel').textContent = errorMsg;
+    
+    // 接続情報
+    document.getElementById('originalConnectionType').textContent = errorMsg;
+    document.getElementById('spoofedConnectionType').textContent = errorMsg;
+    document.getElementById('originalDownlink').textContent = errorMsg;
+    document.getElementById('spoofedDownlink').textContent = errorMsg;
+    
+    // ブラウザバー
+    document.getElementById('originalMenubar').textContent = errorMsg;
+    document.getElementById('spoofedMenubar').textContent = errorMsg;
+    document.getElementById('originalToolbar').textContent = errorMsg;
+    document.getElementById('spoofedToolbar').textContent = errorMsg;
+    
+    // メディアフォーマット
+    document.getElementById('originalMP4Support').textContent = errorMsg;
+    document.getElementById('spoofedMP4Support').textContent = errorMsg;
+    document.getElementById('originalWebMSupport').textContent = errorMsg;
+    document.getElementById('spoofedWebMSupport').textContent = errorMsg;
   }
   
   // フォントリストを表示する関数
