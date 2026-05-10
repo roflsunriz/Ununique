@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+## 1.3.0
+
+### Added
+
+- Added a manifest version synchronization script and updated the options page footer.
+- Added CI/CD and release automation workflows.
+- Added multilingual labels and locale resources for multiple languages.
+
+### Changed
+
+- Updated the options page copy to clearer English and improved the loading messages.
+- Improved the `judgementSummary` message and error message formatting across locales.
+- Refined the main-world injection flow so settings are injected immediately and continue to sync afterward.
+
+### Fixed
+
+- Fixed TypeScript 7 compatibility issues in the build and source code.
+
 ## 1.2.0
 
 ### Added
