@@ -132,7 +132,7 @@
     "message": "Bruit du canvas"
   },
   "judgementSummary": {
-    "message": "$1 / $2 correspondent à la valeur cible"
+    "message": "$1 / $2 vérifications réussies"
   },
   "batteryCharging": {
     "message": "Charging"

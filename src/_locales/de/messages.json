@@ -132,7 +132,7 @@
     "message": "Canvas-Rauschen"
   },
   "judgementSummary": {
-    "message": "$1 / $2 stimmen mit dem Zielwert überein"
+    "message": "$1 / $2 Prüfungen bestanden"
   },
   "batteryCharging": {
     "message": "Charging"

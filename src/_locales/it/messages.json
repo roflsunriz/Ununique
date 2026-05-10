@@ -132,7 +132,7 @@
     "message": "Rumore canvas"
   },
   "judgementSummary": {
-    "message": "$1 / $2 corrispondono al valore obiettivo"
+    "message": "$1 / $2 controlli superati"
   },
   "batteryCharging": {
     "message": "Charging"

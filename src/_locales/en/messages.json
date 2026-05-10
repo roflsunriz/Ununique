@@ -288,7 +288,7 @@
     "message": "WebM video"
   },
   "judgementSummary": {
-    "message": "$1 / $2 items match the target value"
+    "message": "$1 / $2 checks passed"
   },
   "statusFetching": {
     "message": "Loading..."

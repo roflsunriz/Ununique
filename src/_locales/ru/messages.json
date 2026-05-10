@@ -132,7 +132,7 @@
     "message": "Шум canvas"
   },
   "judgementSummary": {
-    "message": "$1 / $2 совпадают с целевым значением"
+    "message": "$1 / $2 проверок пройдено"
   },
   "batteryCharging": {
     "message": "Charging"

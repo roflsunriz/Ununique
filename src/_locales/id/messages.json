@@ -132,7 +132,7 @@
     "message": "Noise canvas"
   },
   "judgementSummary": {
-    "message": "$1 / $2 cocok dengan nilai target"
+    "message": "$1 / $2 pemeriksaan lolos"
   },
   "batteryCharging": {
     "message": "Charging"

@@ -288,7 +288,7 @@
     "message": "WebMビデオ"
   },
   "judgementSummary": {
-    "message": "$1 / $2 件が偽装目標値と一致"
+    "message": "$1/$2件が一致"
   },
   "statusFetching": {
     "message": "取得中..."

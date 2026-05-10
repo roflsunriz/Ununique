@@ -132,7 +132,7 @@
     "message": "Canvas 噪点"
   },
   "judgementSummary": {
-    "message": "$1 / $2 与目标值一致"
+    "message": "$1 / $2 项通过"
   },
   "batteryCharging": {
     "message": "Charging"

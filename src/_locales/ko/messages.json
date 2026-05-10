@@ -132,7 +132,7 @@
     "message": "캔버스 노이즈"
   },
   "judgementSummary": {
-    "message": "$1 / $2 항목이 목표 값과 일치합니다"
+    "message": "$1 / $2개 일치"
   },
   "batteryCharging": {
     "message": "Charging"

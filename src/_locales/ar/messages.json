@@ -114,7 +114,7 @@
     "message": "ضجيج اللوحة"
   },
   "judgementSummary": {
-    "message": "$1 / $2 تطابق القيمة المستهدفة"
+    "message": "تم اجتياز $1 من $2"
   },
   "batteryCharging": {
     "message": "Charging"

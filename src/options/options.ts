@@ -85,7 +85,11 @@
     applyI18n(browserAPI);
     const loadingText = getMessage(browserAPI, "statusFetching", "Loading...");
     const noDataText = getMessage(browserAPI, "noData", "No data");
-    const errorText = getMessage(browserAPI, "dataFetchError", "Failed to get data. Please try again.");
+    const errorText = getMessage(
+      browserAPI,
+      "dataFetchError",
+      "Failed to get data. Please try again."
+    );
     const chargingText = getMessage(browserAPI, "batteryCharging", "Charging");
     const notChargingText = getMessage(browserAPI, "batteryNotCharging", "Not charging");
     const visibleText = getMessage(browserAPI, "visible", "Visible");
@@ -398,10 +402,8 @@
       // 基本情報
       document.getElementById("spoofedUserAgent").textContent =
         spoofedValues.userAgent || noDataText;
-      document.getElementById("spoofedPlatform").textContent =
-        spoofedValues.platform || noDataText;
-      document.getElementById("spoofedLanguage").textContent =
-        spoofedValues.language || noDataText;
+      document.getElementById("spoofedPlatform").textContent = spoofedValues.platform || noDataText;
+      document.getElementById("spoofedLanguage").textContent = spoofedValues.language || noDataText;
       document.getElementById("spoofedScreenWidth").textContent =
         spoofedValues.screenWidth?.toString() || noDataText;
       document.getElementById("spoofedScreenHeight").textContent =
@@ -626,14 +628,15 @@
       const passedCount = spoofingJudgements.filter(Boolean).length;
       const allPassed = passedCount === spoofingJudgements.length;
       spoofingJudgementSummary.className = `judgement-summary ${allPassed ? "pass" : "fail"}`;
-      const summaryTemplate = getMessage(
-        browserAPI,
-        "judgementSummary",
-        "$1 / $2 items match the target value"
-      );
-      spoofingJudgementSummary.textContent = `${allPassed ? "✓" : "×"} ${summaryTemplate
-        .replace("$1", passedCount.toString())
-        .replace("$2", spoofingJudgements.length.toString())}`;
+      const summaryText =
+        browserAPI.i18n.getMessage("judgementSummary", [
+          passedCount.toString(),
+          spoofingJudgements.length.toString()
+        ]) ||
+        getMessage(browserAPI, "judgementSummary", "$1/$2 checks passed")
+          .replace("$1", passedCount.toString())
+          .replace("$2", spoofingJudgements.length.toString());
+      spoofingJudgementSummary.textContent = `${allPassed ? "✓" : "×"} ${summaryText}`;
     }
 
     function valuesEqual(actual: ComparableValue, expected: ComparableValue): boolean {
@@ -849,4 +852,3 @@
     }
   });
 })();
-
