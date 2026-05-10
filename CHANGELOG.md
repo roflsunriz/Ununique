@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 1.3.1
+
+### Changed
+
+- Refreshed the extension icon set with a more polished, modern design for release.
+
 ## 1.3.0
 
 ### Added
