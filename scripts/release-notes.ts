@@ -14,7 +14,23 @@ function escapeRegExp(value: string): string {
 let body = `See CHANGELOG.md for changes in ${version}.\n`;
 
 try {
-  const changelog = await readFile("CHANGELOG.md", "utf8");
+  let changelog = "";
+
+  for (const path of ["CHANGELOG.md", "changelog.md"]) {
+    try {
+      changelog = await readFile(path, "utf8");
+      break;
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+        throw error;
+      }
+    }
+  }
+
+  if (!changelog) {
+    throw Object.assign(new Error("CHANGELOG.md not found"), { code: "ENOENT" });
+  }
+
   const headingPattern = new RegExp(
     `^#{1,6}\\s+(?:\\[?v?${escapeRegExp(version)}\\]?)(?:\\s|$).*`,
     "im"
@@ -23,7 +39,7 @@ try {
 
   if (match) {
     const sectionStart = match.index + match[0].length;
-    const nextHeadingPattern = /^#{1,6}\s+/gm;
+    const nextHeadingPattern = /^##\s+/gm;
     nextHeadingPattern.lastIndex = sectionStart;
     const nextHeading = nextHeadingPattern.exec(changelog);
     body = changelog.slice(sectionStart, nextHeading?.index).trim();
