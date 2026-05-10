@@ -1,0 +1,287 @@
+{
+  "extensionName": {
+    "message": "Ununique"
+  },
+  "extensionDescription": {
+    "message": "يخفي بيانات المتصفح الفريدة كقيم شائعة للمساعدة في منع البصمة الرقمية."
+  },
+  "popupHeaderSpoofing": {
+    "message": "تمويه ترويسات HTTP"
+  },
+  "popupJsSpoofing": {
+    "message": "تمويه خصائص JavaScript"
+  },
+  "popupOpenOptions": {
+    "message": "إعدادات متقدمة"
+  },
+  "popupFooter": {
+    "message": "يخفي البصمات كقيم شائعة للمساعدة في حمايتك من التتبع."
+  },
+  "optionsTitle": {
+    "message": "Ununique - إعدادات متقدمة"
+  },
+  "tabBasic": {
+    "message": "أساسي"
+  },
+  "tabResults": {
+    "message": "النتائج"
+  },
+  "tabHeaders": {
+    "message": "ترويسات HTTP"
+  },
+  "tabJavaScript": {
+    "message": "JavaScript"
+  },
+  "tabDetails": {
+    "message": "التفاصيل"
+  },
+  "basicSettingsDescriptionHeader": {
+    "message": "يخفي ترويسات HTTP التي يرسلها المتصفح إلى الخوادم كقيم شائعة."
+  },
+  "basicSettingsDescriptionJs": {
+    "message": "يخفي خصائص JavaScript التي تقرأها المواقع، مثل حجم الشاشة واللغة، كقيم شائعة."
+  },
+  "spoofingResultsTitle": {
+    "message": "نتائج التمويه"
+  },
+  "spoofingResultsDescription": {
+    "message": "قارن معلومات المتصفح الحالية بالقيم المموهة."
+  },
+  "showSpoofingResults": {
+    "message": "فحص نتائج التمويه"
+  },
+  "hideSpoofingResults": {
+    "message": "إخفاء نتائج التمويه"
+  },
+  "saveSettings": {
+    "message": "حفظ الإعدادات"
+  },
+  "settingsSaved": {
+    "message": "تم الحفظ"
+  },
+  "statusLoading": {
+    "message": "جارٍ الفحص..."
+  },
+  "statusFetching": {
+    "message": "جارٍ التحميل..."
+  },
+  "noData": {
+    "message": "لا توجد بيانات"
+  },
+  "dataFetchError": {
+    "message": "فشل الحصول على البيانات. يرجى المحاولة مرة أخرى."
+  },
+  "judgementTarget": {
+    "message": "القيمة الهدف"
+  },
+  "judgementStatus": {
+    "message": "الحالة"
+  },
+  "footerVersion": {
+    "message": "Ununique v1.0.0 - يحميك من البصمة الرقمية"
+  },
+  "spoofingHeadersIntro": {
+    "message": "تُخفى رؤوس HTTP التالية بقيم شائعة:"
+  },
+  "spoofingHeadersColumnName": {
+    "message": "اسم الرأس"
+  },
+  "spoofingHeadersColumnValue": {
+    "message": "القيمة المنتحلة"
+  },
+  "spoofingJsIntro": {
+    "message": "تُخفى خصائص JavaScript التالية والميزات الأخرى بقيم شائعة:"
+  },
+  "spoofingJsColumnCategory": {
+    "message": "الفئة"
+  },
+  "spoofingJsColumnItem": {
+    "message": "العنصر المنتحل"
+  },
+  "canvasOriginalLabel": {
+    "message": "الأصلية:"
+  },
+  "canvasSpoofedLabel": {
+    "message": "بعد التمويه:"
+  },
+  "comparisonItem": {
+    "message": "العنصر"
+  },
+  "comparisonSpoofedValue": {
+    "message": "القيمة المموهة"
+  },
+  "canvasNoiseLabel": {
+    "message": "ضجيج اللوحة"
+  },
+  "judgementSummary": {
+    "message": "$1 / $2 تطابق القيمة المستهدفة"
+  },
+  "batteryCharging": {
+    "message": "Charging"
+  },
+  "batteryNotCharging": {
+    "message": "Not charging"
+  },
+  "visible": {
+    "message": "Visible"
+  },
+  "hidden": {
+    "message": "Hidden"
+  },
+  "unsupported": {
+    "message": "Not supported"
+  },
+  "available": {
+    "message": "Available"
+  },
+  "unavailable": {
+    "message": "Unavailable"
+  },
+  "noFontsData": {
+    "message": "No font data"
+  },
+  "noDevicesData": {
+    "message": "No devices"
+  },
+  "unknownName": {
+    "message": "Unnamed"
+  },
+  "nullValue": {
+    "message": "null"
+  },
+  "spoofingTabBasic": {
+    "message": "Basic info"
+  },
+  "spoofingTabCanvas": {
+    "message": "Canvas"
+  },
+  "spoofingTabWebgl": {
+    "message": "WebGL"
+  },
+  "spoofingTabFonts": {
+    "message": "Fonts"
+  },
+  "spoofingTabDevices": {
+    "message": "Devices"
+  },
+  "spoofingTabOther": {
+    "message": "Other"
+  },
+  "spoofingBasicTitle": {
+    "message": "Basic JavaScript properties"
+  },
+  "comparisonOriginalValue": {
+    "message": "Original value"
+  },
+  "spoofingUserAgent": {
+    "message": "User-Agent"
+  },
+  "spoofingPlatform": {
+    "message": "Platform"
+  },
+  "spoofingLanguage": {
+    "message": "Language"
+  },
+  "spoofingScreenWidth": {
+    "message": "Screen width"
+  },
+  "spoofingScreenHeight": {
+    "message": "Screen height"
+  },
+  "spoofingHardwareConcurrency": {
+    "message": "Hardware concurrency"
+  },
+  "spoofingDoNotTrack": {
+    "message": "Do Not Track"
+  },
+  "spoofingCanvasTitle": {
+    "message": "Canvas fingerprint"
+  },
+  "comparisonParameter": {
+    "message": "Parameter"
+  },
+  "spoofingWebglTitle": {
+    "message": "WebGL information"
+  },
+  "spoofingWebglVendor": {
+    "message": "VENDOR"
+  },
+  "spoofingWebglRenderer": {
+    "message": "RENDERER"
+  },
+  "spoofingFontsTitle": {
+    "message": "Font list"
+  },
+  "spoofingFontsDescription": {
+    "message": "Compare the fonts available in the browser with the fonts available after spoofing."
+  },
+  "spoofingOriginalFontsLabel": {
+    "message": "Original fonts (partial):"
+  },
+  "spoofingSpoofedFontsLabel": {
+    "message": "Spoofed fonts:"
+  },
+  "spoofingDevicesTitle": {
+    "message": "Media devices"
+  },
+  "spoofingDevicesDescription": {
+    "message": "Compare device information the browser can access, such as cameras and microphones."
+  },
+  "spoofingOriginalDevicesLabel": {
+    "message": "Original devices:"
+  },
+  "spoofingSpoofedDevicesLabel": {
+    "message": "Spoofed devices:"
+  },
+  "spoofingBatteryTitle": {
+    "message": "Battery information"
+  },
+  "spoofingBatteryCharging": {
+    "message": "Charging"
+  },
+  "spoofingBatteryLevel": {
+    "message": "Battery level"
+  },
+  "spoofingConnectionTitle": {
+    "message": "Connection information"
+  },
+  "spoofingConnectionType": {
+    "message": "Connection type"
+  },
+  "spoofingDownlink": {
+    "message": "Downlink speed"
+  },
+  "spoofingBarTitle": {
+    "message": "Browser bars"
+  },
+  "spoofingBarType": {
+    "message": "Bar type"
+  },
+  "spoofingMenubar": {
+    "message": "Menubar"
+  },
+  "spoofingToolbar": {
+    "message": "Toolbar"
+  },
+  "spoofingMediaTitle": {
+    "message": "Media formats"
+  },
+  "spoofingMediaDescription": {
+    "message": "Compare the media formats that the browser can play."
+  },
+  "spoofingMediaFormat": {
+    "message": "Format"
+  },
+  "comparisonOriginalSupport": {
+    "message": "Original support"
+  },
+  "comparisonSpoofedSupport": {
+    "message": "Spoofed support"
+  },
+  "spoofingMp4Video": {
+    "message": "MP4 video"
+  },
+  "spoofingWebmVideo": {
+    "message": "WebM video"
+  }
+}

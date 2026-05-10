@@ -1,0 +1,305 @@
+{
+  "extensionName": {
+    "message": "Ununique"
+  },
+  "extensionDescription": {
+    "message": "フィンガープリンティングを防ぐため、ユニークなデータを一般的な値に偽装する拡張機能"
+  },
+  "popupHeaderSpoofing": {
+    "message": "HTTPヘッダーの偽装"
+  },
+  "popupJsSpoofing": {
+    "message": "JavaScriptプロパティの偽装"
+  },
+  "popupOpenOptions": {
+    "message": "詳細設定"
+  },
+  "popupFooter": {
+    "message": "フィンガープリントを一般的な値に偽装して、追跡から保護します。"
+  },
+  "optionsTitle": {
+    "message": "Ununique - 詳細設定"
+  },
+  "tabBasic": {
+    "message": "基本設定"
+  },
+  "tabResults": {
+    "message": "結果確認"
+  },
+  "tabHeaders": {
+    "message": "HTTPヘッダー"
+  },
+  "tabJavaScript": {
+    "message": "JavaScript"
+  },
+  "tabDetails": {
+    "message": "説明"
+  },
+  "basicSettingsDescriptionHeader": {
+    "message": "ブラウザからサーバーに送信されるHTTPヘッダーを一般的な値に偽装します。"
+  },
+  "basicSettingsDescriptionJs": {
+    "message": "ウェブサイトから読み取られるJavaScriptプロパティ（画面サイズ、言語など）を一般的な値に偽装します。"
+  },
+  "spoofingResultsTitle": {
+    "message": "スプーフィング結果"
+  },
+  "spoofingResultsDescription": {
+    "message": "現在のブラウザ情報と偽装された情報を比較できます。"
+  },
+  "showSpoofingResults": {
+    "message": "スプーフィング結果を確認"
+  },
+  "hideSpoofingResults": {
+    "message": "スプーフィング結果を隠す"
+  },
+  "saveSettings": {
+    "message": "設定を保存"
+  },
+  "settingsSaved": {
+    "message": "保存しました！"
+  },
+  "statusLoading": {
+    "message": "確認中..."
+  },
+  "judgementTarget": {
+    "message": "偽装目標値"
+  },
+  "judgementStatus": {
+    "message": "判定"
+  },
+  "footerVersion": {
+    "message": "Ununique v1.0.0 - フィンガープリンティングからあなたを守ります"
+  },
+  "spoofingHeadersIntro": {
+    "message": "以下のHTTPヘッダーが一般的な値に偽装されます："
+  },
+  "spoofingHeadersColumnName": {
+    "message": "ヘッダー名"
+  },
+  "spoofingHeadersColumnValue": {
+    "message": "偽装される値"
+  },
+  "spoofingJsIntro": {
+    "message": "以下のJavaScriptプロパティとその他の機能が一般的な値に偽装されます："
+  },
+  "spoofingJsColumnCategory": {
+    "message": "カテゴリー"
+  },
+  "spoofingJsColumnItem": {
+    "message": "偽装される項目"
+  },
+  "spoofingJsCategoryBasic": {
+    "message": "基本プロパティ"
+  },
+  "spoofingJsCategoryBasicItems": {
+    "message": "navigator.userAgent, navigator.platform, navigator.language, navigator.hardwareConcurrency, screen.width, screen.height など"
+  },
+  "spoofingJsCategoryFingerprinting": {
+    "message": "フィンガープリント対策"
+  },
+  "spoofingJsCategoryFingerprintingItems": {
+    "message": "キャンバスフィンガープリント, WebGLフィンガープリント, フォントリスト, メディアデバイス"
+  },
+  "spoofingJsCategorySensorsApi": {
+    "message": "センサーとAPI"
+  },
+  "spoofingJsCategorySensorsApiItems": {
+    "message": "バッテリー情報, ネットワーク接続情報, ブラウザバー, メディアフォーマット, ストレージAPI"
+  },
+  "canvasOriginalLabel": {
+    "message": "オリジナル:"
+  },
+  "canvasSpoofedLabel": {
+    "message": "スプーフィング後:"
+  },
+  "comparisonItem": {
+    "message": "項目"
+  },
+  "canvasNoiseLabel": {
+    "message": "キャンバスノイズ"
+  },
+  "batteryCharging": {
+    "message": "充電中"
+  },
+  "batteryNotCharging": {
+    "message": "充電していない"
+  },
+  "visible": {
+    "message": "表示"
+  },
+  "hidden": {
+    "message": "非表示"
+  },
+  "unsupported": {
+    "message": "対応していません"
+  },
+  "available": {
+    "message": "利用可能"
+  },
+  "unavailable": {
+    "message": "利用不可"
+  },
+  "noFontsData": {
+    "message": "フォントデータがありません"
+  },
+  "noDevicesData": {
+    "message": "デバイスがありません"
+  },
+  "unknownName": {
+    "message": "名前なし"
+  },
+  "spoofingTabBasic": {
+    "message": "基本情報"
+  },
+  "spoofingTabCanvas": {
+    "message": "キャンバス"
+  },
+  "spoofingTabWebgl": {
+    "message": "WebGL"
+  },
+  "spoofingTabFonts": {
+    "message": "フォント"
+  },
+  "spoofingTabDevices": {
+    "message": "デバイス"
+  },
+  "spoofingTabOther": {
+    "message": "その他"
+  },
+  "spoofingBasicTitle": {
+    "message": "基本的なJavaScriptプロパティ"
+  },
+  "comparisonOriginalValue": {
+    "message": "元の値"
+  },
+  "comparisonSpoofedValue": {
+    "message": "スプーフィング後の値"
+  },
+  "spoofingUserAgent": {
+    "message": "User-Agent"
+  },
+  "spoofingPlatform": {
+    "message": "プラットフォーム"
+  },
+  "spoofingLanguage": {
+    "message": "言語"
+  },
+  "spoofingScreenWidth": {
+    "message": "画面幅"
+  },
+  "spoofingScreenHeight": {
+    "message": "画面高"
+  },
+  "spoofingHardwareConcurrency": {
+    "message": "ハードウェアコンカレンシー"
+  },
+  "spoofingDoNotTrack": {
+    "message": "Do Not Track"
+  },
+  "spoofingCanvasTitle": {
+    "message": "キャンバスフィンガープリント"
+  },
+  "spoofingWebglTitle": {
+    "message": "WebGL情報"
+  },
+  "comparisonParameter": {
+    "message": "パラメータ"
+  },
+  "spoofingWebglVendor": {
+    "message": "VENDOR"
+  },
+  "spoofingWebglRenderer": {
+    "message": "RENDERER"
+  },
+  "spoofingFontsTitle": {
+    "message": "フォントリスト"
+  },
+  "spoofingFontsDescription": {
+    "message": "ブラウザで利用可能なフォント一覧と、スプーフィング後に利用可能なフォントを比較します。"
+  },
+  "spoofingOriginalFontsLabel": {
+    "message": "オリジナルフォント（一部）:"
+  },
+  "spoofingSpoofedFontsLabel": {
+    "message": "スプーフィング後のフォント:"
+  },
+  "spoofingDevicesTitle": {
+    "message": "メディアデバイス"
+  },
+  "spoofingDevicesDescription": {
+    "message": "カメラやマイクなど、ブラウザから取得できるデバイス情報を比較します。"
+  },
+  "spoofingOriginalDevicesLabel": {
+    "message": "オリジナルデバイス:"
+  },
+  "spoofingSpoofedDevicesLabel": {
+    "message": "スプーフィング後のデバイス:"
+  },
+  "spoofingBatteryTitle": {
+    "message": "バッテリー情報"
+  },
+  "spoofingBatteryCharging": {
+    "message": "充電中"
+  },
+  "spoofingBatteryLevel": {
+    "message": "バッテリーレベル"
+  },
+  "spoofingConnectionTitle": {
+    "message": "接続情報"
+  },
+  "spoofingConnectionType": {
+    "message": "接続タイプ"
+  },
+  "spoofingDownlink": {
+    "message": "ダウンリンク速度"
+  },
+  "spoofingBarTitle": {
+    "message": "ブラウザバー"
+  },
+  "spoofingBarType": {
+    "message": "バーの種類"
+  },
+  "spoofingMenubar": {
+    "message": "メニューバー"
+  },
+  "spoofingToolbar": {
+    "message": "ツールバー"
+  },
+  "spoofingMediaTitle": {
+    "message": "メディアフォーマット"
+  },
+  "spoofingMediaDescription": {
+    "message": "ブラウザが再生可能なメディアフォーマットを比較します。"
+  },
+  "spoofingMediaFormat": {
+    "message": "フォーマット"
+  },
+  "comparisonOriginalSupport": {
+    "message": "元の対応状況"
+  },
+  "comparisonSpoofedSupport": {
+    "message": "スプーフィング後の対応状況"
+  },
+  "spoofingMp4Video": {
+    "message": "MP4ビデオ"
+  },
+  "spoofingWebmVideo": {
+    "message": "WebMビデオ"
+  },
+  "judgementSummary": {
+    "message": "$1 / $2 件が偽装目標値と一致"
+  },
+  "statusFetching": {
+    "message": "取得中..."
+  },
+  "noData": {
+    "message": "データなし"
+  },
+  "dataFetchError": {
+    "message": "データの取得に失敗しました。再試行してください。"
+  },
+  "nullValue": {
+    "message": "null"
+  }
+}

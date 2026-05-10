@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ununique - 設定</title>
+    <title>Ununique - Settings</title>
     <style>
       body {
         font-family: sans-serif;
@@ -264,127 +264,130 @@
     <h1>
       <img src="../../icons/icon-48.png" alt="Ununique" style="vertical-align: middle" /><span
         data-i18n="optionsTitle"
-        >Ununique - 詳細設定</span
+        >Ununique - Advanced Settings</span
       >
     </h1>
 
-    <div class="settings-tabs" role="tablist" aria-label="詳細設定">
+    <div class="settings-tabs" role="tablist" aria-label="Advanced settings">
       <button
         class="settings-tab active"
         type="button"
         data-settings-tab="basic"
         data-i18n="tabBasic"
       >
-        基本設定
+        Basic settings
       </button>
       <button class="settings-tab" type="button" data-settings-tab="results" data-i18n="tabResults">
-        結果確認
+        Results
       </button>
       <button class="settings-tab" type="button" data-settings-tab="details" data-i18n="tabDetails">
-        説明
+        Details
       </button>
     </div>
 
     <div id="settings-basic-tab" class="settings-tab-content active">
       <div class="section">
-        <h2 data-i18n="tabBasic">基本設定</h2>
+        <h2 data-i18n="tabBasic">Basic settings</h2>
 
         <div class="toggle-container">
-          <span class="toggle-label" data-i18n="popupHeaderSpoofing">HTTPヘッダーの偽装</span>
+          <span class="toggle-label" data-i18n="popupHeaderSpoofing">HTTP header spoofing</span>
           <label class="toggle-switch">
             <input type="checkbox" id="headerSpoofing" checked />
             <span class="slider"></span>
           </label>
         </div>
         <div class="info" data-i18n="basicSettingsDescriptionHeader">
-          ブラウザからサーバーに送信されるHTTPヘッダーを一般的な値に偽装します。
+          Masks HTTP headers sent from the browser to servers as common values.
         </div>
 
         <div class="toggle-container">
-          <span class="toggle-label" data-i18n="popupJsSpoofing">JavaScriptプロパティの偽装</span>
+          <span class="toggle-label" data-i18n="popupJsSpoofing">JavaScript property spoofing</span>
           <label class="toggle-switch">
             <input type="checkbox" id="jsSpoofing" checked />
             <span class="slider"></span>
           </label>
         </div>
         <div class="info" data-i18n="basicSettingsDescriptionJs">
-          ウェブサイトから読み取られるJavaScriptプロパティ（画面サイズ、言語など）を一般的な値に偽装します。
+          Masks JavaScript properties read by websites, such as screen size and language, as common
+          values.
         </div>
       </div>
     </div>
 
     <div id="settings-results-tab" class="settings-tab-content">
       <div class="section">
-        <h2 data-i18n="spoofingResultsTitle">スプーフィング結果</h2>
+        <h2 data-i18n="spoofingResultsTitle">Spoofing results</h2>
         <p data-i18n="spoofingResultsDescription">
-          現在のブラウザ情報と偽装された情報を比較できます。
+          Compare current browser information with spoofed values.
         </p>
 
         <button id="checkResults" class="secondary-button" data-i18n="showSpoofingResults">
-          スプーフィング結果を確認
+          Check spoofing results
         </button>
 
         <div id="spoofResults" class="spoof-result" style="display: none">
-          <p id="spoofingJudgementSummary" class="judgement-summary">確認中...</p>
+          <p id="spoofingJudgementSummary" class="judgement-summary" data-i18n="statusLoading">
+            Loading...
+          </p>
           <div class="tabs">
-            <div class="tab active" data-tab="basic">基本情報</div>
-            <div class="tab" data-tab="canvas">キャンバス</div>
-            <div class="tab" data-tab="webgl">WebGL</div>
-            <div class="tab" data-tab="fonts">フォント</div>
-            <div class="tab" data-tab="devices">デバイス</div>
-            <div class="tab" data-tab="other">その他</div>
+            <div class="tab active" data-tab="basic" data-i18n="spoofingTabBasic">Basic info</div>
+            <div class="tab" data-tab="canvas" data-i18n="spoofingTabCanvas">Canvas</div>
+            <div class="tab" data-tab="webgl" data-i18n="spoofingTabWebgl">WebGL</div>
+            <div class="tab" data-tab="fonts" data-i18n="spoofingTabFonts">Fonts</div>
+            <div class="tab" data-tab="devices" data-i18n="spoofingTabDevices">Devices</div>
+            <div class="tab" data-tab="other" data-i18n="spoofingTabOther">Other</div>
           </div>
 
-          <!-- 基本情報タブ -->
+          <!-- Basic info tab -->
           <div id="basic-tab" class="tab-content active">
-            <h3>基本的なJavaScriptプロパティ</h3>
+            <h3 data-i18n="spoofingBasicTitle">Basic JavaScript properties</h3>
             <table>
               <tr>
-                <th>プロパティ</th>
-                <th>元の値</th>
-                <th>スプーフィング後の値</th>
+                <th data-i18n="comparisonItem">Item</th>
+                <th data-i18n="comparisonOriginalValue">Original value</th>
+                <th data-i18n="comparisonSpoofedValue">Spoofed value</th>
               </tr>
               <tr>
-                <td>User-Agent</td>
-                <td id="originalUserAgent">確認中...</td>
-                <td id="spoofedUserAgent">確認中...</td>
+                <td data-i18n="spoofingUserAgent">User-Agent</td>
+                <td id="originalUserAgent">Loading...</td>
+                <td id="spoofedUserAgent">Loading...</td>
               </tr>
               <tr>
-                <td>プラットフォーム</td>
-                <td id="originalPlatform">確認中...</td>
-                <td id="spoofedPlatform">確認中...</td>
+                <td data-i18n="spoofingPlatform">Platform</td>
+                <td id="originalPlatform">Loading...</td>
+                <td id="spoofedPlatform">Loading...</td>
               </tr>
               <tr>
-                <td>言語</td>
-                <td id="originalLanguage">確認中...</td>
-                <td id="spoofedLanguage">確認中...</td>
+                <td data-i18n="spoofingLanguage">Language</td>
+                <td id="originalLanguage">Loading...</td>
+                <td id="spoofedLanguage">Loading...</td>
               </tr>
               <tr>
-                <td>画面幅</td>
-                <td id="originalScreenWidth">確認中...</td>
-                <td id="spoofedScreenWidth">確認中...</td>
+                <td data-i18n="spoofingScreenWidth">Screen width</td>
+                <td id="originalScreenWidth">Loading...</td>
+                <td id="spoofedScreenWidth">Loading...</td>
               </tr>
               <tr>
-                <td>画面高</td>
-                <td id="originalScreenHeight">確認中...</td>
-                <td id="spoofedScreenHeight">確認中...</td>
+                <td data-i18n="spoofingScreenHeight">Screen height</td>
+                <td id="originalScreenHeight">Loading...</td>
+                <td id="spoofedScreenHeight">Loading...</td>
               </tr>
               <tr>
-                <td>ハードウェアコンカレンシー</td>
-                <td id="originalHardwareConcurrency">確認中...</td>
-                <td id="spoofedHardwareConcurrency">確認中...</td>
+                <td data-i18n="spoofingHardwareConcurrency">Hardware concurrency</td>
+                <td id="originalHardwareConcurrency">Loading...</td>
+                <td id="spoofedHardwareConcurrency">Loading...</td>
               </tr>
               <tr>
-                <td>Do Not Track</td>
-                <td id="originalDoNotTrack">確認中...</td>
-                <td id="spoofedDoNotTrack">確認中...</td>
+                <td data-i18n="spoofingDoNotTrack">Do Not Track</td>
+                <td id="originalDoNotTrack">Loading...</td>
+                <td id="spoofedDoNotTrack">Loading...</td>
               </tr>
             </table>
           </div>
 
-          <!-- キャンバスタブ -->
+          <!-- Canvas tab -->
           <div id="canvas-tab" class="tab-content">
-            <h3>キャンバスフィンガープリント</h3>
+            <h3 data-i18n="spoofingCanvasTitle">Canvas fingerprint</h3>
             <div style="display: flex; gap: 15px">
               <div>
                 <p data-i18n="canvasOriginalLabel">Original:</p>
@@ -404,145 +407,149 @@
               </tr>
               <tr>
                 <td data-i18n="canvasNoiseLabel">Canvas noise</td>
-                <td id="spoofedCanvasNoise">確認中...</td>
-                <td id="targetCanvasNoise">確認中...</td>
-                <td id="statusCanvasNoise">確認中...</td>
+                <td id="spoofedCanvasNoise">Loading...</td>
+                <td id="targetCanvasNoise">Loading...</td>
+                <td id="statusCanvasNoise">Loading...</td>
               </tr>
             </table>
           </div>
 
-          <!-- WebGLタブ -->
+          <!-- WebGL tab -->
           <div id="webgl-tab" class="tab-content">
-            <h3>WebGL情報</h3>
+            <h3 data-i18n="spoofingWebglTitle">WebGL information</h3>
             <table>
               <tr>
-                <th>パラメータ</th>
-                <th>元の値</th>
-                <th>スプーフィング後の値</th>
+                <th data-i18n="comparisonParameter">Parameter</th>
+                <th data-i18n="comparisonOriginalValue">Original value</th>
+                <th data-i18n="comparisonSpoofedValue">Spoofed value</th>
               </tr>
               <tr>
-                <td>VENDOR</td>
-                <td id="originalWebGLVendor">確認中...</td>
-                <td id="spoofedWebGLVendor">確認中...</td>
+                <td data-i18n="spoofingWebglVendor">VENDOR</td>
+                <td id="originalWebGLVendor">Loading...</td>
+                <td id="spoofedWebGLVendor">Loading...</td>
               </tr>
               <tr>
-                <td>RENDERER</td>
-                <td id="originalWebGLRenderer">確認中...</td>
-                <td id="spoofedWebGLRenderer">確認中...</td>
+                <td data-i18n="spoofingWebglRenderer">RENDERER</td>
+                <td id="originalWebGLRenderer">Loading...</td>
+                <td id="spoofedWebGLRenderer">Loading...</td>
               </tr>
             </table>
           </div>
 
-          <!-- フォントタブ -->
+          <!-- Fonts tab -->
           <div id="fonts-tab" class="tab-content">
-            <h3>フォントリスト</h3>
-            <p>
-              ブラウザで利用可能なフォント一覧と、スプーフィング後に利用可能なフォントを比較します。
+            <h3 data-i18n="spoofingFontsTitle">Font list</h3>
+            <p data-i18n="spoofingFontsDescription">
+              Compare the fonts available in the browser with the fonts available after spoofing.
             </p>
             <div style="display: flex; gap: 15px">
               <div style="flex: 1">
-                <p>オリジナルフォント（一部）:</p>
-                <div id="originalFonts" class="font-list">確認中...</div>
+                <p data-i18n="spoofingOriginalFontsLabel">Original fonts (partial):</p>
+                <div id="originalFonts" class="font-list">Loading...</div>
               </div>
               <div style="flex: 1">
-                <p>スプーフィング後のフォント:</p>
-                <div id="spoofedFonts" class="font-list">確認中...</div>
+                <p data-i18n="spoofingSpoofedFontsLabel">Spoofed fonts:</p>
+                <div id="spoofedFonts" class="font-list">Loading...</div>
               </div>
             </div>
           </div>
 
-          <!-- デバイスタブ -->
+          <!-- Devices tab -->
           <div id="devices-tab" class="tab-content">
-            <h3>メディアデバイス</h3>
-            <p>カメラやマイクなど、ブラウザから取得できるデバイス情報を比較します。</p>
+            <h3 data-i18n="spoofingDevicesTitle">Media devices</h3>
+            <p data-i18n="spoofingDevicesDescription">
+              Compare device information the browser can access, such as cameras and microphones.
+            </p>
             <div style="display: flex; gap: 15px">
               <div style="flex: 1">
-                <p>オリジナルデバイス:</p>
-                <div id="originalDevices">確認中...</div>
+                <p data-i18n="spoofingOriginalDevicesLabel">Original devices:</p>
+                <div id="originalDevices">Loading...</div>
               </div>
               <div style="flex: 1">
-                <p>スプーフィング後のデバイス:</p>
-                <div id="spoofedDevices">確認中...</div>
+                <p data-i18n="spoofingSpoofedDevicesLabel">Spoofed devices:</p>
+                <div id="spoofedDevices">Loading...</div>
               </div>
             </div>
 
-            <h3>バッテリー情報</h3>
+            <h3 data-i18n="spoofingBatteryTitle">Battery information</h3>
             <table>
               <tr>
-                <th>パラメータ</th>
-                <th>元の値</th>
-                <th>スプーフィング後の値</th>
+                <th data-i18n="comparisonParameter">Parameter</th>
+                <th data-i18n="comparisonOriginalValue">Original value</th>
+                <th data-i18n="comparisonSpoofedValue">Spoofed value</th>
               </tr>
               <tr>
-                <td>充電中</td>
-                <td id="originalBatteryCharging">確認中...</td>
-                <td id="spoofedBatteryCharging">確認中...</td>
+                <td data-i18n="spoofingBatteryCharging">Charging</td>
+                <td id="originalBatteryCharging">Loading...</td>
+                <td id="spoofedBatteryCharging">Loading...</td>
               </tr>
               <tr>
-                <td>バッテリーレベル</td>
-                <td id="originalBatteryLevel">確認中...</td>
-                <td id="spoofedBatteryLevel">確認中...</td>
+                <td data-i18n="spoofingBatteryLevel">Battery level</td>
+                <td id="originalBatteryLevel">Loading...</td>
+                <td id="spoofedBatteryLevel">Loading...</td>
               </tr>
             </table>
           </div>
 
-          <!-- その他タブ -->
+          <!-- Other tab -->
           <div id="other-tab" class="tab-content">
-            <h3>接続情報</h3>
+            <h3 data-i18n="spoofingConnectionTitle">Connection information</h3>
             <table>
               <tr>
-                <th>パラメータ</th>
-                <th>元の値</th>
-                <th>スプーフィング後の値</th>
+                <th data-i18n="comparisonParameter">Parameter</th>
+                <th data-i18n="comparisonOriginalValue">Original value</th>
+                <th data-i18n="comparisonSpoofedValue">Spoofed value</th>
               </tr>
               <tr>
-                <td>接続タイプ</td>
-                <td id="originalConnectionType">確認中...</td>
-                <td id="spoofedConnectionType">確認中...</td>
+                <td data-i18n="spoofingConnectionType">Connection type</td>
+                <td id="originalConnectionType">Loading...</td>
+                <td id="spoofedConnectionType">Loading...</td>
               </tr>
               <tr>
-                <td>ダウンリンク速度</td>
-                <td id="originalDownlink">確認中...</td>
-                <td id="spoofedDownlink">確認中...</td>
+                <td data-i18n="spoofingDownlink">Downlink speed</td>
+                <td id="originalDownlink">Loading...</td>
+                <td id="spoofedDownlink">Loading...</td>
               </tr>
             </table>
 
-            <h3>ブラウザバー</h3>
+            <h3 data-i18n="spoofingBarTitle">Browser bars</h3>
             <table>
               <tr>
-                <th>バーの種類</th>
-                <th>元の値</th>
-                <th>スプーフィング後の値</th>
+                <th data-i18n="spoofingBarType">Bar type</th>
+                <th data-i18n="comparisonOriginalValue">Original value</th>
+                <th data-i18n="comparisonSpoofedValue">Spoofed value</th>
               </tr>
               <tr>
-                <td>メニューバー</td>
-                <td id="originalMenubar">確認中...</td>
-                <td id="spoofedMenubar">確認中...</td>
+                <td data-i18n="spoofingMenubar">Menubar</td>
+                <td id="originalMenubar">Loading...</td>
+                <td id="spoofedMenubar">Loading...</td>
               </tr>
               <tr>
-                <td>ツールバー</td>
-                <td id="originalToolbar">確認中...</td>
-                <td id="spoofedToolbar">確認中...</td>
+                <td data-i18n="spoofingToolbar">Toolbar</td>
+                <td id="originalToolbar">Loading...</td>
+                <td id="spoofedToolbar">Loading...</td>
               </tr>
             </table>
 
-            <h3>メディアフォーマット</h3>
-            <p>ブラウザが再生可能なメディアフォーマットを比較します。</p>
+            <h3 data-i18n="spoofingMediaTitle">Media formats</h3>
+            <p data-i18n="spoofingMediaDescription">
+              Compare the media formats that the browser can play.
+            </p>
             <table>
               <tr>
-                <th>フォーマット</th>
-                <th>元の対応状況</th>
-                <th>スプーフィング後の対応状況</th>
+                <th data-i18n="spoofingMediaFormat">Format</th>
+                <th data-i18n="comparisonOriginalSupport">Original support</th>
+                <th data-i18n="comparisonSpoofedSupport">Spoofed support</th>
               </tr>
               <tr>
-                <td>MP4ビデオ</td>
-                <td id="originalMP4Support">確認中...</td>
-                <td id="spoofedMP4Support">確認中...</td>
+                <td data-i18n="spoofingMp4Video">MP4 video</td>
+                <td id="originalMP4Support">Loading...</td>
+                <td id="spoofedMP4Support">Loading...</td>
               </tr>
               <tr>
-                <td>WebMビデオ</td>
-                <td id="originalWebMSupport">確認中...</td>
-                <td id="spoofedWebMSupport">確認中...</td>
+                <td data-i18n="spoofingWebmVideo">WebM video</td>
+                <td id="originalWebMSupport">Loading...</td>
+                <td id="spoofedWebMSupport">Loading...</td>
               </tr>
             </table>
           </div>
@@ -552,8 +559,10 @@
 
     <div id="settings-details-tab" class="settings-tab-content">
       <div class="section">
-        <h2 data-i18n="popupHeaderSpoofing">HTTPヘッダーの偽装</h2>
-        <p data-i18n="spoofingHeadersIntro">The following HTTP headers are spoofed to common values:</p>
+        <h2 data-i18n="popupHeaderSpoofing">HTTP header spoofing</h2>
+        <p data-i18n="spoofingHeadersIntro">
+          The following HTTP headers are spoofed to common values:
+        </p>
 
         <table>
           <tr>
@@ -586,8 +595,10 @@
       </div>
 
       <div class="section">
-        <h2 data-i18n="popupJsSpoofing">JavaScriptプロパティの偽装</h2>
-        <p data-i18n="spoofingJsIntro">The following JavaScript properties and other features are spoofed to common values:</p>
+        <h2 data-i18n="popupJsSpoofing">JavaScript property spoofing</h2>
+        <p data-i18n="spoofingJsIntro">
+          The following JavaScript properties and other features are spoofed to common values:
+        </p>
 
         <table>
           <tr>
@@ -595,24 +606,23 @@
             <th data-i18n="spoofingJsColumnItem">Spoofed item</th>
           </tr>
           <tr>
-            <td>基本プロパティ</td>
-            <td>
+            <td data-i18n="spoofingJsCategoryBasic">Basic properties</td>
+            <td data-i18n="spoofingJsCategoryBasicItems">
               navigator.userAgent, navigator.platform, navigator.language,
-              navigator.hardwareConcurrency, screen.width, screen.height など
+              navigator.hardwareConcurrency, screen.width, screen.height, etc.
             </td>
           </tr>
           <tr>
-            <td>フィンガープリント対策</td>
-            <td>
-              キャンバスフィンガープリント, WebGLフィンガープリント, フォントリスト,
-              メディアデバイス
+            <td data-i18n="spoofingJsCategoryFingerprinting">Fingerprinting defenses</td>
+            <td data-i18n="spoofingJsCategoryFingerprintingItems">
+              Canvas fingerprinting, WebGL fingerprinting, font lists, media devices
             </td>
           </tr>
           <tr>
-            <td>センサーとAPI</td>
-            <td>
-              バッテリー情報, ネットワーク接続情報, ブラウザバー, メディアフォーマット,
-              ストレージAPI
+            <td data-i18n="spoofingJsCategorySensorsApi">Sensors and APIs</td>
+            <td data-i18n="spoofingJsCategorySensorsApiItems">
+              Battery information, network connection information, browser bars, media format
+              support, Storage API
             </td>
           </tr>
         </table>
@@ -620,11 +630,11 @@
     </div>
 
     <div class="button-container">
-      <button id="save" class="button" data-i18n="saveSettings">設定を保存</button>
+      <button id="save" class="button" data-i18n="saveSettings">Save settings</button>
     </div>
 
     <div class="footer" data-i18n="footerVersion">
-      Ununique v1.0.0 - フィンガープリンティングからあなたを守ります
+      Ununique v1.0.0 - Protects you from fingerprinting
     </div>
 
     <script src="options.js"></script>

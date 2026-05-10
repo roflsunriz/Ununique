@@ -32,9 +32,9 @@
       { name: "Arial Black", available: true }
     ],
     devices: [
-      { kind: "audioinput", label: "内蔵マイク" },
-      { kind: "videoinput", label: "内蔵Webカメラ" },
-      { kind: "audiooutput", label: "内蔵スピーカー" }
+      { kind: "audioinput", label: "Built-in microphone" },
+      { kind: "videoinput", label: "Built-in webcam" },
+      { kind: "audiooutput", label: "Built-in speaker" }
     ],
     batteryCharging: true,
     batteryLevel: 1.0,
@@ -83,6 +83,20 @@
     // Chrome と Firefox の両方に対応するためのブラウザAPI
     const browserAPI = getBrowserApi();
     applyI18n(browserAPI);
+    const loadingText = getMessage(browserAPI, "statusFetching", "Loading...");
+    const noDataText = getMessage(browserAPI, "noData", "No data");
+    const errorText = getMessage(browserAPI, "dataFetchError", "Failed to get data. Please try again.");
+    const chargingText = getMessage(browserAPI, "batteryCharging", "Charging");
+    const notChargingText = getMessage(browserAPI, "batteryNotCharging", "Not charging");
+    const visibleText = getMessage(browserAPI, "visible", "Visible");
+    const hiddenText = getMessage(browserAPI, "hidden", "Hidden");
+    const unsupportedText = getMessage(browserAPI, "unsupported", "Not supported");
+    const availableText = getMessage(browserAPI, "available", "Available");
+    const unavailableText = getMessage(browserAPI, "unavailable", "Unavailable");
+    const noFontsText = getMessage(browserAPI, "noFontsData", "No font data");
+    const noDevicesText = getMessage(browserAPI, "noDevicesData", "No devices");
+    const unknownNameText = getMessage(browserAPI, "unknownName", "Unnamed");
+    const nullValueText = getMessage(browserAPI, "nullValue", "null");
     const judgementTargetLabel = getMessage(browserAPI, "judgementTarget", "Target value");
     const judgementStatusLabel = getMessage(browserAPI, "judgementStatus", "Status");
 
@@ -125,14 +139,14 @@
         checkResultsButton.textContent = getMessage(
           browserAPI,
           "hideSpoofingResults",
-          "スプーフィング結果を隠す"
+          "Hide spoofing results"
         );
       } else {
         spoofResultsDiv.style.display = "none";
         checkResultsButton.textContent = getMessage(
           browserAPI,
           "showSpoofingResults",
-          "スプーフィング結果を確認"
+          "Check spoofing results"
         );
       }
     });
@@ -186,7 +200,7 @@
 
       // 保存成功のメッセージを表示
       const originalText = saveButton.textContent;
-      saveButton.textContent = getMessage(browserAPI, "settingsSaved", "保存しました！");
+      saveButton.textContent = getMessage(browserAPI, "settingsSaved", "Saved");
       saveButton.disabled = true;
 
       // 3秒後に元のテキストに戻す
@@ -226,7 +240,7 @@
 
         displaySpoofingJudgements();
       } catch (e) {
-        console.error("スプーフィング値の取得に失敗しました:", e);
+        console.error(errorText, e);
         displayErrorMessage();
       }
     }
@@ -234,108 +248,104 @@
     // 表示内容をリセットする関数
     function resetDisplayValues(): void {
       // 基本情報
-      document.getElementById("originalUserAgent").textContent = "取得中...";
-      document.getElementById("spoofedUserAgent").textContent = "取得中...";
-      document.getElementById("originalPlatform").textContent = "取得中...";
-      document.getElementById("spoofedPlatform").textContent = "取得中...";
-      document.getElementById("originalLanguage").textContent = "取得中...";
-      document.getElementById("spoofedLanguage").textContent = "取得中...";
-      document.getElementById("originalScreenWidth").textContent = "取得中...";
-      document.getElementById("spoofedScreenWidth").textContent = "取得中...";
-      document.getElementById("originalScreenHeight").textContent = "取得中...";
-      document.getElementById("spoofedScreenHeight").textContent = "取得中...";
-      document.getElementById("originalHardwareConcurrency").textContent = "取得中...";
-      document.getElementById("spoofedHardwareConcurrency").textContent = "取得中...";
-      document.getElementById("originalDoNotTrack").textContent = "取得中...";
-      document.getElementById("spoofedDoNotTrack").textContent = "取得中...";
+      document.getElementById("originalUserAgent").textContent = loadingText;
+      document.getElementById("spoofedUserAgent").textContent = loadingText;
+      document.getElementById("originalPlatform").textContent = loadingText;
+      document.getElementById("spoofedPlatform").textContent = loadingText;
+      document.getElementById("originalLanguage").textContent = loadingText;
+      document.getElementById("spoofedLanguage").textContent = loadingText;
+      document.getElementById("originalScreenWidth").textContent = loadingText;
+      document.getElementById("spoofedScreenWidth").textContent = loadingText;
+      document.getElementById("originalScreenHeight").textContent = loadingText;
+      document.getElementById("spoofedScreenHeight").textContent = loadingText;
+      document.getElementById("originalHardwareConcurrency").textContent = loadingText;
+      document.getElementById("spoofedHardwareConcurrency").textContent = loadingText;
+      document.getElementById("originalDoNotTrack").textContent = loadingText;
+      document.getElementById("spoofedDoNotTrack").textContent = loadingText;
 
       // WebGL情報
-      document.getElementById("originalWebGLVendor").textContent = "取得中...";
-      document.getElementById("spoofedWebGLVendor").textContent = "取得中...";
-      document.getElementById("originalWebGLRenderer").textContent = "取得中...";
-      document.getElementById("spoofedWebGLRenderer").textContent = "取得中...";
+      document.getElementById("originalWebGLVendor").textContent = loadingText;
+      document.getElementById("spoofedWebGLVendor").textContent = loadingText;
+      document.getElementById("originalWebGLRenderer").textContent = loadingText;
+      document.getElementById("spoofedWebGLRenderer").textContent = loadingText;
 
       // フォントリスト
-      document.getElementById("originalFonts").textContent = "取得中...";
-      document.getElementById("spoofedFonts").textContent = "取得中...";
+      document.getElementById("originalFonts").textContent = loadingText;
+      document.getElementById("spoofedFonts").textContent = loadingText;
 
       // メディアデバイス
-      document.getElementById("originalDevices").textContent = "取得中...";
-      document.getElementById("spoofedDevices").textContent = "取得中...";
+      document.getElementById("originalDevices").textContent = loadingText;
+      document.getElementById("spoofedDevices").textContent = loadingText;
 
       // バッテリー情報
-      document.getElementById("originalBatteryCharging").textContent = "取得中...";
-      document.getElementById("spoofedBatteryCharging").textContent = "取得中...";
-      document.getElementById("originalBatteryLevel").textContent = "取得中...";
-      document.getElementById("spoofedBatteryLevel").textContent = "取得中...";
+      document.getElementById("originalBatteryCharging").textContent = loadingText;
+      document.getElementById("spoofedBatteryCharging").textContent = loadingText;
+      document.getElementById("originalBatteryLevel").textContent = loadingText;
+      document.getElementById("spoofedBatteryLevel").textContent = loadingText;
 
       // 接続情報
-      document.getElementById("originalConnectionType").textContent = "取得中...";
-      document.getElementById("spoofedConnectionType").textContent = "取得中...";
-      document.getElementById("originalDownlink").textContent = "取得中...";
-      document.getElementById("spoofedDownlink").textContent = "取得中...";
+      document.getElementById("originalConnectionType").textContent = loadingText;
+      document.getElementById("spoofedConnectionType").textContent = loadingText;
+      document.getElementById("originalDownlink").textContent = loadingText;
+      document.getElementById("spoofedDownlink").textContent = loadingText;
 
       // ブラウザバー
-      document.getElementById("originalMenubar").textContent = "取得中...";
-      document.getElementById("spoofedMenubar").textContent = "取得中...";
-      document.getElementById("originalToolbar").textContent = "取得中...";
-      document.getElementById("spoofedToolbar").textContent = "取得中...";
+      document.getElementById("originalMenubar").textContent = loadingText;
+      document.getElementById("spoofedMenubar").textContent = loadingText;
+      document.getElementById("originalToolbar").textContent = loadingText;
+      document.getElementById("spoofedToolbar").textContent = loadingText;
 
       // メディアフォーマット
-      document.getElementById("originalMP4Support").textContent = "取得中...";
-      document.getElementById("spoofedMP4Support").textContent = "取得中...";
-      document.getElementById("originalWebMSupport").textContent = "取得中...";
-      document.getElementById("spoofedWebMSupport").textContent = "取得中...";
+      document.getElementById("originalMP4Support").textContent = loadingText;
+      document.getElementById("spoofedMP4Support").textContent = loadingText;
+      document.getElementById("originalWebMSupport").textContent = loadingText;
+      document.getElementById("spoofedWebMSupport").textContent = loadingText;
       resetSpoofingJudgements();
     }
 
     function resetSpoofingJudgements(): void {
       spoofingJudgements = [];
       spoofingJudgementSummary.className = "judgement-summary";
-      spoofingJudgementSummary.textContent = getMessage(
-        browserAPI,
-        "statusLoading",
-        "Checking..."
-      );
+      spoofingJudgementSummary.textContent = loadingText;
 
       document.querySelectorAll<HTMLElement>("[data-spoof-target]").forEach((element) => {
-        element.textContent = "取得中...";
+        element.textContent = loadingText;
       });
       document.querySelectorAll<HTMLElement>("[data-spoof-status]").forEach((element) => {
-        element.textContent = "取得中...";
+        element.textContent = loadingText;
         element.className = "";
       });
       document.querySelectorAll<HTMLElement>("[data-collection-judgement]").forEach((element) => {
         element.remove();
       });
-      document.getElementById("spoofedCanvasNoise").textContent = "取得中...";
-      document.getElementById("targetCanvasNoise").textContent = "取得中...";
-      document.getElementById("statusCanvasNoise").textContent = "取得中...";
+      document.getElementById("spoofedCanvasNoise").textContent = loadingText;
+      document.getElementById("targetCanvasNoise").textContent = loadingText;
+      document.getElementById("statusCanvasNoise").textContent = loadingText;
     }
 
     // 元の値を表示する関数
     function displayOriginalValues(): void {
       // 基本情報
       document.getElementById("originalUserAgent").textContent =
-        originalValues.userAgent || "データなし";
+        originalValues.userAgent || noDataText;
       document.getElementById("originalPlatform").textContent =
-        originalValues.platform || "データなし";
+        originalValues.platform || noDataText;
       document.getElementById("originalLanguage").textContent =
-        originalValues.language || "データなし";
+        originalValues.language || noDataText;
       document.getElementById("originalScreenWidth").textContent =
-        originalValues.screenWidth?.toString() || "データなし";
+        originalValues.screenWidth?.toString() || noDataText;
       document.getElementById("originalScreenHeight").textContent =
-        originalValues.screenHeight?.toString() || "データなし";
+        originalValues.screenHeight?.toString() || noDataText;
       document.getElementById("originalHardwareConcurrency").textContent =
-        originalValues.hardwareConcurrency?.toString() || "データなし";
+        originalValues.hardwareConcurrency?.toString() || noDataText;
       document.getElementById("originalDoNotTrack").textContent =
-        originalValues.doNotTrack?.toString() || "データなし";
+        originalValues.doNotTrack?.toString() || noDataText;
 
       // WebGL情報
       document.getElementById("originalWebGLVendor").textContent =
-        originalValues.webglVendor || "データなし";
+        originalValues.webglVendor || noDataText;
       document.getElementById("originalWebGLRenderer").textContent =
-        originalValues.webglRenderer || "データなし";
+        originalValues.webglRenderer || noDataText;
 
       // フォントリスト
       displayFonts("originalFonts", originalValues.fonts || []);
@@ -347,65 +357,65 @@
       document.getElementById("originalBatteryCharging").textContent =
         originalValues.batteryCharging !== undefined
           ? originalValues.batteryCharging
-            ? "充電中"
-            : "充電していない"
-          : "データなし";
+            ? chargingText
+            : notChargingText
+          : noDataText;
       document.getElementById("originalBatteryLevel").textContent =
         originalValues.batteryLevel !== undefined
           ? Math.round(originalValues.batteryLevel * 100) + "%"
-          : "データなし";
+          : noDataText;
 
       // 接続情報
       document.getElementById("originalConnectionType").textContent =
-        originalValues.connectionType || "データなし";
+        originalValues.connectionType || noDataText;
       document.getElementById("originalDownlink").textContent = originalValues.downlink
         ? originalValues.downlink + "Mbps"
-        : "データなし";
+        : noDataText;
 
       // ブラウザバー
       document.getElementById("originalMenubar").textContent =
         originalValues.menubarVisible !== undefined
           ? originalValues.menubarVisible
-            ? "表示"
-            : "非表示"
-          : "データなし";
+            ? visibleText
+            : hiddenText
+          : noDataText;
       document.getElementById("originalToolbar").textContent =
         originalValues.toolbarVisible !== undefined
           ? originalValues.toolbarVisible
-            ? "表示"
-            : "非表示"
-          : "データなし";
+            ? visibleText
+            : hiddenText
+          : noDataText;
 
       // メディアフォーマット
       document.getElementById("originalMP4Support").textContent =
-        originalValues.mp4Support || "対応していません";
+        originalValues.mp4Support || unsupportedText;
       document.getElementById("originalWebMSupport").textContent =
-        originalValues.webmSupport || "対応していません";
+        originalValues.webmSupport || unsupportedText;
     }
 
     // スプーフィング後の値を表示する関数
     function displaySpoofedValues(): void {
       // 基本情報
       document.getElementById("spoofedUserAgent").textContent =
-        spoofedValues.userAgent || "データなし";
+        spoofedValues.userAgent || noDataText;
       document.getElementById("spoofedPlatform").textContent =
-        spoofedValues.platform || "データなし";
+        spoofedValues.platform || noDataText;
       document.getElementById("spoofedLanguage").textContent =
-        spoofedValues.language || "データなし";
+        spoofedValues.language || noDataText;
       document.getElementById("spoofedScreenWidth").textContent =
-        spoofedValues.screenWidth?.toString() || "データなし";
+        spoofedValues.screenWidth?.toString() || noDataText;
       document.getElementById("spoofedScreenHeight").textContent =
-        spoofedValues.screenHeight?.toString() || "データなし";
+        spoofedValues.screenHeight?.toString() || noDataText;
       document.getElementById("spoofedHardwareConcurrency").textContent =
-        spoofedValues.hardwareConcurrency?.toString() || "データなし";
+        spoofedValues.hardwareConcurrency?.toString() || noDataText;
       document.getElementById("spoofedDoNotTrack").textContent =
-        spoofedValues.doNotTrack?.toString() || "データなし";
+        spoofedValues.doNotTrack?.toString() || noDataText;
 
       // WebGL情報
       document.getElementById("spoofedWebGLVendor").textContent =
-        spoofedValues.webglVendor || "データなし";
+        spoofedValues.webglVendor || noDataText;
       document.getElementById("spoofedWebGLRenderer").textContent =
-        spoofedValues.webglRenderer || "データなし";
+        spoofedValues.webglRenderer || noDataText;
 
       // フォントリスト
       displayFonts("spoofedFonts", spoofedValues.fonts || []);
@@ -417,40 +427,40 @@
       document.getElementById("spoofedBatteryCharging").textContent =
         spoofedValues.batteryCharging !== undefined
           ? spoofedValues.batteryCharging
-            ? "充電中"
-            : "充電していない"
-          : "データなし";
+            ? chargingText
+            : notChargingText
+          : noDataText;
       document.getElementById("spoofedBatteryLevel").textContent =
         spoofedValues.batteryLevel !== undefined
           ? Math.round(spoofedValues.batteryLevel * 100) + "%"
-          : "データなし";
+          : noDataText;
 
       // 接続情報
       document.getElementById("spoofedConnectionType").textContent =
-        spoofedValues.connectionType || "データなし";
+        spoofedValues.connectionType || noDataText;
       document.getElementById("spoofedDownlink").textContent = spoofedValues.downlink
         ? spoofedValues.downlink + "Mbps"
-        : "データなし";
+        : noDataText;
 
       // ブラウザバー
       document.getElementById("spoofedMenubar").textContent =
         spoofedValues.menubarVisible !== undefined
           ? spoofedValues.menubarVisible
-            ? "表示"
-            : "非表示"
-          : "データなし";
+            ? visibleText
+            : hiddenText
+          : noDataText;
       document.getElementById("spoofedToolbar").textContent =
         spoofedValues.toolbarVisible !== undefined
           ? spoofedValues.toolbarVisible
-            ? "表示"
-            : "非表示"
-          : "データなし";
+            ? visibleText
+            : hiddenText
+          : noDataText;
 
       // メディアフォーマット
       document.getElementById("spoofedMP4Support").textContent =
-        spoofedValues.mp4Support || "対応していません";
+        spoofedValues.mp4Support || unsupportedText;
       document.getElementById("spoofedWebMSupport").textContent =
-        spoofedValues.webmSupport || "対応していません";
+        spoofedValues.webmSupport || unsupportedText;
     }
 
     function displaySpoofingJudgements(): void {
@@ -481,7 +491,7 @@
         "spoofedBatteryCharging",
         spoofedValues.batteryCharging,
         SPOOFING_TARGETS.batteryCharging,
-        formatBooleanState("充電中", "充電していない")
+        formatBooleanState(chargingText, notChargingText)
       );
       setComparison(
         "spoofedBatteryLevel",
@@ -504,13 +514,13 @@
         "spoofedMenubar",
         spoofedValues.menubarVisible,
         SPOOFING_TARGETS.menubarVisible,
-        formatBooleanState("表示", "非表示")
+        formatBooleanState(visibleText, hiddenText)
       );
       setComparison(
         "spoofedToolbar",
         spoofedValues.toolbarVisible,
         SPOOFING_TARGETS.toolbarVisible,
-        formatBooleanState("表示", "非表示")
+        formatBooleanState(visibleText, hiddenText)
       );
       setComparison("spoofedMP4Support", spoofedValues.mp4Support, SPOOFING_TARGETS.mp4Support);
       setComparison("spoofedWebMSupport", spoofedValues.webmSupport, SPOOFING_TARGETS.webmSupport);
@@ -635,10 +645,10 @@
         return JSON.stringify(value);
       }
       if (value === undefined) {
-        return "データなし";
+        return noDataText;
       }
       if (value === null) {
-        return "null";
+        return nullValueText;
       }
       return String(value);
     }
@@ -664,7 +674,7 @@
 
     // エラーメッセージを表示する関数
     function displayErrorMessage(): void {
-      const errorMsg = "データの取得に失敗しました。再試行してください。";
+      const errorMsg = errorText;
 
       // 基本情報
       document.getElementById("originalUserAgent").textContent = errorMsg;
@@ -728,14 +738,14 @@
       fontDiv.replaceChildren();
 
       if (!fonts || fonts.length === 0) {
-        fontDiv.textContent = "フォントデータがありません";
+        fontDiv.textContent = noFontsText;
         return;
       }
 
       fonts.forEach((font) => {
         const fontItem = document.createElement("div");
         fontItem.className = "font-item";
-        fontItem.textContent = `${font.name}: ${font.available ? "利用可能" : "利用不可"}`;
+        fontItem.textContent = `${font.name}: ${font.available ? availableText : unavailableText}`;
         fontItem.style.color = font.available ? "#4CAF50" : "#999";
         fontDiv.appendChild(fontItem);
       });
@@ -747,7 +757,7 @@
       devicesDiv.replaceChildren();
 
       if (!devices || devices.length === 0) {
-        devicesDiv.textContent = "デバイスがありません";
+        devicesDiv.textContent = noDevicesText;
         return;
       }
 
@@ -763,7 +773,7 @@
         const deviceItem = document.createElement("div");
         deviceItem.style.padding = "3px 0";
         deviceItem.style.fontSize = "13px";
-        deviceItem.textContent = `${device.kind}: ${device.label || "名前なし"}`;
+        deviceItem.textContent = `${device.kind}: ${device.label || unknownNameText}`;
         devicesDiv.appendChild(deviceItem);
       });
     }
@@ -790,7 +800,7 @@
         drawCanvasContent(spoofedCtx, text, true);
         displayCanvasJudgement(spoofedCtx);
       } catch (e) {
-        console.error("キャンバス描画エラー:", e);
+        console.error("Canvas rendering error:", e);
       }
     }
 
@@ -800,9 +810,9 @@
       const passed = redChannel !== 248;
 
       document.getElementById("spoofedCanvasNoise").textContent =
-        `先頭ピクセル赤チャンネル: ${redChannel}`;
+        `First pixel red channel: ${redChannel}`;
       document.getElementById("targetCanvasNoise").textContent =
-        "画像データの赤チャンネルにノイズが追加される";
+        "The image data red channel receives noise";
       document.getElementById("statusCanvasNoise").replaceChildren(createStatusElement(passed));
       spoofingJudgements.push(passed);
     }
@@ -839,3 +849,4 @@
     }
   });
 })();
+

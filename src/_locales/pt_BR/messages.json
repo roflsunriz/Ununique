@@ -1,0 +1,305 @@
+{
+  "extensionName": {
+    "message": "Ununique"
+  },
+  "extensionDescription": {
+    "message": "Mascara dados únicos do navegador como valores comuns para ajudar a evitar fingerprinting."
+  },
+  "popupHeaderSpoofing": {
+    "message": "Mascaramento de cabeçalhos HTTP"
+  },
+  "popupJsSpoofing": {
+    "message": "Mascaramento de propriedades JavaScript"
+  },
+  "popupOpenOptions": {
+    "message": "Configurações avançadas"
+  },
+  "popupFooter": {
+    "message": "Mascara fingerprints como valores comuns para ajudar a proteger você contra rastreamento."
+  },
+  "optionsTitle": {
+    "message": "Ununique - Configurações Avançadas"
+  },
+  "tabBasic": {
+    "message": "Básico"
+  },
+  "tabResults": {
+    "message": "Resultados"
+  },
+  "tabHeaders": {
+    "message": "Cabeçalhos HTTP"
+  },
+  "tabJavaScript": {
+    "message": "JavaScript"
+  },
+  "tabDetails": {
+    "message": "Detalhes"
+  },
+  "basicSettingsDescriptionHeader": {
+    "message": "Mascara como valores comuns os cabeçalhos HTTP enviados pelo navegador aos servidores."
+  },
+  "basicSettingsDescriptionJs": {
+    "message": "Mascara como valores comuns as propriedades JavaScript lidas por sites, como tamanho da tela e idioma."
+  },
+  "spoofingResultsTitle": {
+    "message": "Resultados do mascaramento"
+  },
+  "spoofingResultsDescription": {
+    "message": "Compare as informações atuais do navegador com os valores mascarados."
+  },
+  "showSpoofingResults": {
+    "message": "Verificar resultados"
+  },
+  "hideSpoofingResults": {
+    "message": "Ocultar resultados"
+  },
+  "saveSettings": {
+    "message": "Salvar configurações"
+  },
+  "settingsSaved": {
+    "message": "Salvo"
+  },
+  "statusLoading": {
+    "message": "Verificando..."
+  },
+  "statusFetching": {
+    "message": "Carregando..."
+  },
+  "noData": {
+    "message": "Sem dados"
+  },
+  "dataFetchError": {
+    "message": "Falha ao obter dados. Tente novamente."
+  },
+  "judgementTarget": {
+    "message": "Valor alvo"
+  },
+  "judgementStatus": {
+    "message": "Status"
+  },
+  "footerVersion": {
+    "message": "Ununique v1.0.0 - Protege você contra fingerprinting"
+  },
+  "spoofingHeadersIntro": {
+    "message": "Os seguintes cabeçalhos HTTP são mascarados com valores comuns:"
+  },
+  "spoofingHeadersColumnName": {
+    "message": "Nome do cabeçalho"
+  },
+  "spoofingHeadersColumnValue": {
+    "message": "Valor mascarado"
+  },
+  "spoofingJsIntro": {
+    "message": "As seguintes propriedades JavaScript e outros recursos são mascarados com valores comuns:"
+  },
+  "spoofingJsColumnCategory": {
+    "message": "Categoria"
+  },
+  "spoofingJsColumnItem": {
+    "message": "Item mascarado"
+  },
+  "spoofingJsCategoryBasic": {
+    "message": "Propriedades básicas"
+  },
+  "spoofingJsCategoryBasicItems": {
+    "message": "navigator.userAgent, navigator.platform, navigator.language, navigator.hardwareConcurrency, screen.width, screen.height, etc."
+  },
+  "spoofingJsCategoryFingerprinting": {
+    "message": "Proteções contra fingerprinting"
+  },
+  "spoofingJsCategoryFingerprintingItems": {
+    "message": "Fingerprinting de canvas, fingerprinting de WebGL, listas de fontes, dispositivos de mídia"
+  },
+  "spoofingJsCategorySensorsApi": {
+    "message": "Sensores e APIs"
+  },
+  "spoofingJsCategorySensorsApiItems": {
+    "message": "Informações da bateria, informações da conexão de rede, barras do navegador, suporte a formatos de mídia, API de armazenamento"
+  },
+  "canvasOriginalLabel": {
+    "message": "Original:"
+  },
+  "canvasSpoofedLabel": {
+    "message": "Mascarado:"
+  },
+  "comparisonItem": {
+    "message": "Item"
+  },
+  "comparisonSpoofedValue": {
+    "message": "Valor mascarado"
+  },
+  "canvasNoiseLabel": {
+    "message": "Ruído do canvas"
+  },
+  "judgementSummary": {
+    "message": "$1 / $2 correspondem ao valor alvo"
+  },
+  "batteryCharging": {
+    "message": "Charging"
+  },
+  "batteryNotCharging": {
+    "message": "Not charging"
+  },
+  "visible": {
+    "message": "Visible"
+  },
+  "hidden": {
+    "message": "Hidden"
+  },
+  "unsupported": {
+    "message": "Not supported"
+  },
+  "available": {
+    "message": "Available"
+  },
+  "unavailable": {
+    "message": "Unavailable"
+  },
+  "noFontsData": {
+    "message": "No font data"
+  },
+  "noDevicesData": {
+    "message": "No devices"
+  },
+  "unknownName": {
+    "message": "Unnamed"
+  },
+  "nullValue": {
+    "message": "null"
+  },
+  "spoofingTabBasic": {
+    "message": "Basic info"
+  },
+  "spoofingTabCanvas": {
+    "message": "Canvas"
+  },
+  "spoofingTabWebgl": {
+    "message": "WebGL"
+  },
+  "spoofingTabFonts": {
+    "message": "Fonts"
+  },
+  "spoofingTabDevices": {
+    "message": "Devices"
+  },
+  "spoofingTabOther": {
+    "message": "Other"
+  },
+  "spoofingBasicTitle": {
+    "message": "Basic JavaScript properties"
+  },
+  "comparisonOriginalValue": {
+    "message": "Original value"
+  },
+  "spoofingUserAgent": {
+    "message": "User-Agent"
+  },
+  "spoofingPlatform": {
+    "message": "Platform"
+  },
+  "spoofingLanguage": {
+    "message": "Language"
+  },
+  "spoofingScreenWidth": {
+    "message": "Screen width"
+  },
+  "spoofingScreenHeight": {
+    "message": "Screen height"
+  },
+  "spoofingHardwareConcurrency": {
+    "message": "Hardware concurrency"
+  },
+  "spoofingDoNotTrack": {
+    "message": "Do Not Track"
+  },
+  "spoofingCanvasTitle": {
+    "message": "Canvas fingerprint"
+  },
+  "comparisonParameter": {
+    "message": "Parameter"
+  },
+  "spoofingWebglTitle": {
+    "message": "WebGL information"
+  },
+  "spoofingWebglVendor": {
+    "message": "VENDOR"
+  },
+  "spoofingWebglRenderer": {
+    "message": "RENDERER"
+  },
+  "spoofingFontsTitle": {
+    "message": "Font list"
+  },
+  "spoofingFontsDescription": {
+    "message": "Compare the fonts available in the browser with the fonts available after spoofing."
+  },
+  "spoofingOriginalFontsLabel": {
+    "message": "Original fonts (partial):"
+  },
+  "spoofingSpoofedFontsLabel": {
+    "message": "Spoofed fonts:"
+  },
+  "spoofingDevicesTitle": {
+    "message": "Media devices"
+  },
+  "spoofingDevicesDescription": {
+    "message": "Compare device information the browser can access, such as cameras and microphones."
+  },
+  "spoofingOriginalDevicesLabel": {
+    "message": "Original devices:"
+  },
+  "spoofingSpoofedDevicesLabel": {
+    "message": "Spoofed devices:"
+  },
+  "spoofingBatteryTitle": {
+    "message": "Battery information"
+  },
+  "spoofingBatteryCharging": {
+    "message": "Charging"
+  },
+  "spoofingBatteryLevel": {
+    "message": "Battery level"
+  },
+  "spoofingConnectionTitle": {
+    "message": "Connection information"
+  },
+  "spoofingConnectionType": {
+    "message": "Connection type"
+  },
+  "spoofingDownlink": {
+    "message": "Downlink speed"
+  },
+  "spoofingBarTitle": {
+    "message": "Browser bars"
+  },
+  "spoofingBarType": {
+    "message": "Bar type"
+  },
+  "spoofingMenubar": {
+    "message": "Menubar"
+  },
+  "spoofingToolbar": {
+    "message": "Toolbar"
+  },
+  "spoofingMediaTitle": {
+    "message": "Media formats"
+  },
+  "spoofingMediaDescription": {
+    "message": "Compare the media formats that the browser can play."
+  },
+  "spoofingMediaFormat": {
+    "message": "Format"
+  },
+  "comparisonOriginalSupport": {
+    "message": "Original support"
+  },
+  "comparisonSpoofedSupport": {
+    "message": "Spoofed support"
+  },
+  "spoofingMp4Video": {
+    "message": "MP4 video"
+  },
+  "spoofingWebmVideo": {
+    "message": "WebM video"
+  }
+}
