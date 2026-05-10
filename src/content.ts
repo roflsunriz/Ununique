@@ -147,21 +147,44 @@
     console.log(`[Ununique Debug] ${message}`);
   }
 
+  const DEFAULT_SETTINGS: Settings = {
+    enableHeaderSpoofing: true,
+    enableJsSpoofing: true
+  };
+
+  let hasInjectedMainWorldScript = false;
+
   // 重要: コンテンツスクリプトはisolated worldで実行されるため
   // メインワールドにコードを注入して、ブラウザのプロパティを直接上書きする
   function injectScriptToMainWorld(settings: Settings): void {
-    logDebug("メインワールドへのスクリプト注入を開始します");
-
     // 設定に基づいてJavaScriptスプーフィングをスキップする
     if (!settings.enableJsSpoofing) {
       logDebug("JavaScriptスプーフィングが無効なため、スクリプト注入をスキップします");
       return;
     }
 
+    if (hasInjectedMainWorldScript) {
+      logDebug("メインワールドへのスクリプトは注入済みのため、再注入をスキップします");
+      return;
+    }
+
+    logDebug("メインワールドへのスクリプト注入を開始します");
+
     // メインワールドに注入するコードを文字列として作成
     const scriptContent = `
     // メインワールドで実行されるコードここから
     (function() {
+      if (window.__UNUNIQUE_JS_SPOOFING_INSTALLED__) {
+        console.log("[Ununique Main World] JavaScriptスプーフィングはすでにインストール済みです");
+        return;
+      }
+      Object.defineProperty(window, "__UNUNIQUE_JS_SPOOFING_INSTALLED__", {
+        value: true,
+        configurable: false,
+        enumerable: false,
+        writable: false
+      });
+
       console.log("[Ununique Main World] メインワールドでの実行を開始します");
       
       // マジョリティ値の定義（JSON化してコンテンツスクリプトから引き継ぐ）
@@ -489,6 +512,7 @@
 
     // スクリプト注入後に要素を削除（きれいにする）
     scriptElement.remove();
+    hasInjectedMainWorldScript = true;
 
     logDebug("メインワールドへのスクリプト注入が完了しました");
   }
@@ -517,20 +541,13 @@
             resolve(response.settings);
           } else {
             logDebug("設定の取得に失敗しました。デフォルト設定を使用します。");
-            // デフォルト設定
-            resolve({
-              enableHeaderSpoofing: true,
-              enableJsSpoofing: true
-            });
+            resolve(DEFAULT_SETTINGS);
           }
         });
       } catch (e) {
         logDebug("設定取得中にエラーが発生しました: " + e.message);
         // エラーが発生した場合もデフォルト設定を使用
-        resolve({
-          enableHeaderSpoofing: true,
-          enableJsSpoofing: true
-        });
+        resolve(DEFAULT_SETTINGS);
       }
     });
   }
@@ -560,12 +577,15 @@
 
   // 初期化処理
   async function initialize(): Promise<void> {
-    // 設定を取得して適用
-    const settings = await getSettings();
-    applySettings(settings);
+    // document_startでページスクリプトより先に効かせるため、保存設定の取得を待たずに既定有効で注入する。
+    applySettings(DEFAULT_SETTINGS);
 
     // 設定変更リスナーを設定
     setupSettingsListener();
+
+    // 保存設定は後追いで反映する。無効設定でも既に適用した偽装は巻き戻さない。
+    const settings = await getSettings();
+    applySettings(settings);
   }
 
   // DOMContentLoadedイベントを待たず、即時実行
