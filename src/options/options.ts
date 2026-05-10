@@ -83,6 +83,8 @@
     // Chrome と Firefox の両方に対応するためのブラウザAPI
     const browserAPI = getBrowserApi();
     applyI18n(browserAPI);
+    const judgementTargetLabel = getMessage(browserAPI, "judgementTarget", "Target value");
+    const judgementStatusLabel = getMessage(browserAPI, "judgementStatus", "Status");
 
     // 要素の取得
     const headerSpoofingCheckbox = getRequiredElement("headerSpoofing", HTMLInputElement);
@@ -290,7 +292,11 @@
     function resetSpoofingJudgements(): void {
       spoofingJudgements = [];
       spoofingJudgementSummary.className = "judgement-summary";
-      spoofingJudgementSummary.textContent = "確認中...";
+      spoofingJudgementSummary.textContent = getMessage(
+        browserAPI,
+        "statusLoading",
+        "Checking..."
+      );
 
       document.querySelectorAll<HTMLElement>("[data-spoof-target]").forEach((element) => {
         element.textContent = "取得中...";
@@ -535,9 +541,9 @@
         }
 
         const targetHeader = document.createElement("th");
-        targetHeader.textContent = "偽装目標値";
+        targetHeader.textContent = judgementTargetLabel;
         const statusHeader = document.createElement("th");
-        statusHeader.textContent = "判定";
+        statusHeader.textContent = judgementStatusLabel;
         headerRow.append(targetHeader, statusHeader);
         table.dataset.comparisonColumns = "true";
       });
@@ -579,7 +585,10 @@
       const judgement = document.createElement("div");
       judgement.className = "collection-judgement";
       judgement.dataset.collectionJudgement = "true";
-      judgement.append(`偽装目標値: ${displayValue(expected)} `, createStatusElement(passed));
+      judgement.append(
+        `${judgementTargetLabel}: ${displayValue(expected)} `,
+        createStatusElement(passed)
+      );
       element.insertAdjacentElement("afterend", judgement);
       spoofingJudgements.push(passed);
     }
@@ -607,7 +616,14 @@
       const passedCount = spoofingJudgements.filter(Boolean).length;
       const allPassed = passedCount === spoofingJudgements.length;
       spoofingJudgementSummary.className = `judgement-summary ${allPassed ? "pass" : "fail"}`;
-      spoofingJudgementSummary.textContent = `${allPassed ? "✓" : "×"} ${passedCount} / ${spoofingJudgements.length} 件が偽装目標値と一致`;
+      const summaryTemplate = getMessage(
+        browserAPI,
+        "judgementSummary",
+        "$1 / $2 items match the target value"
+      );
+      spoofingJudgementSummary.textContent = `${allPassed ? "✓" : "×"} ${summaryTemplate
+        .replace("$1", passedCount.toString())
+        .replace("$2", spoofingJudgements.length.toString())}`;
     }
 
     function valuesEqual(actual: ComparableValue, expected: ComparableValue): boolean {

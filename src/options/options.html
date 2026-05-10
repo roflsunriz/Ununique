@@ -387,23 +387,23 @@
             <h3>キャンバスフィンガープリント</h3>
             <div style="display: flex; gap: 15px">
               <div>
-                <p>オリジナル:</p>
+                <p data-i18n="canvasOriginalLabel">Original:</p>
                 <canvas id="originalCanvas" width="220" height="30"></canvas>
               </div>
               <div>
-                <p>スプーフィング後:</p>
+                <p data-i18n="canvasSpoofedLabel">Spoofed:</p>
                 <canvas id="spoofedCanvas" width="220" height="30"></canvas>
               </div>
             </div>
             <table>
               <tr>
-                <th>項目</th>
-                <th>スプーフィング後の値</th>
-                <th>偽装目標値</th>
-                <th>判定</th>
+                <th data-i18n="comparisonItem">Item</th>
+                <th data-i18n="comparisonSpoofedValue">Spoofed value</th>
+                <th data-i18n="judgementTarget">Target value</th>
+                <th data-i18n="judgementStatus">Status</th>
               </tr>
               <tr>
-                <td>キャンバスノイズ</td>
+                <td data-i18n="canvasNoiseLabel">Canvas noise</td>
                 <td id="spoofedCanvasNoise">確認中...</td>
                 <td id="targetCanvasNoise">確認中...</td>
                 <td id="statusCanvasNoise">確認中...</td>
@@ -553,12 +553,12 @@
     <div id="settings-details-tab" class="settings-tab-content">
       <div class="section">
         <h2 data-i18n="popupHeaderSpoofing">HTTPヘッダーの偽装</h2>
-        <p>以下のHTTPヘッダーが一般的な値に偽装されます：</p>
+        <p data-i18n="spoofingHeadersIntro">The following HTTP headers are spoofed to common values:</p>
 
         <table>
           <tr>
-            <th>ヘッダー名</th>
-            <th>偽装される値</th>
+            <th data-i18n="spoofingHeadersColumnName">Header name</th>
+            <th data-i18n="spoofingHeadersColumnValue">Spoofed value</th>
           </tr>
           <tr>
             <td>User-Agent</td>
@@ -587,12 +587,12 @@
 
       <div class="section">
         <h2 data-i18n="popupJsSpoofing">JavaScriptプロパティの偽装</h2>
-        <p>以下のJavaScriptプロパティとその他の機能が一般的な値に偽装されます：</p>
+        <p data-i18n="spoofingJsIntro">The following JavaScript properties and other features are spoofed to common values:</p>
 
         <table>
           <tr>
-            <th>カテゴリー</th>
-            <th>偽装される項目</th>
+            <th data-i18n="spoofingJsColumnCategory">Category</th>
+            <th data-i18n="spoofingJsColumnItem">Spoofed item</th>
           </tr>
           <tr>
             <td>基本プロパティ</td>
