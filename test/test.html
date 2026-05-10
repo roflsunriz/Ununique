@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ununique 拡張機能テスト</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.5;
+        color: #222;
+      }
+
+      h1 {
+        color: #333;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+      }
+
+      .test-section {
+        margin-bottom: 24px;
+        padding: 16px;
+        background-color: #f8f8f8;
+        border-radius: 5px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background-color: #f0f0f0;
+      }
+
+      code,
+      .result {
+        font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+        word-break: break-all;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .status.pass {
+        background: #16883f;
+      }
+
+      .status.fail {
+        background: #c92a2a;
+      }
+
+      .summary {
+        font-weight: 700;
+      }
+
+      .summary.pass {
+        color: #16883f;
+      }
+
+      .summary.fail {
+        color: #c92a2a;
+      }
+
+      canvas {
+        display: block;
+        margin-top: 8px;
+        background: #fff;
+        border: 1px solid #ddd;
+      }
+
+      button {
+        background-color: #0060df;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        margin-top: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0050bd;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ununique 拡張機能テスト</h1>
+
+    <div class="test-section">
+      <h2>判定サマリー</h2>
+      <p id="summary" class="summary">確認中...</p>
+      <button id="runAll">すべて再チェック</button>
+    </div>
+
+    <div class="test-section">
+      <h2>基本情報</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>現在の値</th>
+            <th>偽装目標値</th>
+            <th>判定</th>
+          </tr>
+        </thead>
+        <tbody id="basicResults"></tbody>
+      </table>
+    </div>
+
+    <div class="test-section">
+      <h2>タイムゾーン</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>現在の値</th>
+            <th>偽装目標値</th>
+            <th>判定</th>
+          </tr>
+        </thead>
+        <tbody id="timezoneResults"></tbody>
+      </table>
+    </div>
+
+    <div class="test-section">
+      <h2>WebGL情報</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>現在の値</th>
+            <th>偽装目標値</th>
+            <th>判定</th>
+          </tr>
+        </thead>
+        <tbody id="webglResults"></tbody>
+      </table>
+    </div>
+
+    <div class="test-section">
+      <h2>キャンバスフィンガープリント</h2>
+      <p>既知の描画結果にノイズが入っているかを確認します。</p>
+      <canvas id="testCanvas" width="300" height="50"></canvas>
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>現在の値</th>
+            <th>偽装目標値</th>
+            <th>判定</th>
+          </tr>
+        </thead>
+        <tbody id="canvasResults"></tbody>
+      </table>
+    </div>
+
+    <script>
+      const TARGETS = {
+        userAgent:
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+        platform: "Win32",
+        cookieEnabled: true,
+        language: "en-US",
+        languages: ["en-US", "en"],
+        doNotTrack: 1,
+        product: "Gecko",
+        productSub: "20030107",
+        vendor: "Google Inc.",
+        hardwareConcurrency: 4,
+        screenWidth: 1920,
+        screenHeight: 1080,
+        pixelDepth: 24,
+        colorDepth: 24,
+        timezoneOffset: 0,
+        timezone: "UTC",
+        webglVendor: "Mozilla",
+        webglRenderer: "Mozilla",
+        canvasNoise: "画像データの赤チャンネルにノイズが追加される"
+      };
+
+      const checks = [];
+
+      function valuesEqual(actual, expected) {
+        if (Array.isArray(expected)) {
+          return JSON.stringify(actual) === JSON.stringify(expected);
+        }
+        return actual === expected;
+      }
+
+      function displayValue(value) {
+        if (Array.isArray(value)) {
+          return JSON.stringify(value);
+        }
+        if (value === undefined) {
+          return "undefined";
+        }
+        if (value === null) {
+          return "null";
+        }
+        return String(value);
+      }
+
+      function statusCell(passed) {
+        return `<span class="status ${passed ? "pass" : "fail"}">${passed ? "✓" : "×"}</span>`;
+      }
+
+      function renderRows(tbodyId, rows) {
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = rows
+          .map(
+            (row) => `
+              <tr>
+                <td>${row.label}</td>
+                <td><code>${displayValue(row.actual)}</code></td>
+                <td><code>${displayValue(row.expected)}</code></td>
+                <td>${statusCell(row.passed)}</td>
+              </tr>
+            `
+          )
+          .join("");
+
+        checks.push(...rows.map((row) => row.passed));
+      }
+
+      function getWebGLValue(parameter) {
+        const canvas = document.createElement("canvas");
+        const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+
+        if (!gl) {
+          return "WebGL未サポート";
+        }
+
+        return gl.getParameter(parameter);
+      }
+
+      function drawCanvasContent(ctx) {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.fillStyle = "#f8f8f8";
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.font = "14px Arial";
+        ctx.fillStyle = "#000";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Ununique Canvas Test 123!", 10, 15);
+      }
+
+      function checkCanvasSpoofing() {
+        const canvas = document.getElementById("testCanvas");
+        const ctx = canvas.getContext("2d");
+        drawCanvasContent(ctx);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const redChannel = imageData.data[0];
+        const expectedWithoutSpoofing = 248;
+        const passed = redChannel !== expectedWithoutSpoofing;
+
+        return [
+          {
+            label: "getImageData ノイズ",
+            actual: `先頭ピクセル赤チャンネル: ${redChannel}`,
+            expected: TARGETS.canvasNoise,
+            passed
+          },
+          {
+            label: "toDataURL",
+            actual: `${canvas.toDataURL().substring(0, 100)}...`,
+            expected: "toDataURL の出力にノイズが追加される",
+            passed
+          }
+        ];
+      }
+
+      function runChecks() {
+        checks.length = 0;
+
+        renderRows("basicResults", [
+          {
+            label: "navigator.userAgent",
+            actual: navigator.userAgent,
+            expected: TARGETS.userAgent,
+            passed: valuesEqual(navigator.userAgent, TARGETS.userAgent)
+          },
+          {
+            label: "navigator.platform",
+            actual: navigator.platform,
+            expected: TARGETS.platform,
+            passed: valuesEqual(navigator.platform, TARGETS.platform)
+          },
+          {
+            label: "navigator.cookieEnabled",
+            actual: navigator.cookieEnabled,
+            expected: TARGETS.cookieEnabled,
+            passed: valuesEqual(navigator.cookieEnabled, TARGETS.cookieEnabled)
+          },
+          {
+            label: "navigator.language",
+            actual: navigator.language,
+            expected: TARGETS.language,
+            passed: valuesEqual(navigator.language, TARGETS.language)
+          },
+          {
+            label: "navigator.languages",
+            actual: Array.from(navigator.languages),
+            expected: TARGETS.languages,
+            passed: valuesEqual(Array.from(navigator.languages), TARGETS.languages)
+          },
+          {
+            label: "navigator.doNotTrack",
+            actual: navigator.doNotTrack,
+            expected: TARGETS.doNotTrack,
+            passed: valuesEqual(navigator.doNotTrack, TARGETS.doNotTrack)
+          },
+          {
+            label: "navigator.product",
+            actual: navigator.product,
+            expected: TARGETS.product,
+            passed: valuesEqual(navigator.product, TARGETS.product)
+          },
+          {
+            label: "navigator.productSub",
+            actual: navigator.productSub,
+            expected: TARGETS.productSub,
+            passed: valuesEqual(navigator.productSub, TARGETS.productSub)
+          },
+          {
+            label: "navigator.vendor",
+            actual: navigator.vendor,
+            expected: TARGETS.vendor,
+            passed: valuesEqual(navigator.vendor, TARGETS.vendor)
+          },
+          {
+            label: "navigator.hardwareConcurrency",
+            actual: navigator.hardwareConcurrency,
+            expected: TARGETS.hardwareConcurrency,
+            passed: valuesEqual(navigator.hardwareConcurrency, TARGETS.hardwareConcurrency)
+          },
+          {
+            label: "screen.width",
+            actual: screen.width,
+            expected: TARGETS.screenWidth,
+            passed: valuesEqual(screen.width, TARGETS.screenWidth)
+          },
+          {
+            label: "screen.height",
+            actual: screen.height,
+            expected: TARGETS.screenHeight,
+            passed: valuesEqual(screen.height, TARGETS.screenHeight)
+          },
+          {
+            label: "screen.pixelDepth",
+            actual: screen.pixelDepth,
+            expected: TARGETS.pixelDepth,
+            passed: valuesEqual(screen.pixelDepth, TARGETS.pixelDepth)
+          },
+          {
+            label: "screen.colorDepth",
+            actual: screen.colorDepth,
+            expected: TARGETS.colorDepth,
+            passed: valuesEqual(screen.colorDepth, TARGETS.colorDepth)
+          }
+        ]);
+
+        const resolvedOptions = Intl.DateTimeFormat().resolvedOptions();
+        renderRows("timezoneResults", [
+          {
+            label: "Date.prototype.getTimezoneOffset()",
+            actual: new Date().getTimezoneOffset(),
+            expected: TARGETS.timezoneOffset,
+            passed: valuesEqual(new Date().getTimezoneOffset(), TARGETS.timezoneOffset)
+          },
+          {
+            label: "Intl.DateTimeFormat().resolvedOptions().timeZone",
+            actual: resolvedOptions.timeZone,
+            expected: TARGETS.timezone,
+            passed: valuesEqual(resolvedOptions.timeZone, TARGETS.timezone)
+          }
+        ]);
+
+        renderRows("webglResults", [
+          {
+            label: "WebGL VENDOR",
+            actual: getWebGLValue(0x1f00),
+            expected: TARGETS.webglVendor,
+            passed: valuesEqual(getWebGLValue(0x1f00), TARGETS.webglVendor)
+          },
+          {
+            label: "WebGL RENDERER",
+            actual: getWebGLValue(0x1f01),
+            expected: TARGETS.webglRenderer,
+            passed: valuesEqual(getWebGLValue(0x1f01), TARGETS.webglRenderer)
+          }
+        ]);
+
+        renderRows("canvasResults", checkCanvasSpoofing());
+
+        const passedCount = checks.filter(Boolean).length;
+        const summary = document.getElementById("summary");
+        const allPassed = passedCount === checks.length;
+        summary.className = `summary ${allPassed ? "pass" : "fail"}`;
+        summary.textContent = `${allPassed ? "✓" : "×"} ${passedCount} / ${checks.length} 件が偽装目標値と一致`;
+      }
+
+      window.addEventListener("load", () => {
+        runChecks();
+      });
+      document.getElementById("runAll").addEventListener("click", () => {
+        runChecks();
+      });
+    </script>
+  </body>
+</html>

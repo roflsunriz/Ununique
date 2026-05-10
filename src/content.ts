@@ -1,148 +1,165 @@
-// マジョリティ値の定義
-const MAJORITY_VALUES = {
-  navigator: {
-    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-    platform: "Win32",
-    cookieEnabled: true,
-    language: "en-US",
-    languages: ["en-US", "en"],
-    doNotTrack: 1,
-    product: "Gecko",
-    productSub: "20030107",
-    vendor: "Google Inc.",
-    hardwareConcurrency: 4,
-    javaEnabled: false,
-    deviceMemory: 8
-  },
-  screen: {
-    width: 1920,
-    height: 1080,
-    pixelDepth: 24,
-    availWidth: 1920,
-    availHeight: 1080,
-    availLeft: 0,
-    availTop: 0,
-    colorDepth: 24,
-    left: 0,
-    top: 0
-  },
-  // タイムゾーン情報
-  timezone: {
-    offset: 0, // UTC-00:00
-    timezone: "UTC"
-  },
-  // プラグイン情報 (Firefoxでは限定的)
-  plugins: {
-    // Chrome標準のPDFビューア
-    pdfViewerName: "Chrome PDF Plugin",
-    pdfViewerDescription: "Portable Document Format",
-    pdfViewerFilename: "internal-pdf-viewer",
-    // 基本的なMIMEタイプ
-    mimeTypes: [
-      {
-        type: "application/pdf",
-        description: "Portable Document Format",
-        suffixes: "pdf"
-      }
-    ]
-  },
-  // 一般的なフォントリスト
-  fonts: [
-    "Arial",
-    "Times New Roman",
-    "Courier New",
-    "Verdana",
-    "Georgia",
-    "Tahoma",
-    "Trebuchet MS",
-    "Impact",
-    "Comic Sans MS",
-    "Arial Black",
-    "Lucida Sans Unicode",
-    "Lucida Console",
-    "Palatino Linotype",
-    "Book Antiqua",
-    "Arial Narrow",
-    "Cambria",
-    "Calibri",
-    "Garamond",
-    "MS Sans Serif",
-    "MS Serif"
-  ],
-  // ネットワーク接続情報
-  connection: {
-    effectiveType: "4g",
-    rtt: 50,
-    downlink: 10,
-    saveData: false
-  },
-  // バッテリー情報
-  battery: {
-    charging: true,
-    chargingTime: 0,
-    dischargingTime: Infinity,
-    level: 1.0
-  },
-  // メディアデバイス情報
-  mediaDevices: {
-    // 一般的なカメラとマイクの設定
-    videoInputs: 1,
-    audioInputs: 1,
-    audioOutputs: 1
-  },
-  // ブラウザバー情報
-  bars: {
-    visible: false
-  },
-  // オーディオフィンガープリント対策の設定
-  audio: {
-    sampleRate: 44100,
-    channelCount: 2,
-    frequencyValues: new Float32Array(128).fill(0.5) // 一律の値
-  },
-  // モーションセンサー情報
-  sensors: {
-    // 加速度センサーのデフォルト値（静止状態）
-    acceleration: {
-      x: 0,
-      y: 0,
-      z: 0
+(() => {
+  // マジョリティ値の定義
+  const MAJORITY_VALUES: {
+    navigator: Record<string, string | number | boolean | string[]>;
+    screen: Record<string, number>;
+    timezone: { offset: number; timezone: string };
+    plugins: {
+      pdfViewerName: string;
+      pdfViewerDescription: string;
+      pdfViewerFilename: string;
+      mimeTypes: Array<{ type: string; description: string; suffixes: string }>;
+    };
+    fonts: string[];
+    connection: { effectiveType: string; rtt: number; downlink: number; saveData: boolean };
+    battery: { charging: boolean; chargingTime: number; dischargingTime: number; level: number };
+    mediaDevices: { videoInputs: number; audioInputs: number; audioOutputs: number };
+    bars: { visible: boolean };
+    audio: { sampleRate: number; channelCount: number; frequencyValues: Float32Array };
+    sensors: {
+      acceleration: { x: number; y: number; z: number };
+      rotationRate: { alpha: number; beta: number; gamma: number };
+      ambientLight: number;
+    };
+  } = {
+    navigator: {
+      userAgent:
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+      platform: "Win32",
+      cookieEnabled: true,
+      language: "en-US",
+      languages: ["en-US", "en"],
+      doNotTrack: 1,
+      product: "Gecko",
+      productSub: "20030107",
+      vendor: "Google Inc.",
+      hardwareConcurrency: 4,
+      javaEnabled: false,
+      deviceMemory: 8
     },
-    // ジャイロスコープのデフォルト値（回転なし）
-    rotationRate: {
-      alpha: 0,
-      beta: 0,
-      gamma: 0
+    screen: {
+      width: 1920,
+      height: 1080,
+      pixelDepth: 24,
+      availWidth: 1920,
+      availHeight: 1080,
+      availLeft: 0,
+      availTop: 0,
+      colorDepth: 24,
+      left: 0,
+      top: 0
     },
-    // 照度センサーのデフォルト値
-    ambientLight: 500  // 標準的な室内照明の照度 (ルクス)
+    // タイムゾーン情報
+    timezone: {
+      offset: 0, // UTC-00:00
+      timezone: "UTC"
+    },
+    // プラグイン情報 (Firefoxでは限定的)
+    plugins: {
+      // Chrome標準のPDFビューア
+      pdfViewerName: "Chrome PDF Plugin",
+      pdfViewerDescription: "Portable Document Format",
+      pdfViewerFilename: "internal-pdf-viewer",
+      // 基本的なMIMEタイプ
+      mimeTypes: [
+        {
+          type: "application/pdf",
+          description: "Portable Document Format",
+          suffixes: "pdf"
+        }
+      ]
+    },
+    // 一般的なフォントリスト
+    fonts: [
+      "Arial",
+      "Times New Roman",
+      "Courier New",
+      "Verdana",
+      "Georgia",
+      "Tahoma",
+      "Trebuchet MS",
+      "Impact",
+      "Comic Sans MS",
+      "Arial Black",
+      "Lucida Sans Unicode",
+      "Lucida Console",
+      "Palatino Linotype",
+      "Book Antiqua",
+      "Arial Narrow",
+      "Cambria",
+      "Calibri",
+      "Garamond",
+      "MS Sans Serif",
+      "MS Serif"
+    ],
+    // ネットワーク接続情報
+    connection: {
+      effectiveType: "4g",
+      rtt: 50,
+      downlink: 10,
+      saveData: false
+    },
+    // バッテリー情報
+    battery: {
+      charging: true,
+      chargingTime: 0,
+      dischargingTime: Infinity,
+      level: 1.0
+    },
+    // メディアデバイス情報
+    mediaDevices: {
+      // 一般的なカメラとマイクの設定
+      videoInputs: 1,
+      audioInputs: 1,
+      audioOutputs: 1
+    },
+    // ブラウザバー情報
+    bars: {
+      visible: false
+    },
+    // オーディオフィンガープリント対策の設定
+    audio: {
+      sampleRate: 44100,
+      channelCount: 2,
+      frequencyValues: new Float32Array(128).fill(0.5) // 一律の値
+    },
+    // モーションセンサー情報
+    sensors: {
+      // 加速度センサーのデフォルト値（静止状態）
+      acceleration: {
+        x: 0,
+        y: 0,
+        z: 0
+      },
+      // ジャイロスコープのデフォルト値（回転なし）
+      rotationRate: {
+        alpha: 0,
+        beta: 0,
+        gamma: 0
+      },
+      // 照度センサーのデフォルト値
+      ambientLight: 500 // 標準的な室内照明の照度 (ルクス)
+    }
+  };
+
+  // デバッグ用のロギング関数
+  function logDebug(message: string): void {
+    console.log(`[Ununique Debug] ${message}`);
   }
-};
 
-// デバッグ用のロギング関数
-function logDebug(message) {
-  console.log(`[Ununique Debug] ${message}`);
-}
+  // 重要: コンテンツスクリプトはisolated worldで実行されるため
+  // メインワールドにコードを注入して、ブラウザのプロパティを直接上書きする
+  function injectScriptToMainWorld(settings: Settings): void {
+    logDebug("メインワールドへのスクリプト注入を開始します");
 
-// 現在の設定を保持する変数
-let currentSettings = {
-  enableHeaderSpoofing: true,
-  enableJsSpoofing: true
-};
+    // 設定に基づいてJavaScriptスプーフィングをスキップする
+    if (!settings.enableJsSpoofing) {
+      logDebug("JavaScriptスプーフィングが無効なため、スクリプト注入をスキップします");
+      return;
+    }
 
-// 重要: コンテンツスクリプトはisolated worldで実行されるため
-// メインワールドにコードを注入して、ブラウザのプロパティを直接上書きする
-function injectScriptToMainWorld(settings) {
-  logDebug("メインワールドへのスクリプト注入を開始します");
-  
-  // 設定に基づいてJavaScriptスプーフィングをスキップする
-  if (!settings.enableJsSpoofing) {
-    logDebug("JavaScriptスプーフィングが無効なため、スクリプト注入をスキップします");
-    return;
-  }
-  
-  // メインワールドに注入するコードを文字列として作成
-  const scriptContent = `
+    // メインワールドに注入するコードを文字列として作成
+    const scriptContent = `
     // メインワールドで実行されるコードここから
     (function() {
       console.log("[Ununique Main World] メインワールドでの実行を開始します");
@@ -461,97 +478,96 @@ function injectScriptToMainWorld(settings) {
     })();
     // メインワールドで実行されるコードここまで
   `;
-  
-  // インラインスクリプト要素を作成
-  const scriptElement = document.createElement('script');
-  scriptElement.textContent = scriptContent;
-  
-  // script要素をheadの先頭に挿入（最も早く実行される位置）
-  const head = document.head || document.documentElement;
-  head.insertBefore(scriptElement, head.firstChild);
-  
-  // スクリプト注入後に要素を削除（きれいにする）
-  scriptElement.remove();
-  
-  logDebug("メインワールドへのスクリプト注入が完了しました");
-}
 
-// 設定に基づいてスクリプト注入を実行する関数
-function applySettings(settings) {
-  currentSettings = settings;
-  
-  if (settings.enableJsSpoofing) {
-    injectScriptToMainWorld(settings);
-    logDebug("JavaScriptスプーフィングが有効です。メインワールドでの偽装を実行しました。");
-  } else {
-    logDebug("JavaScriptスプーフィングが無効です。");
+    // インラインスクリプト要素を作成
+    const scriptElement = document.createElement("script");
+    scriptElement.textContent = scriptContent;
+
+    // script要素をheadの先頭に挿入（最も早く実行される位置）
+    const head = document.head || document.documentElement;
+    head.insertBefore(scriptElement, head.firstChild);
+
+    // スクリプト注入後に要素を削除（きれいにする）
+    scriptElement.remove();
+
+    logDebug("メインワールドへのスクリプト注入が完了しました");
   }
-}
 
-// バックグラウンドスクリプトと通信するためのコードは残しておく
-// 設定を取得する
-async function getSettings() {
-  return new Promise((resolve) => {
+  // 設定に基づいてスクリプト注入を実行する関数
+  function applySettings(settings: Settings): void {
+    if (settings.enableJsSpoofing) {
+      injectScriptToMainWorld(settings);
+      logDebug("JavaScriptスプーフィングが有効です。メインワールドでの偽装を実行しました。");
+    } else {
+      logDebug("JavaScriptスプーフィングが無効です。");
+    }
+  }
+
+  // バックグラウンドスクリプトと通信するためのコードは残しておく
+  // 設定を取得する
+  async function getSettings(): Promise<Settings> {
+    return new Promise((resolve) => {
+      try {
+        // ブラウザAPIへの対応（Firefox または Chrome）
+        const browserAPI: BrowserApi = typeof browser !== "undefined" && browser ? browser : chrome;
+
+        browserAPI.runtime.sendMessage<SettingsResponse>({ type: "getSettings" }, (response) => {
+          if (response && response.settings) {
+            logDebug("設定を取得しました: " + JSON.stringify(response.settings));
+            resolve(response.settings);
+          } else {
+            logDebug("設定の取得に失敗しました。デフォルト設定を使用します。");
+            // デフォルト設定
+            resolve({
+              enableHeaderSpoofing: true,
+              enableJsSpoofing: true
+            });
+          }
+        });
+      } catch (e) {
+        logDebug("設定取得中にエラーが発生しました: " + e.message);
+        // エラーが発生した場合もデフォルト設定を使用
+        resolve({
+          enableHeaderSpoofing: true,
+          enableJsSpoofing: true
+        });
+      }
+    });
+  }
+
+  // 設定変更を監視するリスナーを設定
+  function setupSettingsListener(): void {
     try {
       // ブラウザAPIへの対応（Firefox または Chrome）
-      const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
-      
-      browserAPI.runtime.sendMessage({ type: "getSettings" }, (response) => {
-        if (response && response.settings) {
-          logDebug("設定を取得しました: " + JSON.stringify(response.settings));
-          resolve(response.settings);
-        } else {
-          logDebug("設定の取得に失敗しました。デフォルト設定を使用します。");
-          // デフォルト設定
-          resolve({
-            enableHeaderSpoofing: true,
-            enableJsSpoofing: true
-          });
+      const browserAPI: BrowserApi = typeof browser !== "undefined" && browser ? browser : chrome;
+
+      browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        if (message.type === "settingsChanged" && message.settings) {
+          logDebug("設定変更通知を受信しました: " + JSON.stringify(message.settings));
+          applySettings(message.settings);
+          if (sendResponse) {
+            sendResponse({ success: true });
+          }
         }
+        return true;
       });
+
+      logDebug("設定変更リスナーを設定しました");
     } catch (e) {
-      logDebug("設定取得中にエラーが発生しました: " + e.message);
-      // エラーが発生した場合もデフォルト設定を使用
-      resolve({
-        enableHeaderSpoofing: true,
-        enableJsSpoofing: true
-      });
+      logDebug("設定変更リスナーの設定中にエラーが発生しました: " + e.message);
     }
-  });
-}
-
-// 設定変更を監視するリスナーを設定
-function setupSettingsListener() {
-  try {
-    // ブラウザAPIへの対応（Firefox または Chrome）
-    const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
-    
-    browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      if (message.type === "settingsChanged" && message.settings) {
-        logDebug("設定変更通知を受信しました: " + JSON.stringify(message.settings));
-        applySettings(message.settings);
-        if (sendResponse) {
-          sendResponse({ success: true });
-        }
-      }
-      return true;
-    });
-    
-    logDebug("設定変更リスナーを設定しました");
-  } catch (e) {
-    logDebug("設定変更リスナーの設定中にエラーが発生しました: " + e.message);
   }
-}
 
-// 初期化処理
-async function initialize() {
-  // 設定を取得して適用
-  const settings = await getSettings();
-  applySettings(settings);
-  
-  // 設定変更リスナーを設定
-  setupSettingsListener();
-}
+  // 初期化処理
+  async function initialize(): Promise<void> {
+    // 設定を取得して適用
+    const settings = await getSettings();
+    applySettings(settings);
 
-// DOMContentLoadedイベントを待たず、即時実行
-initialize(); 
+    // 設定変更リスナーを設定
+    setupSettingsListener();
+  }
+
+  // DOMContentLoadedイベントを待たず、即時実行
+  void initialize();
+})();

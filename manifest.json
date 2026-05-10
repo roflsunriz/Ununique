@@ -1,25 +1,21 @@
 {
   "manifest_version": 2,
-  "name": "Ununique",
+  "name": "__MSG_extensionName__",
   "version": "1.2.0",
-  "description": "フィンガープリンティングを防ぐため、ユニークなデータを一般的な値に偽装する拡張機能",
+  "default_locale": "ja",
+  "description": "__MSG_extensionDescription__",
   "icons": {
     "48": "icons/icon-48.png",
     "96": "icons/icon-96.png"
   },
-  "permissions": [
-    "webRequest",
-    "webRequestBlocking",
-    "<all_urls>",
-    "storage"
-  ],
+  "permissions": ["webRequest", "webRequestBlocking", "<all_urls>", "storage"],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["dist/background.js"]
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "js": ["dist/content.js"],
       "run_at": "document_start",
       "all_frames": true,
       "match_about_blank": true
@@ -30,11 +26,11 @@
       "19": "icons/icon-19.png",
       "38": "icons/icon-38.png"
     },
-    "default_title": "Ununique",
-    "default_popup": "popup/popup.html"
+    "default_title": "__MSG_extensionName__",
+    "default_popup": "dist/popup/popup.html"
   },
   "options_ui": {
-    "page": "options/options.html",
+    "page": "dist/options/options.html",
     "browser_style": true
   },
   "browser_specific_settings": {
@@ -42,4 +38,4 @@
       "id": "ununiquewebextension@gmail.com"
     }
   }
-} 
+}

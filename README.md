@@ -14,7 +14,7 @@ Ununiqueは、Firefoxブラウザ向けの拡張機能で、フィンガープ�
 
 ### リリースからインストール
 
-1. [Githubのリリースページ](https://github.com/yourusername/ununique/releases)から最新の`.xpi`ファイルをダウンロードします。
+1. [Githubのリリースページ](https://github.com/roflsunriz/ununique/releases)から最新の`.xpi`ファイルをダウンロードします。
 2. Firefoxを開き、メニューから「アドオン」を選択します。
 3. 歯車アイコンをクリックし、「ファイルからアドオンをインストール」を選択します。
 4. ダウンロードした`.xpi`ファイルを選択してインストールします。
