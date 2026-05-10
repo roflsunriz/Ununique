@@ -82,6 +82,7 @@ interface TabInfo {
 interface BrowserApi {
   runtime: {
     lastError?: RuntimeLastError;
+    getManifest(): { version: string };
     sendMessage<TResponse = unknown>(
       message: ExtensionMessage,
       responseCallback?: (response: TResponse) => void

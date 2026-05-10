@@ -69,7 +69,7 @@
     "message": "Status"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - Protects you from fingerprinting"
+    "message": "Ununique v$1 - Protects you from fingerprinting"
   },
   "spoofingHeadersIntro": {
     "message": "The following HTTP headers are spoofed to common values:"

@@ -78,7 +78,7 @@
     "message": "الحالة"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - يحميك من البصمة الرقمية"
+    "message": "Ununique v$1 - يحميك من البصمة الرقمية"
   },
   "spoofingHeadersIntro": {
     "message": "تُخفى رؤوس HTTP التالية بقيم شائعة:"

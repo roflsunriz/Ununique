@@ -78,7 +78,7 @@
     "message": "Stato"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - Ti protegge dal fingerprinting"
+    "message": "Ununique v$1 - Ti protegge dal fingerprinting"
   },
   "spoofingHeadersIntro": {
     "message": "Le seguenti intestazioni HTTP vengono mascherate con valori comuni:"

@@ -78,7 +78,7 @@
     "message": "判定"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - 保护你免受指纹识别"
+    "message": "Ununique v$1 - 保护你免受指纹识别"
   },
   "spoofingHeadersIntro": {
     "message": "以下 HTTP 标头会伪装为常见值："

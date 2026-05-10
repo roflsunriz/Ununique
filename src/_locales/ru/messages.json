@@ -78,7 +78,7 @@
     "message": "Статус"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - Защищает вас от фингерпринтинга"
+    "message": "Ununique v$1 - Защищает вас от фингерпринтинга"
   },
   "spoofingHeadersIntro": {
     "message": "Следующие HTTP-заголовки маскируются под обычные значения:"

@@ -78,7 +78,7 @@
     "message": "상태"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - 핑거프린팅으로부터 보호합니다"
+    "message": "Ununique v$1 - 핑거프린팅으로부터 보호합니다"
   },
   "spoofingHeadersIntro": {
     "message": "다음 HTTP 헤더는 일반적인 값으로 가장됩니다:"

@@ -78,7 +78,7 @@
     "message": "Status"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - Schützt Sie vor Fingerprinting"
+    "message": "Ununique v$1 - Schützt Sie vor Fingerprinting"
   },
   "spoofingHeadersIntro": {
     "message": "Die folgenden HTTP-Header werden auf gängige Werte getarnt:"

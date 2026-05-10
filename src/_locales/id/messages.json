@@ -78,7 +78,7 @@
     "message": "Status"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - Melindungi Anda dari fingerprinting"
+    "message": "Ununique v$1 - Melindungi Anda dari fingerprinting"
   },
   "spoofingHeadersIntro": {
     "message": "Header HTTP berikut disamarkan ke nilai umum:"

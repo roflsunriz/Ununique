@@ -69,7 +69,7 @@
     "message": "判定"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - フィンガープリンティングからあなたを守ります"
+    "message": "Ununique v$1 - フィンガープリンティングからあなたを守ります"
   },
   "spoofingHeadersIntro": {
     "message": "以下のHTTPヘッダーが一般的な値に偽装されます："

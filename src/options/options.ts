@@ -57,13 +57,17 @@
   function applyI18n(browserAPI: BrowserApi): void {
     document.documentElement.lang = browserAPI.i18n.getUILanguage();
     document.title = browserAPI.i18n.getMessage("optionsTitle") || document.title;
+    const manifestVersion = browserAPI.runtime.getManifest().version;
     document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((element) => {
       const key = element.dataset.i18n;
       if (!key) {
         return;
       }
 
-      const message = browserAPI.i18n.getMessage(key);
+      const message =
+        key === "footerVersion"
+          ? browserAPI.i18n.getMessage(key, [manifestVersion])
+          : browserAPI.i18n.getMessage(key);
       if (message) {
         element.textContent = message;
       }

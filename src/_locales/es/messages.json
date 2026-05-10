@@ -78,7 +78,7 @@
     "message": "Estado"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - Te protege de la huella digital"
+    "message": "Ununique v$1 - Te protege de la huella digital"
   },
   "spoofingHeadersIntro": {
     "message": "Los siguientes encabezados HTTP se ocultan con valores comunes:"

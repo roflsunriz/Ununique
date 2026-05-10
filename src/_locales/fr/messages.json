@@ -78,7 +78,7 @@
     "message": "État"
   },
   "footerVersion": {
-    "message": "Ununique v1.0.0 - Vous protège du fingerprinting"
+    "message": "Ununique v$1 - Vous protège du fingerprinting"
   },
   "spoofingHeadersIntro": {
     "message": "Les en-têtes HTTP suivants sont masqués avec des valeurs courantes :"
