@@ -8,10 +8,7 @@ if (!version) {
   throw new Error("package.json did not include a version.");
 }
 
-const nextManifestText = manifestText.replace(
-  /("version":\s*")([^"]+)(")/,
-  `$1${version}$3`
-);
+const nextManifestText = manifestText.replace(/("version":\s*")([^"]+)(")/, `$1${version}$3`);
 
 if (nextManifestText === manifestText) {
   console.log(`manifest.json is already synced to ${version}.`);
