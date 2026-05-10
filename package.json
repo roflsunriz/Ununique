@@ -9,9 +9,12 @@
     "format": "prettier --write \"src/**/*.{ts,html,json}\" \"test/**/*.html\" \"*.{json,mjs}\" \"scripts/**/*.ts\"",
     "format-check": "prettier --check \"src/**/*.{ts,html,json}\" \"test/**/*.html\" \"*.{json,mjs}\" \"scripts/**/*.ts\"",
     "lint": "eslint .",
+    "package": "bun run build && bun run stage-extension && web-ext build --source-dir build/extension --artifacts-dir web-ext-artifacts --overwrite-dest --filename ununique.xpi",
     "preview": "bun run build && web-ext run --source-dir .",
+    "stage-extension": "bun scripts/stage-extension.ts",
     "type-check": "tsc -p tsconfig.json --noEmit",
-    "typecheck": "bun run type-check"
+    "typecheck": "bun run type-check",
+    "web-ext:lint": "bun run build && bun run stage-extension && web-ext lint --source-dir build/extension"
   },
   "devDependencies": {
     "eslint": "^10.3.0",

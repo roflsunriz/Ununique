@@ -35,7 +35,10 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "ununiquewebextension@gmail.com"
+      "id": "ununiquewebextension@gmail.com",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   }
 }

@@ -254,12 +254,12 @@
       document.getElementById("spoofedWebGLRenderer").textContent = "取得中...";
 
       // フォントリスト
-      document.getElementById("originalFonts").innerHTML = "取得中...";
-      document.getElementById("spoofedFonts").innerHTML = "取得中...";
+      document.getElementById("originalFonts").textContent = "取得中...";
+      document.getElementById("spoofedFonts").textContent = "取得中...";
 
       // メディアデバイス
-      document.getElementById("originalDevices").innerHTML = "取得中...";
-      document.getElementById("spoofedDevices").innerHTML = "取得中...";
+      document.getElementById("originalDevices").textContent = "取得中...";
+      document.getElementById("spoofedDevices").textContent = "取得中...";
 
       // バッテリー情報
       document.getElementById("originalBatteryCharging").textContent = "取得中...";
@@ -561,7 +561,7 @@
       const passed = valuesEqual(actual, expected);
 
       targetCell.textContent = formatter(expected);
-      statusCell.innerHTML = statusMarkup(passed);
+      statusCell.replaceChildren(createStatusElement(passed));
       spoofingJudgements.push(passed);
     }
 
@@ -579,7 +579,7 @@
       const judgement = document.createElement("div");
       judgement.className = "collection-judgement";
       judgement.dataset.collectionJudgement = "true";
-      judgement.innerHTML = `偽装目標値: ${displayValue(expected)} ${statusMarkup(passed)}`;
+      judgement.append(`偽装目標値: ${displayValue(expected)} `, createStatusElement(passed));
       element.insertAdjacentElement("afterend", judgement);
       spoofingJudgements.push(passed);
     }
@@ -627,8 +627,11 @@
       return String(value);
     }
 
-    function statusMarkup(passed: boolean): string {
-      return `<span class="spoof-status ${passed ? "pass" : "fail"}">${passed ? "✓" : "×"}</span>`;
+    function createStatusElement(passed: boolean): HTMLSpanElement {
+      const element = document.createElement("span");
+      element.className = `spoof-status ${passed ? "pass" : "fail"}`;
+      element.textContent = passed ? "✓" : "×";
+      return element;
     }
 
     function formatBooleanState(
@@ -706,7 +709,7 @@
     // フォントリストを表示する関数
     function displayFonts(elementId: string, fonts: FontAvailability[]): void {
       const fontDiv = getRequiredElement(elementId, HTMLDivElement);
-      fontDiv.innerHTML = "";
+      fontDiv.replaceChildren();
 
       if (!fonts || fonts.length === 0) {
         fontDiv.textContent = "フォントデータがありません";
@@ -725,7 +728,7 @@
     // メディアデバイスを表示する関数
     function displayDevices(elementId: string, devices: DeviceSummary[]): void {
       const devicesDiv = getRequiredElement(elementId, HTMLDivElement);
-      devicesDiv.innerHTML = "";
+      devicesDiv.replaceChildren();
 
       if (!devices || devices.length === 0) {
         devicesDiv.textContent = "デバイスがありません";
@@ -784,7 +787,7 @@
         `先頭ピクセル赤チャンネル: ${redChannel}`;
       document.getElementById("targetCanvasNoise").textContent =
         "画像データの赤チャンネルにノイズが追加される";
-      document.getElementById("statusCanvasNoise").innerHTML = statusMarkup(passed);
+      document.getElementById("statusCanvasNoise").replaceChildren(createStatusElement(passed));
       spoofingJudgements.push(passed);
     }
 

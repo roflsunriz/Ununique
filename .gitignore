@@ -1,3 +1,5 @@
 node_modules/
 dist/
 _locales/
+build/
+web-ext-artifacts/
