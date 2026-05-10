@@ -1,7 +1,8 @@
-1. package.jsonのバージョンを上げる
-2. git tag vX.X.X
-3. git push origin main vX.X.XでGithub Actionsが自動でFirefox AMOで署名しxpiファイルをダウンロードしリリース作成
+1. `package.json` のバージョンを上げる
+2. `CHANGELOG.md` に対象バージョンの変更点を追加する
+3. `git tag vX.X.X`
+4. `git push Ununique main vX.X.X` で GitHub Actions が自動で Firefox AMO 署名とリリース作成を行う
   
 ---  
   
-間違えたときはローカルとリモートのタグを消して新しいHEADのリリースにする  
+間違えたときはローカルとリモートのタグを消して、新しい HEAD でタグを付け直してリリースする  
