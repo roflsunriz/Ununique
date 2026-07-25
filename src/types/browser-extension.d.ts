@@ -1,9 +1,5 @@
 type BrowserMessageType =
-  | "getSettings"
-  | "saveSettings"
-  | "getOriginalValues"
-  | "getSpoofingValues"
-  | "settingsChanged";
+  "getSettings" | "saveSettings" | "getOriginalValues" | "getSpoofingValues" | "settingsChanged";
 
 interface Settings {
   enableHeaderSpoofing: boolean;

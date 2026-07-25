@@ -1,12 +1,6 @@
 (() => {
   type ComparableValue =
-    | string
-    | number
-    | boolean
-    | undefined
-    | null
-    | FontAvailability[]
-    | DeviceSummary[];
+    string | number | boolean | undefined | null | FontAvailability[] | DeviceSummary[];
 
   const SPOOFING_TARGETS: Required<BrowserValues> = {
     userAgent:
