@@ -2,7 +2,7 @@
 
 `metadata.json` は Firefox Add-ons (AMO) の submission API / `web-ext sign --amo-metadata` に渡す掲載情報です。`name`、`summary`、`description`、更新ノートを拡張機能の対応ロケールに合わせて用意し、`default_locale` は AMO のロケール名である `en-US` にしています。拡張機能側の `en`、`es`、`pt_BR`、`zh_CN` は、それぞれ AMO の `en-US`、`es-ES`、`pt-BR`、`zh-CN` へ変換します。
 
-2026-08-02 に Mozilla の公式ソースを確認した結果、AMO の本番フロントエンドで有効なロケールは `cs`、`de`、`dsb`、`el`、`en-CA`、`en-GB`、`en-US`、`es-AR`、`es-CL`、`es-ES`、`es-MX`、`fi`、`fr`、`fur`、`fy-NL`、`he`、`hr`、`hsb`、`hu`、`ia`、`it`、`ja`、`ka`、`kab`、`ko`、`nb-NO`、`nl`、`nn-NO`、`pl`、`pt-BR`、`pt-PT`、`ro`、`ru`、`sk`、`sl`、`sq`、`sr`、`sv-SE`、`tr`、`uk`、`vi`、`zh-CN`、`zh-TW` です。AMO サーバーの言語一覧はこれより広く、`ar`、`bn`、`hi`、`id`、`ur` も掲載用翻訳として表現できるため、今回のメタデータでは拡張機能が実際に提供する15言語を掲載します。AMO側で未有効の言語が受理されない場合は、その言語だけを削除して再送します。
+2026-08-02 に Mozilla の公式ソースを確認した結果、AMO の本番フロントエンドで有効なロケールは `cs`、`de`、`dsb`、`el`、`en-CA`、`en-GB`、`en-US`、`es-AR`、`es-CL`、`es-ES`、`es-MX`、`fi`、`fr`、`fur`、`fy-NL`、`he`、`hr`、`hsb`、`hu`、`ia`、`it`、`ja`、`ka`、`kab`、`ko`、`nb-NO`、`nl`、`nn-NO`、`pl`、`pt-BR`、`pt-PT`、`ro`、`ru`、`sk`、`sl`、`sq`、`sr`、`sv-SE`、`tr`、`uk`、`vi`、`zh-CN`、`zh-TW` です。AMOサーバーの言語一覧はこれより広く見えますが、実際の提出では`id`と`ar`が「invalid」と拒否されたため、今回のメタデータでは現行本番ロケールと一致する10言語を掲載します。拡張機能本体の15ロケールUIは維持します。AMO側の言語検証が変わった場合は、提出結果に合わせてメタデータだけを更新します。
 
 参照した公式ソース:
 

@@ -17,6 +17,7 @@ const amoMetadata = JSON.parse(
   name: Record<string, string>;
   summary: Record<string, string>;
   description: Record<string, string>;
+  support_email: Record<string, string>;
   categories: { firefox: string[] };
   version: { license: string; release_notes: Record<string, string> };
 };
@@ -99,17 +100,13 @@ describe("extension package contracts", () => {
       "pt-BR",
       "ru",
       "zh-CN",
-      "ko",
-      "id",
-      "ar",
-      "hi",
-      "bn",
-      "ur"
+      "ko"
     ];
 
     expect(amoMetadata.default_locale).toBe("en-US");
     expect(amoMetadata.categories.firefox).toContain("privacy-security");
     expect(amoMetadata.version.license).toBe("MIT");
+    expect(amoMetadata.support_email["en-US"]).toBe("ununiquewebextension@gmail.com");
     for (const locale of expectedLocales) {
       expect(amoMetadata.name[locale], `AMO name is missing ${locale}`).toBeString();
       expect(amoMetadata.summary[locale], `AMO summary is missing ${locale}`).toBeString();

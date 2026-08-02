@@ -10,12 +10,7 @@
     "pt-BR": "Ununique",
     "ru": "Ununique",
     "zh-CN": "Ununique",
-    "ko": "Ununique",
-    "id": "Ununique",
-    "ar": "Ununique",
-    "hi": "Ununique",
-    "bn": "Ununique",
-    "ur": "Ununique"
+    "ko": "Ununique"
   },
   "summary": {
     "en-US": "Normalizes common browser surfaces to reduce fingerprinting.",
@@ -27,12 +22,7 @@
     "pt-BR": "Normaliza superfícies comuns do navegador para reduzir a impressão digital.",
     "ru": "Нормализует распространённые параметры браузера, чтобы уменьшить цифровой отпечаток.",
     "zh-CN": "将常见浏览器特征标准化，减少浏览器指纹信息。",
-    "ko": "일반적인 브라우저 정보를 정규화하여 핑거프린팅을 줄입니다.",
-    "id": "Menormalkan permukaan browser umum untuk mengurangi sidik jari digital.",
-    "ar": "يطبع خصائص المتصفح الشائعة لتقليل البصمة الرقمية.",
-    "hi": "फिंगरप्रिंटिंग कम करने के लिए सामान्य ब्राउज़र सतहों को सामान्यीकृत करता है।",
-    "bn": "ফিঙ্গারপ্রিন্টিং কমাতে সাধারণ ব্রাউজার বৈশিষ্ট্যগুলো স্বাভাবিক মানে আনে।",
-    "ur": "فنگر پرنٹنگ کم کرنے کے لیے عام براؤزر خصوصیات کو معمول پر لاتا ہے۔"
+    "ko": "일반적인 브라우저 정보를 정규화하여 핑거프린팅을 줄입니다."
   },
   "description": {
     "en-US": "Ununique normalizes browser and device signals that websites commonly use for fingerprinting. It keeps the browser family and version coherent, rounds high-entropy screen and CPU values into common buckets, aligns identifying HTTP headers with JavaScript values, and applies short-lived per-document canvas noise. Balanced mode favors compatibility; Strict mode also masks media devices, audio measurements, fonts, and classic workers. All processing and settings stay local.",
@@ -44,12 +34,7 @@
     "pt-BR": "O Ununique normaliza sinais do navegador e do dispositivo usados com frequência por sites para criar uma impressão digital. Mantém coerentes a família e a versão do navegador, arredonda valores de tela e CPU com alta entropia para faixas comuns, alinha cabeçalhos HTTP identificadores aos valores JavaScript e aplica ruído de Canvas de curta duração por documento. O modo equilibrado prioriza compatibilidade; o rigoroso também mascara dispositivos de mídia, medições de áudio, fontes e workers clássicos. Todo o processamento e as configurações permanecem locais.",
     "ru": "Ununique нормализует сигналы браузера и устройства, которые сайты часто используют для цифрового отпечатка. Семейство и версия браузера остаются согласованными, значения экрана и CPU с высокой энтропией округляются до распространённых диапазонов, идентифицирующие HTTP-заголовки согласуются со значениями JavaScript, а для каждого документа применяется краткоживущий шум Canvas. Сбалансированный режим ставит совместимость на первое место; строгий дополнительно маскирует медиадевайсы, измерения аудио, шрифты и классические worker. Обработка и настройки остаются локальными.",
     "zh-CN": "Ununique 会将网站常用于浏览器指纹识别的浏览器和设备信号标准化。它保持浏览器系列和版本的一致性，将高熵的屏幕与 CPU 值舍入到常见范围，使可识别的 HTTP 标头与 JavaScript 值保持一致，并为每个文档应用短期 Canvas 噪声。平衡模式优先考虑兼容性；严格模式还会屏蔽媒体设备、音频测量、字体和经典 Worker。所有处理与设置都保留在本地。",
-    "ko": "Ununique는 웹사이트가 핑거프린팅에 사용하는 브라우저 및 기기 신호를 정규화합니다. 브라우저 계열과 버전을 일관되게 유지하고, 엔트로피가 높은 화면 및 CPU 값을 일반적인 범위로 반올림하며, 식별 가능한 HTTP 헤더와 JavaScript 값을 맞추고, 문서마다 짧은 수명의 Canvas 노이즈를 적용합니다. 균형 모드는 호환성을 우선하고, 엄격 모드는 미디어 장치·오디오 측정·글꼴·일반 Worker도 마스킹합니다. 모든 처리와 설정은 로컬에 유지됩니다.",
-    "id": "Ununique menormalkan sinyal browser dan perangkat yang sering digunakan situs untuk sidik jari digital. Keluarga dan versi browser tetap konsisten, nilai layar dan CPU dengan entropi tinggi dibulatkan ke rentang umum, header HTTP pengenal diselaraskan dengan nilai JavaScript, dan noise Canvas berumur pendek diterapkan per dokumen. Mode seimbang mengutamakan kompatibilitas; mode ketat juga menyamarkan perangkat media, pengukuran audio, font, dan worker klasik. Semua pemrosesan dan pengaturan tetap lokal.",
-    "ar": "يقوم Ununique بتطبيع إشارات المتصفح والجهاز التي تستخدمها المواقع عادةً لإنشاء بصمة رقمية. يحافظ على اتساق نوع المتصفح وإصداره، ويقرّب قيم الشاشة ووحدة المعالجة ذات المعلومات العالية إلى نطاقات شائعة، ويوحّد ترويسات HTTP مع قيم JavaScript، ويطبق ضوضاء قصيرة العمر على Canvas لكل مستند. يفضل الوضع المتوازن التوافق، بينما يخفي الوضع الصارم أيضًا أجهزة الوسائط وقياسات الصوت والخطوط وعمال الويب التقليديين. تبقى المعالجة والإعدادات محلية.",
-    "hi": "Ununique उन ब्राउज़र और डिवाइस संकेतों को सामान्य करता है जिनका उपयोग वेबसाइटें फिंगरप्रिंटिंग के लिए करती हैं। यह ब्राउज़र परिवार और संस्करण को सुसंगत रखता है, अधिक जानकारी वाले स्क्रीन और CPU मानों को सामान्य सीमाओं में बदलता है, पहचान वाले HTTP हेडर को JavaScript मानों से मिलाता है और हर दस्तावेज़ पर अल्पकालिक Canvas noise लगाता है। संतुलित मोड अनुकूलता को प्राथमिकता देता है; सख्त मोड मीडिया उपकरणों, ऑडियो माप, फ़ॉन्ट और सामान्य Worker को भी मास्क करता है। सभी प्रसंस्करण और सेटिंग स्थानीय रहती हैं।",
-    "bn": "Ununique ওয়েবসাইটের ফিঙ্গারপ্রিন্টিংয়ে ব্যবহৃত ব্রাউজার ও ডিভাইসের সংকেতগুলো স্বাভাবিক মানে আনে। এটি ব্রাউজারের পরিবার ও সংস্করণের সামঞ্জস্য রাখে, বেশি তথ্যবহুল স্ক্রিন ও CPU মানকে সাধারণ সীমায় আনে, শনাক্তকারী HTTP হেডারকে JavaScript মানের সঙ্গে মিলিয়ে দেয় এবং প্রতিটি ডকুমেন্টে স্বল্পস্থায়ী Canvas noise প্রয়োগ করে। ভারসাম্যপূর্ণ মোড সামঞ্জস্যকে অগ্রাধিকার দেয়; কঠোর মোড মিডিয়া ডিভাইস, অডিও পরিমাপ, ফন্ট ও সাধারণ Worker-ও মাস্ক করে। সব প্রক্রিয়া ও সেটিং স্থানীয় থাকে।",
-    "ur": "Ununique ان براؤزر اور ڈیوائس سگنلز کو معمول پر لاتا ہے جنہیں ویب سائٹس فنگر پرنٹنگ کے لیے استعمال کرتی ہیں۔ یہ براؤزر کے خاندان اور ورژن میں مطابقت رکھتا ہے، زیادہ معلومات رکھنے والی اسکرین اور CPU اقدار کو عام حدود میں لاتا ہے، شناخت والے HTTP ہیڈرز کو JavaScript اقدار سے ہم آہنگ کرتا ہے اور ہر دستاویز پر مختصر مدت کا Canvas شور لگاتا ہے۔ متوازن موڈ مطابقت کو ترجیح دیتا ہے؛ سخت موڈ میڈیا ڈیوائسز، آڈیو پیمائش، فونٹس اور عام Worker کو بھی ماسک کرتا ہے۔ تمام کارروائی اور ترتیبات مقامی رہتی ہیں۔"
+    "ko": "Ununique는 웹사이트가 핑거프린팅에 사용하는 브라우저 및 기기 신호를 정규화합니다. 브라우저 계열과 버전을 일관되게 유지하고, 엔트로피가 높은 화면 및 CPU 값을 일반적인 범위로 반올림하며, 식별 가능한 HTTP 헤더와 JavaScript 값을 맞추고, 문서마다 짧은 수명의 Canvas 노이즈를 적용합니다. 균형 모드는 호환성을 우선하고, 엄격 모드는 미디어 장치·오디오 측정·글꼴·일반 Worker도 마스킹합니다. 모든 처리와 설정은 로컬에 유지됩니다."
   },
   "categories": {
     "firefox": ["privacy-security"]
@@ -59,6 +44,9 @@
   },
   "support_url": {
     "en-US": "https://github.com/roflsunriz/Ununique/issues"
+  },
+  "support_email": {
+    "en-US": "ununiquewebextension@gmail.com"
   },
   "version": {
     "license": "MIT",
@@ -72,12 +60,7 @@
       "pt-BR": "Melhora a normalização da impressão digital, a restauração ao desativar, a proteção rigorosa, a localização e as verificações de CI.",
       "ru": "Улучшает нормализацию отпечатка, восстановление при отключении, строгую защиту, локализацию и проверки CI.",
       "zh-CN": "改进指纹标准化、停用时的恢复、严格保护模式、本地化和 CI 检查。",
-      "ko": "핑거프린트 정규화, 비활성화 시 복원, 엄격한 보호, 현지화 및 CI 검사를 개선합니다.",
-      "id": "Meningkatkan normalisasi sidik jari, pemulihan saat dinonaktifkan, perlindungan ketat, pelokalan, dan pemeriksaan CI.",
-      "ar": "تحسين تطبيع البصمة والاستعادة عند التعطيل والحماية الصارمة والتعريب وفحوصات CI.",
-      "hi": "फिंगरप्रिंट सामान्यीकरण, बंद करने पर पुनर्स्थापना, सख्त सुरक्षा, स्थानीयकरण और CI जाँच में सुधार।",
-      "bn": "ফিঙ্গারপ্রিন্ট স্বাভাবিকীকরণ, নিষ্ক্রিয় করলে পুনরুদ্ধার, কঠোর সুরক্ষা, স্থানীয়করণ ও CI পরীক্ষা উন্নত করা হয়েছে।",
-      "ur": "فنگر پرنٹ کی معمول سازی، غیر فعال ہونے پر بحالی، سخت تحفظ، مقامی کاری اور CI جانچ بہتر کی گئی ہے۔"
+      "ko": "핑거프린트 정규화, 비활성화 시 복원, 엄격한 보호, 현지화 및 CI 검사를 개선합니다."
     }
   }
 }

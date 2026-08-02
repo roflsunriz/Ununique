@@ -9,6 +9,7 @@ interface AmoMetadata {
   description?: LocalizedText;
   homepage?: LocalizedText;
   support_url?: LocalizedText;
+  support_email?: LocalizedText;
   categories?: { firefox?: unknown };
   version?: {
     license?: unknown;
@@ -17,23 +18,7 @@ interface AmoMetadata {
 }
 
 const metadataPath = "amo/metadata.json";
-const expectedLocales = [
-  "en-US",
-  "ja",
-  "de",
-  "es-ES",
-  "fr",
-  "it",
-  "pt-BR",
-  "ru",
-  "zh-CN",
-  "ko",
-  "id",
-  "ar",
-  "hi",
-  "bn",
-  "ur"
-];
+const expectedLocales = ["en-US", "ja", "de", "es-ES", "fr", "it", "pt-BR", "ru", "zh-CN", "ko"];
 
 const metadata = JSON.parse(await readFile(metadataPath, "utf8")) as AmoMetadata;
 const failures: string[] = [];
@@ -64,6 +49,11 @@ for (const [field, value] of [
   if (typeof value !== "string" || !isHttpsUrl(value)) {
     failures.push(`${field} must be an https URL`);
   }
+}
+
+const supportEmail = metadata.support_email?.["en-US"];
+if (typeof supportEmail !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(supportEmail)) {
+  failures.push("support_email.en-US must be an email address");
 }
 
 if (failures.length > 0) {
