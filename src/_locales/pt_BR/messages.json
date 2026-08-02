@@ -301,5 +301,38 @@
   },
   "spoofingWebmVideo": {
     "message": "WebM video"
+  },
+  "advancedSettingsLabel": {
+    "message": "Configurações avançadas"
+  },
+  "protectionModeLabel": {
+    "message": "Modo de proteção"
+  },
+  "protectionModeBalanced": {
+    "message": "Equilibrado"
+  },
+  "protectionModeStrict": {
+    "message": "Rigoroso"
+  },
+  "protectionModeDescription": {
+    "message": "O modo equilibrado reduz a impressão digital mantendo a compatibilidade. O modo rigoroso também mascara dispositivos de mídia, medições de áudio e workers clássicos."
+  },
+  "canvasNoiseValue": {
+    "message": "Canal vermelho do primeiro pixel: $1"
+  },
+  "canvasNoiseDescription": {
+    "message": "Ruído por documento é aplicado aos pixels."
+  },
+  "headerUserAgentValue": {
+    "message": "Firefox family/version preserved; platform normalized to Windows."
+  },
+  "headerClientHintsValue": {
+    "message": "Windows / non-mobile, when present"
+  },
+  "headerPreservedHeaders": {
+    "message": "Preserved headers"
+  },
+  "headerPreservedValue": {
+    "message": "Referer, cache validators, upgrade directives, and unrelated headers"
   }
 }

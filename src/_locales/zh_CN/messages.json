@@ -301,5 +301,38 @@
   },
   "spoofingWebmVideo": {
     "message": "WebM video"
+  },
+  "advancedSettingsLabel": {
+    "message": "高级设置"
+  },
+  "protectionModeLabel": {
+    "message": "保护模式"
+  },
+  "protectionModeBalanced": {
+    "message": "平衡"
+  },
+  "protectionModeStrict": {
+    "message": "严格"
+  },
+  "protectionModeDescription": {
+    "message": "平衡模式在保持兼容性的同时减少指纹信息。严格模式还会屏蔽媒体设备、音频测量和经典 Worker。"
+  },
+  "canvasNoiseValue": {
+    "message": "第一个像素的红色通道: $1"
+  },
+  "canvasNoiseDescription": {
+    "message": "我们会为每个文档向像素应用噪声。"
+  },
+  "headerUserAgentValue": {
+    "message": "Firefox family/version preserved; platform normalized to Windows."
+  },
+  "headerClientHintsValue": {
+    "message": "Windows / non-mobile, when present"
+  },
+  "headerPreservedHeaders": {
+    "message": "Preserved headers"
+  },
+  "headerPreservedValue": {
+    "message": "Referer, cache validators, upgrade directives, and unrelated headers"
   }
 }

@@ -301,5 +301,38 @@
   },
   "nullValue": {
     "message": "null"
+  },
+  "advancedSettingsLabel": {
+    "message": "詳細設定"
+  },
+  "protectionModeLabel": {
+    "message": "保護モード"
+  },
+  "protectionModeBalanced": {
+    "message": "バランス"
+  },
+  "protectionModeStrict": {
+    "message": "厳格"
+  },
+  "protectionModeDescription": {
+    "message": "バランスモードは互換性を保ちながらフィンガープリントを減らします。厳格モードではメディアデバイス、音声計測、通常のWorkerもマスクします。"
+  },
+  "canvasNoiseValue": {
+    "message": "最初の画素の赤チャンネル: $1"
+  },
+  "canvasNoiseDescription": {
+    "message": "ドキュメントごとのノイズを画素に適用します。"
+  },
+  "headerUserAgentValue": {
+    "message": "Firefoxの種類・バージョンを保ち、プラットフォームをWindowsへ正規化します。"
+  },
+  "headerClientHintsValue": {
+    "message": "Windows／モバイルではない値（存在する場合）"
+  },
+  "headerPreservedHeaders": {
+    "message": "保持するヘッダー"
+  },
+  "headerPreservedValue": {
+    "message": "Referer、キャッシュ検証、アップグレード指定、その他の無関係なヘッダー"
   }
 }

@@ -30,6 +30,9 @@ jobs:
       - name: Sync manifest version
         run: bun scripts/sync-manifest.ts
 
+      - name: Validate AMO metadata
+        run: bun run validate-amo
+
       - name: Validate tag version
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
@@ -61,6 +64,7 @@ jobs:
             --api-key "$AMO_API_KEY" \
             --api-secret "$AMO_API_SECRET" \
             --channel "$AMO_CHANNEL" \
+            --amo-metadata amo/metadata.json \
             --approval-timeout "$AMO_APPROVAL_TIMEOUT" \
             --timeout "$AMO_TIMEOUT"
 

@@ -283,5 +283,56 @@
   },
   "spoofingWebmVideo": {
     "message": "WebM video"
+  },
+  "spoofingJsCategoryBasic": {
+    "message": "الخصائص الأساسية"
+  },
+  "spoofingJsCategoryBasicItems": {
+    "message": "navigator.userAgent وnavigator.platform وnavigator.language وnavigator.hardwareConcurrency وscreen.width وscreen.height وغيرها"
+  },
+  "spoofingJsCategoryFingerprinting": {
+    "message": "حماية البصمة الرقمية"
+  },
+  "spoofingJsCategoryFingerprintingItems": {
+    "message": "بصمة Canvas وWebGL وقوائم الخطوط وأجهزة الوسائط"
+  },
+  "spoofingJsCategorySensorsApi": {
+    "message": "المستشعرات وواجهات API"
+  },
+  "spoofingJsCategorySensorsApiItems": {
+    "message": "معلومات البطارية والاتصال والشريط ودعم تنسيقات الوسائط وواجهة Storage"
+  },
+  "advancedSettingsLabel": {
+    "message": "الإعدادات المتقدمة"
+  },
+  "protectionModeLabel": {
+    "message": "وضع الحماية"
+  },
+  "protectionModeBalanced": {
+    "message": "متوازن"
+  },
+  "protectionModeStrict": {
+    "message": "صارم"
+  },
+  "protectionModeDescription": {
+    "message": "يقلل الوضع المتوازن البصمة مع الحفاظ على التوافق. يخفي الوضع الصارم أيضًا أجهزة الوسائط وقياسات الصوت وعمال الويب التقليديين."
+  },
+  "canvasNoiseValue": {
+    "message": "القناة الحمراء للبكسل الأول: $1"
+  },
+  "canvasNoiseDescription": {
+    "message": "يتم تطبيق ضوضاء خاصة بكل مستند على وحدات البكسل."
+  },
+  "headerUserAgentValue": {
+    "message": "Firefox family/version preserved; platform normalized to Windows."
+  },
+  "headerClientHintsValue": {
+    "message": "Windows / non-mobile, when present"
+  },
+  "headerPreservedHeaders": {
+    "message": "Preserved headers"
+  },
+  "headerPreservedValue": {
+    "message": "Referer, cache validators, upgrade directives, and unrelated headers"
   }
 }

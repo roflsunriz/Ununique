@@ -301,5 +301,38 @@
   },
   "spoofingWebmVideo": {
     "message": "WebM video"
+  },
+  "advancedSettingsLabel": {
+    "message": "Erweiterte Einstellungen"
+  },
+  "protectionModeLabel": {
+    "message": "Schutzmodus"
+  },
+  "protectionModeBalanced": {
+    "message": "Ausgewogen"
+  },
+  "protectionModeStrict": {
+    "message": "Streng"
+  },
+  "protectionModeDescription": {
+    "message": "Der ausgewogene Modus reduziert Fingerprinting bei guter Kompatibilität. Der strenge Modus maskiert zusätzlich Mediengeräte, Audiomessungen und klassische Worker."
+  },
+  "canvasNoiseValue": {
+    "message": "Rotkanal des ersten Pixels: $1"
+  },
+  "canvasNoiseDescription": {
+    "message": "Auf die Pixel wird dokumentbezogenes Rauschen angewendet."
+  },
+  "headerUserAgentValue": {
+    "message": "Firefox family/version preserved; platform normalized to Windows."
+  },
+  "headerClientHintsValue": {
+    "message": "Windows / non-mobile, when present"
+  },
+  "headerPreservedHeaders": {
+    "message": "Preserved headers"
+  },
+  "headerPreservedValue": {
+    "message": "Referer, cache validators, upgrade directives, and unrelated headers"
   }
 }

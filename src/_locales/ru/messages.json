@@ -301,5 +301,38 @@
   },
   "spoofingWebmVideo": {
     "message": "WebM video"
+  },
+  "advancedSettingsLabel": {
+    "message": "Расширенные настройки"
+  },
+  "protectionModeLabel": {
+    "message": "Режим защиты"
+  },
+  "protectionModeBalanced": {
+    "message": "Сбалансированный"
+  },
+  "protectionModeStrict": {
+    "message": "Строгий"
+  },
+  "protectionModeDescription": {
+    "message": "Сбалансированный режим уменьшает отпечаток, сохраняя совместимость. Строгий режим также маскирует мультимедийные устройства, измерения аудио и классические worker."
+  },
+  "canvasNoiseValue": {
+    "message": "Красный канал первого пикселя: $1"
+  },
+  "canvasNoiseDescription": {
+    "message": "К пикселям применяется шум, уникальный для документа."
+  },
+  "headerUserAgentValue": {
+    "message": "Firefox family/version preserved; platform normalized to Windows."
+  },
+  "headerClientHintsValue": {
+    "message": "Windows / non-mobile, when present"
+  },
+  "headerPreservedHeaders": {
+    "message": "Preserved headers"
+  },
+  "headerPreservedValue": {
+    "message": "Referer, cache validators, upgrade directives, and unrelated headers"
   }
 }

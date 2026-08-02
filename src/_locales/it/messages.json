@@ -301,5 +301,38 @@
   },
   "spoofingWebmVideo": {
     "message": "WebM video"
+  },
+  "advancedSettingsLabel": {
+    "message": "Impostazioni avanzate"
+  },
+  "protectionModeLabel": {
+    "message": "Modalità di protezione"
+  },
+  "protectionModeBalanced": {
+    "message": "Bilanciata"
+  },
+  "protectionModeStrict": {
+    "message": "Rigida"
+  },
+  "protectionModeDescription": {
+    "message": "La modalità bilanciata riduce l’impronta mantenendo la compatibilità. La modalità rigida maschera anche dispositivi multimediali, misure audio e worker classici."
+  },
+  "canvasNoiseValue": {
+    "message": "Canale rosso del primo pixel: $1"
+  },
+  "canvasNoiseDescription": {
+    "message": "Ai pixel viene applicato rumore per documento."
+  },
+  "headerUserAgentValue": {
+    "message": "Firefox family/version preserved; platform normalized to Windows."
+  },
+  "headerClientHintsValue": {
+    "message": "Windows / non-mobile, when present"
+  },
+  "headerPreservedHeaders": {
+    "message": "Preserved headers"
+  },
+  "headerPreservedValue": {
+    "message": "Referer, cache validators, upgrade directives, and unrelated headers"
   }
 }

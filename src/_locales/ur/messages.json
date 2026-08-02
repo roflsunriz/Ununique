@@ -3,136 +3,145 @@
     "message": "Ununique"
   },
   "extensionDescription": {
-    "message": "고유한 브라우저 데이터를 일반적인 값으로 위장하여 핑거프린팅을 방지하는 데 도움을 줍니다."
+    "message": "منفرد براؤزر ڈیٹا کو عام اقدار کے طور پر ماسک کر کے فنگر پرنٹنگ سے بچانے میں مدد کرتا ہے۔"
   },
   "popupHeaderSpoofing": {
-    "message": "HTTP 헤더 위장"
+    "message": "HTTP ہیڈر ماسک کریں"
   },
   "popupJsSpoofing": {
-    "message": "JavaScript 속성 위장"
+    "message": "JavaScript خصوصیات ماسک کریں"
   },
   "popupOpenOptions": {
-    "message": "고급 설정"
+    "message": "اعلیٰ ترتیبات"
   },
   "popupFooter": {
-    "message": "핑거프린트를 일반적인 값으로 위장하여 추적으로부터 보호합니다."
+    "message": "فنگر پرنٹ کو عام اقدار میں ماسک کر کے ٹریکنگ سے بچانے میں مدد کرتا ہے۔"
   },
   "optionsTitle": {
-    "message": "Ununique - 고급 설정"
+    "message": "Ununique - اعلیٰ ترتیبات"
+  },
+  "advancedSettingsLabel": {
+    "message": "اعلیٰ ترتیبات"
   },
   "tabBasic": {
-    "message": "기본"
+    "message": "بنیادی"
   },
   "tabResults": {
-    "message": "결과"
+    "message": "نتائج"
+  },
+  "tabDetails": {
+    "message": "تفصیلات"
+  },
+  "basicSettingsDescriptionHeader": {
+    "message": "براؤزر سے سرور کو بھیجے جانے والے HTTP ہیڈرز کو عام اقدار کے طور پر ماسک کرتا ہے۔"
+  },
+  "basicSettingsDescriptionJs": {
+    "message": "اسکرین کے سائز اور زبان جیسی ویب سائٹس کی پڑھی ہوئی JavaScript خصوصیات کو عام اقدار کے طور پر ماسک کرتا ہے۔"
+  },
+  "protectionModeLabel": {
+    "message": "تحفظ کا موڈ"
+  },
+  "protectionModeBalanced": {
+    "message": "متوازن"
+  },
+  "protectionModeStrict": {
+    "message": "سخت"
+  },
+  "protectionModeDescription": {
+    "message": "متوازن موڈ مطابقت برقرار رکھتے ہوئے فنگر پرنٹ کم کرتا ہے۔ سخت موڈ میڈیا ڈیوائسز، آڈیو پیمائش اور عام Worker کو بھی ماسک کرتا ہے۔"
+  },
+  "saveSettings": {
+    "message": "ترتیبات محفوظ کریں"
+  },
+  "settingsSaved": {
+    "message": "محفوظ ہو گیا"
+  },
+  "statusLoading": {
+    "message": "جانچ جاری ہے..."
+  },
+  "statusFetching": {
+    "message": "لوڈ ہو رہا ہے..."
+  },
+  "showSpoofingResults": {
+    "message": "ماسکنگ کے نتائج چیک کریں"
+  },
+  "hideSpoofingResults": {
+    "message": "ماسکنگ کے نتائج چھپائیں"
+  },
+  "canvasNoiseValue": {
+    "message": "پہلے پکسل کا سرخ چینل: $1"
+  },
+  "canvasNoiseDescription": {
+    "message": "ہر دستاویز کے لیے پکسلز پر الگ شور لگایا جاتا ہے۔"
   },
   "tabHeaders": {
-    "message": "HTTP 헤더"
+    "message": "HTTP Headers"
   },
   "tabJavaScript": {
     "message": "JavaScript"
   },
-  "tabDetails": {
-    "message": "설명"
-  },
-  "basicSettingsDescriptionHeader": {
-    "message": "브라우저가 서버로 보내는 HTTP 헤더를 일반적인 값으로 위장합니다."
-  },
-  "basicSettingsDescriptionJs": {
-    "message": "화면 크기와 언어처럼 웹사이트가 읽는 JavaScript 속성을 일반적인 값으로 위장합니다."
-  },
   "spoofingResultsTitle": {
-    "message": "위장 결과"
+    "message": "Spoofing Results"
   },
   "spoofingResultsDescription": {
-    "message": "현재 브라우저 정보와 위장된 값을 비교합니다."
-  },
-  "showSpoofingResults": {
-    "message": "위장 결과 확인"
-  },
-  "hideSpoofingResults": {
-    "message": "위장 결과 숨기기"
-  },
-  "saveSettings": {
-    "message": "설정 저장"
-  },
-  "settingsSaved": {
-    "message": "저장됨"
-  },
-  "statusLoading": {
-    "message": "확인 중..."
-  },
-  "statusFetching": {
-    "message": "불러오는 중..."
-  },
-  "noData": {
-    "message": "데이터 없음"
-  },
-  "dataFetchError": {
-    "message": "데이터를 가져오지 못했습니다. 다시 시도하세요."
+    "message": "Compare current browser information with spoofed values."
   },
   "judgementTarget": {
-    "message": "목표 값"
+    "message": "Target value"
   },
   "judgementStatus": {
-    "message": "상태"
+    "message": "Status"
   },
   "footerVersion": {
-    "message": "Ununique v$1 - 핑거프린팅으로부터 보호합니다"
+    "message": "Ununique v$1 - Protects you from fingerprinting"
   },
   "spoofingHeadersIntro": {
-    "message": "다음 HTTP 헤더는 일반적인 값으로 가장됩니다:"
+    "message": "The following HTTP headers are spoofed to common values:"
   },
   "spoofingHeadersColumnName": {
-    "message": "헤더 이름"
+    "message": "Header name"
   },
   "spoofingHeadersColumnValue": {
-    "message": "가장된 값"
+    "message": "Spoofed value"
   },
   "spoofingJsIntro": {
-    "message": "다음 JavaScript 속성과 기타 기능은 일반적인 값으로 가장됩니다:"
+    "message": "The following JavaScript properties and other features are spoofed to common values:"
   },
   "spoofingJsColumnCategory": {
-    "message": "카테고리"
+    "message": "Category"
   },
   "spoofingJsColumnItem": {
-    "message": "가장된 항목"
+    "message": "Spoofed item"
   },
   "spoofingJsCategoryBasic": {
-    "message": "기본 속성"
+    "message": "Basic properties"
   },
   "spoofingJsCategoryBasicItems": {
-    "message": "navigator.userAgent, navigator.platform, navigator.language, navigator.hardwareConcurrency, screen.width, screen.height 등"
+    "message": "navigator.userAgent, navigator.platform, navigator.language, navigator.hardwareConcurrency, screen.width, screen.height, etc."
   },
   "spoofingJsCategoryFingerprinting": {
-    "message": "핑거프린팅 방어"
+    "message": "Fingerprinting defenses"
   },
   "spoofingJsCategoryFingerprintingItems": {
-    "message": "캔버스 핑거프린팅, WebGL 핑거프린팅, 글꼴 목록, 미디어 장치"
+    "message": "Canvas fingerprinting, WebGL fingerprinting, font lists, media devices"
   },
   "spoofingJsCategorySensorsApi": {
-    "message": "센서 및 API"
+    "message": "Sensors and APIs"
   },
   "spoofingJsCategorySensorsApiItems": {
-    "message": "배터리 정보, 네트워크 연결 정보, 브라우저 바, 미디어 형식 지원, Storage API"
+    "message": "Battery information, network connection information, browser bars, media format support, Storage API"
   },
   "canvasOriginalLabel": {
-    "message": "원본:"
+    "message": "Original:"
   },
   "canvasSpoofedLabel": {
-    "message": "가장된 후:"
+    "message": "Spoofed:"
   },
   "comparisonItem": {
-    "message": "항목"
-  },
-  "comparisonSpoofedValue": {
-    "message": "가장된 값"
+    "message": "Item"
   },
   "canvasNoiseLabel": {
-    "message": "캔버스 노이즈"
-  },
-  "judgementSummary": {
-    "message": "$1 / $2개 일치"
+    "message": "Canvas noise"
   },
   "batteryCharging": {
     "message": "Charging"
@@ -164,9 +173,6 @@
   "unknownName": {
     "message": "Unnamed"
   },
-  "nullValue": {
-    "message": "null"
-  },
   "spoofingTabBasic": {
     "message": "Basic info"
   },
@@ -190,6 +196,9 @@
   },
   "comparisonOriginalValue": {
     "message": "Original value"
+  },
+  "comparisonSpoofedValue": {
+    "message": "Spoofed value"
   },
   "spoofingUserAgent": {
     "message": "User-Agent"
@@ -215,11 +224,11 @@
   "spoofingCanvasTitle": {
     "message": "Canvas fingerprint"
   },
-  "comparisonParameter": {
-    "message": "Parameter"
-  },
   "spoofingWebglTitle": {
     "message": "WebGL information"
+  },
+  "comparisonParameter": {
+    "message": "Parameter"
   },
   "spoofingWebglVendor": {
     "message": "VENDOR"
@@ -302,26 +311,17 @@
   "spoofingWebmVideo": {
     "message": "WebM video"
   },
-  "advancedSettingsLabel": {
-    "message": "고급 설정"
+  "judgementSummary": {
+    "message": "$1 / $2 checks passed"
   },
-  "protectionModeLabel": {
-    "message": "보호 모드"
+  "noData": {
+    "message": "No data"
   },
-  "protectionModeBalanced": {
-    "message": "균형"
+  "dataFetchError": {
+    "message": "Failed to get data. Please try again."
   },
-  "protectionModeStrict": {
-    "message": "엄격"
-  },
-  "protectionModeDescription": {
-    "message": "균형 모드는 호환성을 유지하면서 지문 정보를 줄입니다. 엄격 모드는 미디어 장치, 오디오 측정값 및 일반 Worker도 마스킹합니다."
-  },
-  "canvasNoiseValue": {
-    "message": "첫 번째 픽셀의 빨간색 채널: $1"
-  },
-  "canvasNoiseDescription": {
-    "message": "문서마다 픽셀에 노이즈를 적용합니다."
+  "nullValue": {
+    "message": "null"
   },
   "headerUserAgentValue": {
     "message": "Firefox family/version preserved; platform normalized to Windows."

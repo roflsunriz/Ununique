@@ -2,8 +2,10 @@ type BrowserMessageType =
   "getSettings" | "saveSettings" | "getOriginalValues" | "getSpoofingValues" | "settingsChanged";
 
 interface Settings {
+  settingsVersion: number;
   enableHeaderSpoofing: boolean;
   enableJsSpoofing: boolean;
+  protectionMode: "balanced" | "strict";
 }
 
 interface FontAvailability {
@@ -23,6 +25,7 @@ interface BrowserValues {
   screenWidth?: number;
   screenHeight?: number;
   hardwareConcurrency?: number | string;
+  deviceMemory?: number;
   doNotTrack?: string | number;
   webglVendor?: string;
   webglRenderer?: string;

@@ -1,10 +1,22 @@
+import {
+  DEFAULT_PRIVACY_SETTINGS,
+  normalizeSettings,
+  type PrivacySettings
+} from "../shared/fingerprint";
+
 (() => {
   function getBrowserApi(): BrowserApi {
     return typeof browser !== "undefined" && browser ? browser : chrome;
   }
 
   function applyI18n(browserAPI: BrowserApi): void {
-    document.documentElement.lang = browserAPI.i18n.getUILanguage();
+    const language = browserAPI.i18n.getUILanguage();
+    document.documentElement.lang = language;
+    document.documentElement.dir = ["ar", "fa", "he", "ur"].some((rtlLanguage) =>
+      language.toLowerCase().startsWith(rtlLanguage)
+    )
+      ? "rtl"
+      : "ltr";
     document.title = browserAPI.i18n.getMessage("extensionName") || document.title;
     document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((element) => {
       const key = element.dataset.i18n;
@@ -15,6 +27,13 @@
       const message = browserAPI.i18n.getMessage(key);
       if (message) {
         element.textContent = message;
+      }
+    });
+    document.querySelectorAll<HTMLElement>("[data-i18n-aria-label]").forEach((element) => {
+      const key = element.dataset.i18nAriaLabel;
+      const message = key ? browserAPI.i18n.getMessage(key) : "";
+      if (message) {
+        element.setAttribute("aria-label", message);
       }
     });
   }
@@ -39,13 +58,15 @@
     const openOptionsLink = getRequiredElement("openOptions", HTMLAnchorElement);
 
     // 保存された設定を取得して表示
-    const response = await browserAPI.runtime.sendMessage<SettingsResponse>({
-      type: "getSettings"
-    });
-    const settings: Settings = response?.settings ?? {
-      enableHeaderSpoofing: true,
-      enableJsSpoofing: true
-    };
+    let settings: PrivacySettings = { ...DEFAULT_PRIVACY_SETTINGS };
+    try {
+      const response = await browserAPI.runtime.sendMessage<SettingsResponse>({
+        type: "getSettings"
+      });
+      settings = normalizeSettings(response?.settings);
+    } catch (error) {
+      console.warn("[Ununique] Could not load popup settings", error);
+    }
 
     // チェックボックスの状態を設定
     headerSpoofingCheckbox.checked = settings.enableHeaderSpoofing;
@@ -63,14 +84,15 @@
 
     // 設定を保存する関数
     async function saveSettings(): Promise<void> {
-      const newSettings = {
+      settings = normalizeSettings({
+        ...settings,
         enableHeaderSpoofing: headerSpoofingCheckbox.checked,
         enableJsSpoofing: jsSpoofingCheckbox.checked
-      };
+      });
 
       await browserAPI.runtime.sendMessage({
         type: "saveSettings",
-        settings: newSettings
+        settings
       });
 
       // 設定が変更されたことをユーザーに通知

@@ -1,44 +1,25 @@
+import {
+  applyCanvasNoise,
+  createFingerprintProfile,
+  DEFAULT_PRIVACY_SETTINGS,
+  normalizeSettings,
+  profileToBrowserValues,
+  type PrivacySettings
+} from "../shared/fingerprint";
+
 (() => {
   type ComparableValue =
     string | number | boolean | undefined | null | FontAvailability[] | DeviceSummary[];
 
-  const SPOOFING_TARGETS: Required<BrowserValues> = {
-    userAgent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-    platform: "Win32",
-    language: "en-US",
-    screenWidth: 1920,
-    screenHeight: 1080,
-    hardwareConcurrency: 4,
-    doNotTrack: "1",
-    webglVendor: "Nvidia Inc.",
-    webglRenderer: "Nvidia(R) GeForce GTX 1060",
-    fonts: [
-      { name: "Arial", available: true },
-      { name: "Times New Roman", available: true },
-      { name: "Courier New", available: true },
-      { name: "Verdana", available: true },
-      { name: "Georgia", available: true },
-      { name: "Tahoma", available: true },
-      { name: "Trebuchet MS", available: true },
-      { name: "Impact", available: true },
-      { name: "Comic Sans MS", available: true },
-      { name: "Arial Black", available: true }
-    ],
-    devices: [
-      { kind: "audioinput", label: "Built-in microphone" },
-      { kind: "videoinput", label: "Built-in webcam" },
-      { kind: "audiooutput", label: "Built-in speaker" }
-    ],
-    batteryCharging: true,
-    batteryLevel: 1.0,
-    connectionType: "4g",
-    downlink: 10,
-    menubarVisible: false,
-    toolbarVisible: false,
-    mp4Support: "probably",
-    webmSupport: "probably"
-  };
+  const SPOOFING_TARGETS: BrowserValues = profileToBrowserValues(
+    createFingerprintProfile({
+      userAgent: navigator.userAgent,
+      screenWidth: typeof screen !== "undefined" ? screen.width : undefined,
+      screenHeight: typeof screen !== "undefined" ? screen.height : undefined,
+      hardwareConcurrency: navigator.hardwareConcurrency,
+      deviceMemory: (navigator as Navigator & { deviceMemory?: number }).deviceMemory
+    })
+  );
 
   function getBrowserApi(): BrowserApi {
     return typeof browser !== "undefined" && browser ? browser : chrome;
@@ -49,7 +30,13 @@
   }
 
   function applyI18n(browserAPI: BrowserApi): void {
-    document.documentElement.lang = browserAPI.i18n.getUILanguage();
+    const language = browserAPI.i18n.getUILanguage();
+    document.documentElement.lang = language;
+    document.documentElement.dir = ["ar", "fa", "he", "ur"].some((rtlLanguage) =>
+      language.toLowerCase().startsWith(rtlLanguage)
+    )
+      ? "rtl"
+      : "ltr";
     document.title = browserAPI.i18n.getMessage("optionsTitle") || document.title;
     const manifestVersion = browserAPI.runtime.getManifest().version;
     document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((element) => {
@@ -64,6 +51,13 @@
           : browserAPI.i18n.getMessage(key);
       if (message) {
         element.textContent = message;
+      }
+    });
+    document.querySelectorAll<HTMLElement>("[data-i18n-aria-label]").forEach((element) => {
+      const key = element.dataset.i18nAriaLabel;
+      const message = key ? browserAPI.i18n.getMessage(key) : "";
+      if (message) {
+        element.setAttribute("aria-label", message);
       }
     });
   }
@@ -105,6 +99,7 @@
     // 要素の取得
     const headerSpoofingCheckbox = getRequiredElement("headerSpoofing", HTMLInputElement);
     const jsSpoofingCheckbox = getRequiredElement("jsSpoofing", HTMLInputElement);
+    const protectionModeSelect = getRequiredElement("protectionMode", HTMLSelectElement);
     const saveButton = getRequiredElement("save", HTMLButtonElement);
     const checkResultsButton = getRequiredElement("checkResults", HTMLButtonElement);
     const spoofResultsDiv = getRequiredElement("spoofResults", HTMLDivElement);
@@ -118,17 +113,20 @@
     initTabs();
 
     // 保存された設定を取得して表示
-    const response = await browserAPI.runtime.sendMessage<SettingsResponse>({
-      type: "getSettings"
-    });
-    const settings: Settings = response.settings ?? {
-      enableHeaderSpoofing: true,
-      enableJsSpoofing: true
-    };
+    let settings: PrivacySettings = { ...DEFAULT_PRIVACY_SETTINGS };
+    try {
+      const response = await browserAPI.runtime.sendMessage<SettingsResponse>({
+        type: "getSettings"
+      });
+      settings = normalizeSettings(response?.settings);
+    } catch (error) {
+      console.warn("[Ununique] Could not load options settings", error);
+    }
 
     // チェックボックスの状態を設定
     headerSpoofingCheckbox.checked = settings.enableHeaderSpoofing;
     jsSpoofingCheckbox.checked = settings.enableJsSpoofing;
+    protectionModeSelect.value = settings.protectionMode;
 
     // 保存ボタンのクリックイベント
     saveButton.addEventListener("click", saveSettings);
@@ -191,13 +189,16 @@
     // 設定を保存する関数
     async function saveSettings(): Promise<void> {
       const newSettings = {
+        ...settings,
         enableHeaderSpoofing: headerSpoofingCheckbox.checked,
-        enableJsSpoofing: jsSpoofingCheckbox.checked
+        enableJsSpoofing: jsSpoofingCheckbox.checked,
+        protectionMode: protectionModeSelect.value
       };
 
+      settings = normalizeSettings(newSettings);
       await browserAPI.runtime.sendMessage({
         type: "saveSettings",
-        settings: newSettings
+        settings
       });
 
       // 保存成功のメッセージを表示
@@ -798,22 +799,28 @@
         if (!spoofedCtx) {
           return;
         }
-        drawCanvasContent(spoofedCtx, text, true);
-        displayCanvasJudgement(spoofedCtx);
+        const noiseApplied = drawCanvasContent(spoofedCtx, text, true);
+        displayCanvasJudgement(spoofedCtx, noiseApplied);
       } catch (e) {
         console.error("Canvas rendering error:", e);
       }
     }
 
-    function displayCanvasJudgement(ctx: CanvasRenderingContext2D): void {
+    function displayCanvasJudgement(ctx: CanvasRenderingContext2D, noiseApplied: boolean): void {
       const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
       const redChannel = imageData.data[0];
-      const passed = redChannel !== 248;
+      const passed = noiseApplied;
 
-      document.getElementById("spoofedCanvasNoise").textContent =
-        `First pixel red channel: ${redChannel}`;
-      document.getElementById("targetCanvasNoise").textContent =
-        "The image data red channel receives noise";
+      document.getElementById("spoofedCanvasNoise").textContent = getMessage(
+        browserAPI,
+        "canvasNoiseValue",
+        "First pixel red channel: $1"
+      ).replace("$1", String(redChannel));
+      document.getElementById("targetCanvasNoise").textContent = getMessage(
+        browserAPI,
+        "canvasNoiseDescription",
+        "Per-document noise is applied to pixels."
+      );
       document.getElementById("statusCanvasNoise").replaceChildren(createStatusElement(passed));
       spoofingJudgements.push(passed);
     }
@@ -823,7 +830,7 @@
       ctx: CanvasRenderingContext2D,
       text: string,
       isSpoof: boolean
-    ): void {
+    ): boolean {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
       // 背景を描画
@@ -840,13 +847,14 @@
       if (isSpoof) {
         const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
         const data = imageData.data;
-
-        for (let i = 0; i < data.length; i += 100) {
-          data[i] = data[i] === 255 ? 254 : data[i] + 1;
-        }
+        const originalData = new Uint8ClampedArray(data);
+        applyCanvasNoise(data, imageData.width, imageData.height, 0x9e3779b9);
 
         ctx.putImageData(imageData, 0, 0);
+        return data.some((value, index) => value !== originalData[index]);
       }
+
+      return false;
     }
   });
 })();
