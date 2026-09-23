@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- CI と Dependabot の分類の実行順が前後しても更新を取りこぼさないよう、同じ PR 番号と head SHA を再照合する経路を追加した。
+
 ### Security
 
 - 既知の脆弱性を解消するため、上流依存が旧版へ固定する adm-zip、brace-expansion、fast-uri、image-size を安全な patch 版へ更新し、Bun のロックファイルを再生成した。
