@@ -22,7 +22,7 @@
     "web-ext:lint": "bun run build && bun run stage-extension && web-ext lint --source-dir build/extension"
   },
   "devDependencies": {
-    "eslint": "^10.8.0",
+    "eslint": "^10.11.0",
     "globals": "^17.7.0",
     "prettier": "^3.9.6",
     "typescript": "^5.9.3",
