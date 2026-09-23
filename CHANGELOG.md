@@ -1,6 +1,14 @@
 # Changelog
 
-## Unreleased
+## [Unreleased]
+
+### Security
+
+- 既知の脆弱性を解消するため、上流依存が旧版へ固定する adm-zip、brace-expansion、fast-uri、image-size を安全な patch 版へ更新し、Bun のロックファイルを再生成した。
+
+### Changed
+
+- 依存更新を安全に省力化するため、Dependabot の patch／minor PR を既存 CI の全チェック成功後に自動取り込みし、失敗ジョブを一度再実行し、必要なら `bun.lock` を限定して再生成する設定を追加した。
 
 ## 1.4.0 - 2026-08-02
 

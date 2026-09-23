@@ -29,3 +29,11 @@ Use Bun for this repository.
 - `bun run type-check`
 - `bun run build`
 - `bun run preview`
+
+## 依存監査で確定した事項（2026-09-23）
+
+- `bun audit fix` だけでは adm-zip、brace-expansion、fast-uri、image-size の脆弱版が上流の厳密な依存範囲で残る。`package.json` の既存 `overrides` と `bun.lock` を同時に更新し、`bun audit` と関連テスト・ビルドで確認する。上流が安全版を取り込んだ場合は override の必要性を再評価する。
+
+## Dependabot の限定修復（2026-09-23）
+
+- CI 再失敗後の自動修復は `bun.lock` だけをパッチとして適用する。修復後は `workflow_dispatch` で `.github/workflows/ci.yml` を再実行するため、この CI の `contents: read` と checkout の `persist-credentials: false` を維持し、PR コードを実行するジョブへ書き込み権限や秘密情報を渡さない。根拠は `.github/workflows/dependabot-automation.yml` と共通ワークフローの権限分離。
