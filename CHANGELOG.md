@@ -13,6 +13,7 @@
 ### Changed
 
 - 依存更新を安全に省力化するため、Dependabot の patch／minor PR を既存 CI の全チェック成功後に自動取り込みし、失敗ジョブを一度再実行し、必要なら `bun.lock` を限定して再生成する設定を追加した。
+- typescript-eslint が TypeScript 7 の API 未提供に対応していないため、`typescript` を `npm:@typescript/typescript6@^6.0.2` へエイリアスして lint 用の API を維持し、型検査とビルドに使う `tsc` 7.0.2 を `@typescript/native` で併用する構成にした。
 
 ## 1.4.0 - 2026-08-02
 

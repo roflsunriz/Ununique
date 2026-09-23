@@ -37,3 +37,9 @@ Use Bun for this repository.
 ## Dependabot の限定修復（2026-09-23）
 
 - CI 再失敗後の自動修復は `bun.lock` だけをパッチとして適用する。修復後は `workflow_dispatch` で `.github/workflows/ci.yml` を再実行するため、この CI の `contents: read` と checkout の `persist-credentials: false` を維持し、PR コードを実行するジョブへ書き込み権限や秘密情報を渡さない。根拠は `.github/workflows/dependabot-automation.yml` と共通ワークフローの権限分離。
+
+## TypeScript 7 の併用構成（2026-09-23）
+
+- TypeScript 7.0 は API を含まず typescript-eslint が未対応のため、`typescript` は `npm:@typescript/typescript6@^6.0.2` へエイリアスし、TS7 の `tsc` は `@typescript/native`（`npm:typescript@^7.0.2`）で併用する。公式手順は TypeScript 7.0 の発表記事「Running Side-by-Side with TypeScript 6.0」による。
+- この構成では `tsc` が 7.x、`tsc6` が 6.x を提供し、lint は `typescript` パッケージ経由の 6 系 API で動作する。TypeScript 7.1 で新 API が提供されたら typescript-eslint の対応状況を確認して構成を再評価する。
+- 手動で push した Dependabot PR は自動化の classify が対象外（「PR is not from Dependabot」）となるため、CI 全成功を確認して手動でマージする。
