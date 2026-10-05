@@ -43,3 +43,8 @@ Use Bun for this repository.
 - TypeScript 7.0 は API を含まず typescript-eslint が未対応のため、`typescript` は `npm:@typescript/typescript6@^6.0.2` へエイリアスし、TS7 の `tsc` は `@typescript/native`（`npm:typescript@^7.0.2`）で併用する。公式手順は TypeScript 7.0 の発表記事「Running Side-by-Side with TypeScript 6.0」による。
 - この構成では `tsc` が 7.x、`tsc6` が 6.x を提供し、lint は `typescript` パッケージ経由の 6 系 API で動作する。TypeScript 7.1 で新 API が提供されたら typescript-eslint の対応状況を確認して構成を再評価する。
 - 手動で push した Dependabot PR は自動化の classify が対象外（「PR is not from Dependabot」）となるため、CI 全成功を確認して手動でマージする。
+
+## 系列別の依存修復（2026-10-05）
+
+- 全majorへの一律overrideを避け、親パッケージの要求系列に合う修正版をversion-scoped overrideで選ぶ。lockfileの実効版、固定インストール、全重大度監査と製品チェックを確認する。
+- version-scoped overrideはBun 1.4.2で形式3のlockfileへ解決し、CI・Releaseでも同じ版を使う。Bun 1.3.8では更新したbrace-expansionの実効版が残る場合があった。node-forgeの未修正highはweb-extのAndroid経路であり、監査除外や機能削除で成功扱いにしない。詳細は `verification.md`。
