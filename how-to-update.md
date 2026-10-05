@@ -20,3 +20,7 @@ major 更新で CI が失敗する場合は、失敗ログから原因を特定�
 `package.json` の `overrides` は、上流パッケージが adm-zip、brace-expansion、fast-uri、image-size の旧版を固定している間に安全な patch 版を選ぶために使う。上流が安全版を採用したら override を減らせるか確認する。更新時は `bun install --lockfile-only --ignore-scripts`、`bun install --frozen-lockfile`、`bun audit` を実行し、該当する lint・型・テスト・ビルドを確認する。問題があれば更新コミットを revert し、lockfile と package.json を同じ版へ戻す。
 
 CI 完了より Dependabot の分類が遅れる場合は、`callback_workflow_file` が指す呼び出し側 workflow を `workflow_dispatch` し、同じ PR 番号・head SHA・全チェックを再確認する。呼び出し側のファイル名を変える際はこの入力も一緒に更新する。
+
+## 系列別overrideの保守
+
+`package.json` のversion-scoped overrideは親依存のmajor範囲を確認して更新し、同じBunでlockfile生成・固定インストール・全重大度監査・既存品質チェックを実行してください。上流が修正版を取り込んだ際は不要なoverrideを外せるか確認します。問題があれば修復コミットを通常のrevertで戻し、package.jsonとlockfileを同じ版に保ちます。今回の既知制約と配布検証は `verification.md` を参照してください。

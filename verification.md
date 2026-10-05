@@ -23,3 +23,11 @@ TypeScript 7.0 は API を含まず typescript-eslint 8.70 が未対応のため
 - 既存の固有質問・入力例・必須条件を原文と照合。READMEのリンク・画像・コマンド・条件を確認し、裏付けがある誤記だけを訂正した。
 - 既存のCI、Dependabot、labeler、ライセンスのファイル内容は比較元から変更していない。
 - 製品のビルド・インストール・実機操作、GitHub上のフォーム表示、公開後CIは今回の静的検証に含めない。公開後に実際の受付表示と必要ラベルの適用を確認する。
+
+## 2026-10-05: マージ後の依存監査失敗の修復
+
+- 旧受付整備PRは既にマージ済みで、現在の既定ブランチCIに依存監査の失敗があることをGitHub APIと失敗ログで再確認した。過去の公開前記録を現在の成功根拠には使わない。
+- `brace-expansion`、`fast-uri`、`js-yaml`、`undici` は親依存が要求するmajor系列ごとに修正版を指定する。全系列を新majorへ一律置換しない。
+- Bun 1.3.8 は新たなversion-scoped overrideを形式1のロックへ保存しても brace-expansion 5.0.9 が残った。Bun 1.4.2で固定インストールすると形式3へ移行し、5.0.12へ解決された。packageManagerとCI・Releaseの固定版を1.4.2へ揃える。
+- 書式、lint、型、14テスト（4514アサーション）、ロケール/AMO検査、ビルド、web-ext lint、XPI生成を確認。
+- 全重大度の `bun audit` は node-forge のhigh 1件で失敗する。`web-ext 10.7.0 -> @devicefarmer/adbkit 3.3.9 -> node-forge 1.4.0` の経路で、公式npm最新版は1.4.0、GHSA-86w9-cpqp-85rvのfirst_patched_versionはnull。監査抑制、Android実行機能の無根拠な削除、未修正版の別名化はしない。修正版または機能を保持する上流移行が確認されるまでマージ対象にしない。
