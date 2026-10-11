@@ -8,9 +8,14 @@
 
 ### Security
 
+- 依存監査の失敗を解消するため、brace-expansion、fast-uri、js-yaml、undici、shell-quote、source-map-js を親依存の系列に合う修正版へ更新した。
+- `node-forge` の RSA 署名検証に残る脆弱性へ、上流の修正に基づく Bun パッチと回帰テストを適用した。上流修正版の公開まで、CI は該当アドバイザリ1件だけをパッチ検証後に判定する。
+
 - 既知の脆弱性を解消するため、上流依存が旧版へ固定する adm-zip、brace-expansion、fast-uri、image-size を安全な patch 版へ更新し、Bun のロックファイルを再生成した。
 
 ### Changed
+
+- version-scoped override を確実に解決できるよう、Bun と CI・Release を 1.4.2 に揃え、形式3のロックを再生成した。
 
 
 - 不具合・機能提案などの受付とPRの記入形式を揃え、プロジェクト固有の確認項目を残した。 READMEは既存の意味と手順を保ち、実装と異なる説明や読みにくい表現を修正した。
