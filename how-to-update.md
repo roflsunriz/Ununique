@@ -24,3 +24,5 @@ CI 完了より Dependabot の分類が遅れる場合は、`callback_workflow_f
 ## 系列別overrideの保守
 
 `package.json` のversion-scoped overrideは親依存のmajor範囲を確認して更新し、同じBunでlockfile生成・固定インストール・全重大度監査・既存品質チェックを実行してください。上流が修正版を取り込んだ際は不要なoverrideを外せるか確認します。問題があれば修復コミットを通常のrevertで戻し、package.jsonとlockfileを同じ版に保ちます。今回の既知制約と配布検証は `verification.md` を参照してください。
+
+`node-forge@1.4.0` は上流の修正版が公開されるまで `patches/node-forge@1.4.0.patch` を適用します。更新時は `bun install --frozen-lockfile`、`bun audit`、`bun run audit`、`bun run test` を実行します。素の監査が GHSA-86w9-cpqp-85rv を報告するのは、パッチの有無を判定しないためです。`bun run audit` は全件を確認し、この1件だけパッチ設定と回帰テストが有効なら通します。上流修正版が出たら `node-forge` を更新し、パッチ、検証例外、関連文書を削除して素の `bun audit` が成功することを確認します。更新に問題があればコミットを revert して、lockfile とパッチの整合性を復旧します。

@@ -48,3 +48,8 @@ Use Bun for this repository.
 
 - 全majorへの一律overrideを避け、親パッケージの要求系列に合う修正版をversion-scoped overrideで選ぶ。lockfileの実効版、固定インストール、全重大度監査と製品チェックを確認する。
 - version-scoped overrideはBun 1.4.2で形式3のlockfileへ解決し、CI・Releaseでも同じ版を使う。Bun 1.3.8では更新したbrace-expansionの実効版が残る場合があった。node-forgeの未修正highはweb-extのAndroid経路であり、監査除外や機能削除で成功扱いにしない。詳細は `verification.md`。
+
+## 未公開修正の依存パッチ（2026-10-11）
+
+- `node-forge@1.4.0` の GHSA-86w9-cpqp-85rv は npm に修正版がない。上流PR digitalbazaar/forge#1152 の入れ子の DigestAlgorithm 要素数検証を `patches/node-forge@1.4.0.patch` に適用する。`test/node-forge-patch.test.mjs` は正常形と余分な要素を含む形を検証する。
+- Bun の素の監査はパッチを認識せず当該バージョンを報告するため、CI は `bun run audit` で監査結果の全件を確認する。この1件だけはパッチ設定と回帰テスト成功を確認し、他の検出は失敗させる。上流修正版が公開されたらパッチと例外を取り除いて素の監査に戻す。根拠と手順は `verification.md` と `how-to-update.md`。
