@@ -39,3 +39,8 @@ TypeScript 7.0 は API を含まず typescript-eslint 8.70 が未対応のため
 - `shell-quote` 1.12.0 と `source-map-js` 1.2.2 へ更新した。`bun audit` はパッチ済みの `node-forge` 1件を引き続き報告する。CI の `bun run audit` は全件を取得し、このアドバイザリ1件だけパッチ設定と回帰テストを確認して通す。他の検出、パッチ欠落、テスト失敗は失敗にする。
 - 2026-10-05 のマージ保留判断は、上流修正を検証可能なパッチとして適用できたため更新した。上流の正式修正版が公開されたらパッチと検証例外を外して素の監査を再確認する。
 - Bun 1.4.2 の固定インストール、format-check、lint、type-check、16件のテスト、validate-locales、validate-amo、build、web-ext lint、XPI生成、`bun run audit` を確認した。素の `bun audit` はパッチ済みの1件を報告する。
+
+## 2026-10-11: Dependabot PR の統合
+
+- PR #11 の監査修復後、Dependabot PR #13（ESLint 10.12.0）、#14（globals 17.13.0）、#12（typescript-eslint 8.71.1）が CI 全成功で main に統合された。PR #12 は Dependabot が公開中の新しい patch 版へ更新した。
+- `bun outdated` で残った Prettier 3.9.10 を更新した。固定インストール、書式、lint、型、16テスト、ロケール・AMO検査、ビルド、web-ext lint、監査判定が成功し、更新後の `bun outdated` は更新候補なしだった。

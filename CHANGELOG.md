@@ -15,6 +15,8 @@
 
 ### Changed
 
+- 開発時の解析と整形を最新の互換版で維持するため、ESLint、globals、typescript-eslint、Prettier を更新した。
+
 - version-scoped override を確実に解決できるよう、Bun と CI・Release を 1.4.2 に揃え、形式3のロックを再生成した。
 
 
