@@ -15,6 +15,8 @@
 
 ### Changed
 
+
+- 共通指針と固有の知見を区別して参照できるよう、AGENTS・READMEなどの実現手段、例外と調査知見を `findings.md` へ分離し、着手前の全文確認と更新先を統一した。
 - 開発時の解析と整形を最新の互換版で維持するため、ESLint、globals、typescript-eslint、Prettier を更新した。
 
 - version-scoped override を確実に解決できるよう、Bun と CI・Release を 1.4.2 に揃え、形式3のロックを再生成した。

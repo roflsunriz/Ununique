@@ -1,4 +1,7 @@
 1. `package.json` のバージョンを上げる。
+
+作業前に [findings.md](findings.md) を全文読み、固有の環境・ツール・例外条件を確認する。以下は更新と復旧の手順の正本とする。
+
 2. `CHANGELOG.md` に対象バージョンの変更点を追加する。
 3. `bun install --frozen-lockfile`、`bun run validate-amo`、`bun run validate-locales`、`bun run test`、`bun run lint`、`bun run type-check`、`bun run build`、`bun run web-ext:lint`、`bun audit` を実行する。
 4. `bun run package` でXPIを作成し、必要なら `bun run e2e:firefox` を専用プロファイルで実行する。
