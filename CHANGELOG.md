@@ -4,6 +4,8 @@
 
 ### Changed
 
+- GitHub Actions の月間利用時間を抑えるため、Dependabot version update と自動マージを毎週・即時処理から毎月28日（Asia/Tokyo）の月末一括処理へ変更した。
+
 - 9系統の品質検査matrixをfail-fast化し、workflow別の重複CI取消しとBun依存キャッシュで結果を早く返すようにした。
 
 ### Fixed
