@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- 9系統の品質検査matrixをfail-fast化し、workflow別の重複CI取消しとBun依存キャッシュで結果を早く返すようにした。
+
 ### Fixed
 
 - CI と Dependabot の分類の実行順が前後しても更新を取りこぼさないよう、同じ PR 番号と head SHA を再照合する経路を追加した。
