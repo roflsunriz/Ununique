@@ -1,8 +1,8 @@
 import { spawn, type ChildProcess } from "node:child_process";
 import { connect as connectSocket, createServer, type Socket } from "node:net";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { isAbsolute, join, relative } from "node:path";
 
 type MarionetteResponse = [number, number, unknown, unknown];
 
@@ -11,8 +11,19 @@ const firefoxBinary =
   process.env.FIREFOX_BINARY ??
   (process.platform === "win32" ? "C:/Program Files/Mozilla Firefox/firefox.exe" : "firefox");
 
-const profileDirectory = await mkdtemp(join(tmpdir(), "ununique-firefox-e2e-"));
+const temporaryRoot = await realpath(tmpdir());
+const profileDirectory = await realpath(
+  await mkdtemp(join(temporaryRoot, "ununique-firefox-e2e-"))
+);
+const relativeProfile = relative(temporaryRoot, profileDirectory);
+if (!relativeProfile || relativeProfile.startsWith("..") || isAbsolute(relativeProfile)) {
+  throw new Error("Temporary profile is outside its verified directory.");
+}
 const marionettePort = await findFreePort();
+await writeFile(
+  join(profileDirectory, "user.js"),
+  `user_pref("marionette.port", ${marionettePort});\n`
+);
 const pageServer = Bun.serve({
   port: 0,
   fetch() {
@@ -29,35 +40,36 @@ const firefoxErrors: string[] = [];
 try {
   firefox = spawn(
     firefoxBinary,
-    [
-      "-no-remote",
-      "-headless",
-      "-marionette",
-      "--marionette-port",
-      String(marionettePort),
-      "-profile",
-      profileDirectory,
-      "about:blank"
-    ],
+    ["-no-remote", "-headless", "-marionette", "-profile", profileDirectory, "about:blank"],
     { stdio: ["ignore", "ignore", "pipe"], windowsHide: true }
   );
   firefox.stderr?.on("data", (data: Buffer) => {
     firefoxErrors.push(data.toString("utf8"));
   });
 
-  await waitForPort(marionettePort, firefox);
-  client = await MarionetteClient.connect(marionettePort);
+  for (let attempt = 0; attempt < 240; attempt += 1) {
+    if (firefox.exitCode !== null) {
+      throw new Error(`Firefox exited before Marionette started: ${firefox.exitCode}`);
+    }
+    try {
+      client = await MarionetteClient.connect(marionettePort);
+      break;
+    } catch {
+      await new Promise((resolve) => setTimeout(resolve, 125));
+    }
+  }
+  if (!client) throw new Error(`Marionette port ${marionettePort} did not become ready`);
   await client.request("WebDriver:NewSession", {
     capabilities: { alwaysMatch: { browserName: "firefox" } }
   });
 
   const addon = await Bun.file(extensionArchive).arrayBuffer();
-  await client.request("WebDriver:InstallAddon", {
+  await client.request("Addon:Install", {
     addon: Buffer.from(addon).toString("base64"),
     temporary: true
   });
 
-  await client.request("WebDriver:Get", { url: `http://127.0.0.1:${pageServer.port}/` });
+  await client.request("WebDriver:Navigate", { url: `http://127.0.0.1:${pageServer.port}/` });
   const values = await waitForProtectedPage(client);
 
   assert(values.platform === "Win32", `navigator.platform was ${values.platform}`);
@@ -67,8 +79,22 @@ try {
     values.userAgent.includes("Windows NT 10.0"),
     "User-Agent did not use the normalized platform"
   );
-  assert(values.screenWidth % 100 === 0, `screen.width was not bucketed: ${values.screenWidth}`);
-  assert(values.screenHeight % 100 === 0, `screen.height was not bucketed: ${values.screenHeight}`);
+  const screenSize = `${values.screenWidth}x${values.screenHeight}`;
+  assert(
+    [
+      "800x600",
+      "1024x768",
+      "1280x720",
+      "1366x768",
+      "1440x900",
+      "1536x864",
+      "1600x900",
+      "1920x1080",
+      "2560x1440",
+      "3840x2160"
+    ].includes(screenSize),
+    `screen size was not normalized: ${screenSize}`
+  );
   assert(values.timezoneOffset === 0, `timezone offset was ${values.timezoneOffset}`);
   assert(values.timezone === "UTC", `resolved timezone was ${values.timezone}`);
   assert(values.changedCanvasPixels > 0, "Canvas pixels were not masked");
@@ -89,6 +115,9 @@ try {
       2
     )
   );
+} catch (error) {
+  console.error(`Firefox stderr: ${firefoxErrors.join("")}`);
+  throw error;
 } finally {
   try {
     await client?.request("WebDriver:DeleteSession", {});
@@ -120,7 +149,8 @@ interface ProtectedPageValues {
 }
 
 async function waitForProtectedPage(marionette: MarionetteClient): Promise<ProtectedPageValues> {
-  const script = `return (() => {
+  let lastValue: ProtectedPageValues | undefined;
+  const pageProbe = `(() => {
     const canvas = document.createElement("canvas");
     canvas.width = 64;
     canvas.height = 64;
@@ -146,7 +176,13 @@ async function waitForProtectedPage(marionette: MarionetteClient): Promise<Prote
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       changedCanvasPixels
     };
-  })();`;
+  })()`;
+  const pageScript = `document.documentElement.setAttribute("data-e2e-probe", JSON.stringify(${pageProbe}));`;
+  const script = `const element = document.createElement("script");
+    element.textContent = ${JSON.stringify(pageScript)};
+    document.documentElement.appendChild(element);
+    element.remove();
+    return JSON.parse(document.documentElement.getAttribute("data-e2e-probe"));`;
 
   for (let attempt = 0; attempt < 30; attempt += 1) {
     try {
@@ -155,7 +191,13 @@ async function waitForProtectedPage(marionette: MarionetteClient): Promise<Prote
         args: []
       });
       const value = getResponseValue(response) as ProtectedPageValues;
-      if (value.platform === "Win32" && value.language === "en-US") {
+      lastValue = value;
+      if (
+        value.platform === "Win32" &&
+        value.language === "en-US" &&
+        value.timezone === "UTC" &&
+        value.changedCanvasPixels > 0
+      ) {
         return value;
       }
     } catch {
@@ -164,7 +206,9 @@ async function waitForProtectedPage(marionette: MarionetteClient): Promise<Prote
     await new Promise((resolve) => setTimeout(resolve, 250));
   }
 
-  throw new Error("The extension did not apply its page protection within 7.5 seconds.");
+  throw new Error(
+    `The extension did not apply its page protection within 7.5 seconds: ${JSON.stringify(lastValue)}`
+  );
 }
 
 class MarionetteClient {
@@ -278,30 +322,6 @@ async function findFreePort(): Promise<number> {
       server.close(() => resolve(address.port));
     });
   });
-}
-
-async function waitForPort(port: number, firefoxProcess?: ChildProcess): Promise<void> {
-  for (let attempt = 0; attempt < 240; attempt += 1) {
-    if (firefoxProcess?.exitCode !== null && firefoxProcess?.exitCode !== undefined) {
-      throw new Error(
-        `Firefox exited before opening Marionette port ${port} (code ${firefoxProcess.exitCode}). ${firefoxErrors.join("")}`
-      );
-    }
-    try {
-      await new Promise<void>((resolve, reject) => {
-        const socket = connectSocket({ host: "127.0.0.1", port });
-        socket.once("connect", () => {
-          socket.end();
-          resolve();
-        });
-        socket.once("error", reject);
-      });
-      return;
-    } catch {
-      await new Promise((resolve) => setTimeout(resolve, 125));
-    }
-  }
-  throw new Error(`Firefox did not open Marionette port ${port}. ${firefoxErrors.join("")}`);
 }
 
 async function stopFirefox(firefoxProcess: ChildProcess): Promise<void> {
