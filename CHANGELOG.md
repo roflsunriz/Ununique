@@ -10,12 +10,14 @@
 
 ### Fixed
 
+- Firefoxの一時プロファイルを使う拡張検証で、Marionetteの接続・アドオン登録とページ側の観測方法を修正し、現在の画面サイズ仕様を確認できるようにした。
 - CI と Dependabot の分類の実行順が前後しても更新を取りこぼさないよう、同じ PR 番号と head SHA を再照合する経路を追加した。
 
 ### Security
 
+- 依存の既知の脆弱性に対応するため、fast-uri、undici、node-forgeとminimatch 10系を修正版へ更新した。deepmergeは修正版公開まで限定パッチと攻撃回帰を適用する。
+- node-forgeの上流修正版へ移行し、旧パッチとその監査例外を撤去した。minimatch 3系の判定差は実装と回帰を照合し、未確認の監査結果は引き続き失敗させる。
 - 依存監査の失敗を解消するため、brace-expansion、fast-uri、js-yaml、undici、shell-quote、source-map-js を親依存の系列に合う修正版へ更新した。
-- `node-forge` の RSA 署名検証に残る脆弱性へ、上流の修正に基づく Bun パッチと回帰テストを適用した。上流修正版の公開まで、CI は該当アドバイザリ1件だけをパッチ検証後に判定する。
 
 - 既知の脆弱性を解消するため、上流依存が旧版へ固定する adm-zip、brace-expansion、fast-uri、image-size を安全な patch 版へ更新し、Bun のロックファイルを再生成した。
 

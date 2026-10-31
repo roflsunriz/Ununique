@@ -31,4 +31,4 @@ CI 完了より Dependabot の分類が遅れる場合は、`callback_workflow_f
 
 `package.json` のversion-scoped overrideは親依存のmajor範囲を確認して更新し、同じBunでlockfile生成・固定インストール・全重大度監査・既存品質チェックを実行してください。上流が修正版を取り込んだ際は不要なoverrideを外せるか確認します。問題があれば修復コミットを通常のrevertで戻し、package.jsonとlockfileを同じ版に保ちます。今回の既知制約と配布検証は `verification.md` を参照してください。
 
-`node-forge@1.4.0` は上流の修正版が公開されるまで `patches/node-forge@1.4.0.patch` を適用します。更新時は `bun install --frozen-lockfile`、`bun audit`、`bun run audit`、`bun run test` を実行します。素の監査が GHSA-86w9-cpqp-85rv を報告するのは、パッチの有無を判定しないためです。`bun run audit` は全件を確認し、この1件だけパッチ設定と回帰テストが有効なら通します。上流修正版が出たら `node-forge` を更新し、パッチ、検証例外、関連文書を削除して素の `bun audit` が成功することを確認します。更新に問題があればコミットを revert して、lockfile とパッチの整合性を復旧します。
+`node-forge` は上流の1.4.2へ更新し、旧パッチとその監査例外を撤去しました。`deepmerge@4.3.1` は修正版の公開まで限定パッチを適用し、`bun run audit` でパッチと実ファイルのハッシュ、攻撃回帰を検証します。`minimatch` 3.1.5に関するDBと作者の影響範囲の差は `findings.md` の根拠と回帰で確認し、10系は11.0.1に更新します。素の `bun audit` はこの2件を表示しますが、`bun run audit` は検証した対象以外の指摘や変更を失敗させます。上流の修正版・判定更新後は例外とパッチを再評価し、`bun install --frozen-lockfile`、`bun audit`、`bun run audit`、`bun run test` と拡張の動作を確認します。問題があれば修復コミットをrevertし、lockfileとパッチを同じ状態へ戻します。
